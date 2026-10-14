@@ -1,0 +1,1794 @@
+[
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-001",
+    "clubName": "União do Horizonte FC",
+    "shortName": "UHF",
+    "nickname": "Horizontinos",
+    "motto": "O futuro se constrói em campo",
+    "foundationYear": 2004,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "RS",
+      "city": "Porto Alegre",
+      "district": "Zona Norte",
+      "clubOriginType": "popular"
+    },
+    "colors": {
+      "primaryColor": "#143A63",
+      "secondaryColor": "#F4F1E8",
+      "accentColor": "#D7A849"
+    },
+    "visualIdentity": {
+      "crestShape": "escudo",
+      "crestIcon": "sol",
+      "crestStyle": "popular",
+      "crestTextMode": "sigla",
+      "bannerStyle": "torcida",
+      "bannerPattern": "chevron",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": true,
+      "flagLayout": "horizontal",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "institucional"
+    },
+    "stadium": {
+      "stadiumName": "Arena Horizonte Livre",
+      "stadiumNickname": "A Mirante",
+      "capacity": 22500,
+      "pitchType": "grama-natural",
+      "stadiumStyle": "moderno",
+      "atmosphere": "festiva",
+      "supporterCulture": "cantos",
+      "anthemName": "",
+      "anthemStyle": "popular"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "popular-brasileiro",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "serio",
+    "fanbase": {
+      "localSupporters": 54300,
+      "digitalFollowers": 66400,
+      "averageHomeAttendance": 14601,
+      "stadiumOccupancyRate": 0.649,
+      "attendanceParticipationRate": 0.2689,
+      "memberConversionRate": 0.0717,
+      "estimatedMembers": 3893,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "regional",
+      "primaryFunding": "comunidade",
+      "annualTicketRevenueBRL": 13929000,
+      "annualMemberRevenueBRL": 681000,
+      "annualSponsorshipBRL": 2671000,
+      "annualDigitalRevenueBRL": 66000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 17347000,
+      "annualOperatingBudgetBRL": 14571000,
+      "annualPayrollBudgetBRL": 8451000,
+      "annualStadiumOperationsBRL": 4080000,
+      "annualTransfersBudgetBRL": 2040000,
+      "ticketNetPriceBRL": 53,
+      "annualMembershipFeeBRL": 175,
+      "annualDigitalYieldPerFollowerBRL": 0.99,
+      "stadiumOwnership": "alugado"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 92,
+      "warnings": [
+        "S02: símbolo fora dos preferidos do tema"
+      ],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-002",
+    "clubName": "Estrela do Pampa SC",
+    "shortName": "EPS",
+    "nickname": "Estrelados",
+    "motto": "Nossa terra, nossa paixão",
+    "foundationYear": 1997,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "RS",
+      "city": "Bagé",
+      "district": "Centro",
+      "clubOriginType": "regional"
+    },
+    "colors": {
+      "primaryColor": "#126A46",
+      "secondaryColor": "#F8F8F2",
+      "accentColor": "#E6B857"
+    },
+    "visualIdentity": {
+      "crestShape": "redondo",
+      "crestIcon": "estrela",
+      "crestStyle": "classico",
+      "crestTextMode": "sigla",
+      "bannerStyle": "classico",
+      "bannerPattern": "diagonal",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": false,
+      "flagLayout": "tricolor",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "institucional"
+    },
+    "stadium": {
+      "stadiumName": "Estádio Vento Pampeano",
+      "stadiumNickname": "O Ventanal",
+      "capacity": 14000,
+      "pitchType": "grama-natural",
+      "stadiumStyle": "classico",
+      "atmosphere": "tradicional",
+      "supporterCulture": "cantos",
+      "anthemName": "",
+      "anthemStyle": "popular"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "regional",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "serio",
+    "fanbase": {
+      "localSupporters": 44100,
+      "digitalFollowers": 800,
+      "averageHomeAttendance": 10090,
+      "stadiumOccupancyRate": 0.721,
+      "attendanceParticipationRate": 0.2288,
+      "memberConversionRate": 0.028,
+      "estimatedMembers": 1235,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "municipal",
+      "primaryFunding": "associativo",
+      "annualTicketRevenueBRL": 8173000,
+      "annualMemberRevenueBRL": 340000,
+      "annualSponsorshipBRL": 1876000,
+      "annualDigitalRevenueBRL": 1000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 10390000,
+      "annualOperatingBudgetBRL": 8728000,
+      "annualPayrollBudgetBRL": 5062000,
+      "annualStadiumOperationsBRL": 2444000,
+      "annualTransfersBudgetBRL": 1222000,
+      "ticketNetPriceBRL": 45,
+      "annualMembershipFeeBRL": 275,
+      "annualDigitalYieldPerFollowerBRL": 1.56,
+      "stadiumOwnership": "proprio"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-003",
+    "clubName": "Ferroviário do Sul FC",
+    "shortName": "FSF",
+    "nickname": "Ferroviários",
+    "motto": "O trabalho constrói vitórias",
+    "foundationYear": 1952,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "RS",
+      "city": "Santa Maria",
+      "district": "Ferroviária",
+      "clubOriginType": "operario"
+    },
+    "colors": {
+      "primaryColor": "#8F2132",
+      "secondaryColor": "#FFF4DC",
+      "accentColor": "#D6A34D"
+    },
+    "visualIdentity": {
+      "crestShape": "escudo",
+      "crestIcon": "trem",
+      "crestStyle": "popular",
+      "crestTextMode": "sigla",
+      "bannerStyle": "torcida",
+      "bannerPattern": "centralizado",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": true,
+      "flagLayout": "vertical",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "institucional"
+    },
+    "stadium": {
+      "stadiumName": "Estádio dos Trilhos",
+      "stadiumNickname": "A Estação",
+      "capacity": 18500,
+      "pitchType": "grama-natural",
+      "stadiumStyle": "popular",
+      "atmosphere": "intimidante",
+      "supporterCulture": "barra",
+      "anthemName": "",
+      "anthemStyle": "popular"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "operario",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "serio",
+    "fanbase": {
+      "localSupporters": 43500,
+      "digitalFollowers": 5600,
+      "averageHomeAttendance": 11554,
+      "stadiumOccupancyRate": 0.625,
+      "attendanceParticipationRate": 0.2656,
+      "memberConversionRate": 0.0541,
+      "estimatedMembers": 2353,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "regional",
+      "primaryFunding": "associativo",
+      "annualTicketRevenueBRL": 9775000,
+      "annualMemberRevenueBRL": 788000,
+      "annualSponsorshipBRL": 5850000,
+      "annualDigitalRevenueBRL": 2000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 16415000,
+      "annualOperatingBudgetBRL": 13789000,
+      "annualPayrollBudgetBRL": 7998000,
+      "annualStadiumOperationsBRL": 3861000,
+      "annualTransfersBudgetBRL": 1930000,
+      "ticketNetPriceBRL": 47,
+      "annualMembershipFeeBRL": 335,
+      "annualDigitalYieldPerFollowerBRL": 0.34,
+      "stadiumOwnership": "alugado"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-004",
+    "clubName": "Aurora Universitária",
+    "shortName": "AUR",
+    "nickname": "Acadêmicos",
+    "motto": "Conhecimento em movimento",
+    "foundationYear": 2011,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "RS",
+      "city": "Canoas",
+      "district": "Universitário",
+      "clubOriginType": "universitario"
+    },
+    "colors": {
+      "primaryColor": "#6C4791",
+      "secondaryColor": "#FCF8FF",
+      "accentColor": "#F0B96A"
+    },
+    "visualIdentity": {
+      "crestShape": "brasao",
+      "crestIcon": "livro",
+      "crestStyle": "academico",
+      "crestTextMode": "sigla",
+      "bannerStyle": "academico",
+      "bannerPattern": "chevron",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": false,
+      "flagLayout": "bicolor",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "institucional"
+    },
+    "stadium": {
+      "stadiumName": "Parque do Saber",
+      "stadiumNickname": "O Campus",
+      "capacity": 6500,
+      "pitchType": "grama-hibrida",
+      "stadiumStyle": "compacto",
+      "atmosphere": "tecnica",
+      "supporterCulture": "familia",
+      "anthemName": "",
+      "anthemStyle": "popular"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "academico",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "serio",
+    "fanbase": {
+      "localSupporters": 21800,
+      "digitalFollowers": 1100,
+      "averageHomeAttendance": 5215,
+      "stadiumOccupancyRate": 0.802,
+      "attendanceParticipationRate": 0.2392,
+      "memberConversionRate": 0.0237,
+      "estimatedMembers": 517,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "municipal",
+      "primaryFunding": "associativo",
+      "annualTicketRevenueBRL": 2534000,
+      "annualMemberRevenueBRL": 103000,
+      "annualSponsorshipBRL": 1673000,
+      "annualDigitalRevenueBRL": 1000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 4311000,
+      "annualOperatingBudgetBRL": 3621000,
+      "annualPayrollBudgetBRL": 2100000,
+      "annualStadiumOperationsBRL": 1014000,
+      "annualTransfersBudgetBRL": 507000,
+      "ticketNetPriceBRL": 27,
+      "annualMembershipFeeBRL": 200,
+      "annualDigitalYieldPerFollowerBRL": 0.85,
+      "stadiumOwnership": "alugado"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-005",
+    "clubName": "República Atlética",
+    "shortName": "RPA",
+    "nickname": "Republicanos",
+    "motto": "Memória que move o futuro",
+    "foundationYear": 1923,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "RJ",
+      "city": "Rio de Janeiro",
+      "district": "Centro",
+      "clubOriginType": "historico"
+    },
+    "colors": {
+      "primaryColor": "#212936",
+      "secondaryColor": "#FCF7E8",
+      "accentColor": "#C99A39"
+    },
+    "visualIdentity": {
+      "crestShape": "brasao",
+      "crestIcon": "louro",
+      "crestStyle": "classico",
+      "crestTextMode": "sigla",
+      "bannerStyle": "classico",
+      "bannerPattern": "diagonal",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": true,
+      "flagLayout": "quartelada",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "institucional"
+    },
+    "stadium": {
+      "stadiumName": "Memorial da República",
+      "stadiumNickname": "O Memorial",
+      "capacity": 28000,
+      "pitchType": "grama-natural",
+      "stadiumStyle": "classico",
+      "atmosphere": "tradicional",
+      "supporterCulture": "misto",
+      "anthemName": "",
+      "anthemStyle": "popular"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "historico",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "serio",
+    "fanbase": {
+      "localSupporters": 106300,
+      "digitalFollowers": 500,
+      "averageHomeAttendance": 20271,
+      "stadiumOccupancyRate": 0.724,
+      "attendanceParticipationRate": 0.1907,
+      "memberConversionRate": 0.0395,
+      "estimatedMembers": 4199,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "regional",
+      "primaryFunding": "mecenato",
+      "annualTicketRevenueBRL": 9122000,
+      "annualMemberRevenueBRL": 798000,
+      "annualSponsorshipBRL": 9112000,
+      "annualDigitalRevenueBRL": 0,
+      "annualBackingBRL": 1799000,
+      "annualGrossRevenueBRL": 20831000,
+      "annualOperatingBudgetBRL": 17498000,
+      "annualPayrollBudgetBRL": 10149000,
+      "annualStadiumOperationsBRL": 4899000,
+      "annualTransfersBudgetBRL": 2450000,
+      "ticketNetPriceBRL": 25,
+      "annualMembershipFeeBRL": 190,
+      "annualDigitalYieldPerFollowerBRL": 0.82,
+      "stadiumOwnership": "proprio"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-006",
+    "clubName": "União das Águas FC",
+    "shortName": "UAF",
+    "nickname": "Correnteza",
+    "motto": "O rio nos leva adiante",
+    "foundationYear": 1986,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "PA",
+      "city": "Belém",
+      "district": "Guamá",
+      "clubOriginType": "regional"
+    },
+    "colors": {
+      "primaryColor": "#1764A2",
+      "secondaryColor": "#F5F9FF",
+      "accentColor": "#17365B"
+    },
+    "visualIdentity": {
+      "crestShape": "escudo",
+      "crestIcon": "rio",
+      "crestStyle": "popular",
+      "crestTextMode": "sigla",
+      "bannerStyle": "torcida",
+      "bannerPattern": "centralizado",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": false,
+      "flagLayout": "horizontal",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "institucional"
+    },
+    "stadium": {
+      "stadiumName": "Arena das Marés",
+      "stadiumNickname": "A Corrente",
+      "capacity": 16500,
+      "pitchType": "grama-natural",
+      "stadiumStyle": "popular",
+      "atmosphere": "festiva",
+      "supporterCulture": "cantos",
+      "anthemName": "",
+      "anthemStyle": "popular"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "regional",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "serio",
+    "fanbase": {
+      "localSupporters": 49200,
+      "digitalFollowers": 400,
+      "averageHomeAttendance": 11936,
+      "stadiumOccupancyRate": 0.723,
+      "attendanceParticipationRate": 0.2426,
+      "memberConversionRate": 0.0439,
+      "estimatedMembers": 2160,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "regional",
+      "primaryFunding": "associativo",
+      "annualTicketRevenueBRL": 10313000,
+      "annualMemberRevenueBRL": 691000,
+      "annualSponsorshipBRL": 2191000,
+      "annualDigitalRevenueBRL": 0,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 13195000,
+      "annualOperatingBudgetBRL": 11084000,
+      "annualPayrollBudgetBRL": 6429000,
+      "annualStadiumOperationsBRL": 3104000,
+      "annualTransfersBudgetBRL": 1551000,
+      "ticketNetPriceBRL": 48,
+      "annualMembershipFeeBRL": 320,
+      "annualDigitalYieldPerFollowerBRL": 0.63,
+      "stadiumOwnership": "compartilhado"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-007",
+    "clubName": "Clube Operário da Serra",
+    "shortName": "COS",
+    "nickname": "Forjadores",
+    "motto": "Forjados na disputa",
+    "foundationYear": 1970,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "RS",
+      "city": "Caxias do Sul",
+      "district": "Industrial",
+      "clubOriginType": "operario"
+    },
+    "colors": {
+      "primaryColor": "#1D1D25",
+      "secondaryColor": "#FFE36E",
+      "accentColor": "#8BC8DD"
+    },
+    "visualIdentity": {
+      "crestShape": "escudo",
+      "crestIcon": "engrenagem",
+      "crestStyle": "classico",
+      "crestTextMode": "sigla",
+      "bannerStyle": "popular",
+      "bannerPattern": "chevron",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": true,
+      "flagLayout": "chevron",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "institucional"
+    },
+    "stadium": {
+      "stadiumName": "Estádio da Forja",
+      "stadiumNickname": "O Forno",
+      "capacity": 11800,
+      "pitchType": "grama-sintetica",
+      "stadiumStyle": "compacto",
+      "atmosphere": "intimidante",
+      "supporterCulture": "barra",
+      "anthemName": "",
+      "anthemStyle": "popular"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "operario",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "serio",
+    "fanbase": {
+      "localSupporters": 47800,
+      "digitalFollowers": 600,
+      "averageHomeAttendance": 8704,
+      "stadiumOccupancyRate": 0.738,
+      "attendanceParticipationRate": 0.1821,
+      "memberConversionRate": 0.0584,
+      "estimatedMembers": 2792,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "municipal",
+      "primaryFunding": "patrocinio",
+      "annualTicketRevenueBRL": 7050000,
+      "annualMemberRevenueBRL": 768000,
+      "annualSponsorshipBRL": 885000,
+      "annualDigitalRevenueBRL": 1000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 8704000,
+      "annualOperatingBudgetBRL": 7311000,
+      "annualPayrollBudgetBRL": 4240000,
+      "annualStadiumOperationsBRL": 2047000,
+      "annualTransfersBudgetBRL": 1024000,
+      "ticketNetPriceBRL": 45,
+      "annualMembershipFeeBRL": 275,
+      "annualDigitalYieldPerFollowerBRL": 0.86,
+      "stadiumOwnership": "proprio"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-008",
+    "clubName": "Atlético da Liberdade",
+    "shortName": "ADL",
+    "nickname": "Libertos",
+    "motto": "A camisa é de todos",
+    "foundationYear": 2001,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "PE",
+      "city": "Recife",
+      "district": "Boa Vista",
+      "clubOriginType": "popular"
+    },
+    "colors": {
+      "primaryColor": "#6D2537",
+      "secondaryColor": "#EFEFEF",
+      "accentColor": "#9AB4C5"
+    },
+    "visualIdentity": {
+      "crestShape": "diamante",
+      "crestIcon": "tocha",
+      "crestStyle": "popular",
+      "crestTextMode": "sigla",
+      "bannerStyle": "torcida",
+      "bannerPattern": "diagonal",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": false,
+      "flagLayout": "diagonal",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "institucional"
+    },
+    "stadium": {
+      "stadiumName": "Arena da Liberdade",
+      "stadiumNickname": "O Caldeirão",
+      "capacity": 31000,
+      "pitchType": "grama-hibrida",
+      "stadiumStyle": "moderno",
+      "atmosphere": "festiva",
+      "supporterCulture": "barra",
+      "anthemName": "",
+      "anthemStyle": "popular"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "popular-brasileiro",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "serio",
+    "fanbase": {
+      "localSupporters": 72600,
+      "digitalFollowers": 12300,
+      "averageHomeAttendance": 20931,
+      "stadiumOccupancyRate": 0.675,
+      "attendanceParticipationRate": 0.2883,
+      "memberConversionRate": 0.0585,
+      "estimatedMembers": 4247,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "regional",
+      "primaryFunding": "patrocinio",
+      "annualTicketRevenueBRL": 12056000,
+      "annualMemberRevenueBRL": 849000,
+      "annualSponsorshipBRL": 5048000,
+      "annualDigitalRevenueBRL": 10000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 17963000,
+      "annualOperatingBudgetBRL": 15089000,
+      "annualPayrollBudgetBRL": 8752000,
+      "annualStadiumOperationsBRL": 4225000,
+      "annualTransfersBudgetBRL": 2112000,
+      "ticketNetPriceBRL": 32,
+      "annualMembershipFeeBRL": 200,
+      "annualDigitalYieldPerFollowerBRL": 0.82,
+      "stadiumOwnership": "proprio"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-009",
+    "clubName": "Nacional dos Ventos FC",
+    "shortName": "NVF",
+    "nickname": "Vento Norte",
+    "motto": "Nenhum vento nos faz recuar",
+    "foundationYear": 2008,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "CE",
+      "city": "Fortaleza",
+      "district": "Aldeota",
+      "clubOriginType": "regional"
+    },
+    "colors": {
+      "primaryColor": "#162D55",
+      "secondaryColor": "#FFF4E7",
+      "accentColor": "#EF7A62"
+    },
+    "visualIdentity": {
+      "crestShape": "redondo",
+      "crestIcon": "asa",
+      "crestStyle": "elegante",
+      "crestTextMode": "sigla",
+      "bannerStyle": "classico",
+      "bannerPattern": "centralizado",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": true,
+      "flagLayout": "vertical",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "institucional"
+    },
+    "stadium": {
+      "stadiumName": "Estádio Vento Norte",
+      "stadiumNickname": "O Sopro",
+      "capacity": 24200,
+      "pitchType": "grama-natural",
+      "stadiumStyle": "moderno",
+      "atmosphere": "intimidante",
+      "supporterCulture": "misto",
+      "anthemName": "",
+      "anthemStyle": "popular"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "regional",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "serio",
+    "fanbase": {
+      "localSupporters": 74900,
+      "digitalFollowers": 300,
+      "averageHomeAttendance": 18725,
+      "stadiumOccupancyRate": 0.774,
+      "attendanceParticipationRate": 0.25,
+      "memberConversionRate": 0.0332,
+      "estimatedMembers": 2487,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "regional",
+      "primaryFunding": "comunidade",
+      "annualTicketRevenueBRL": 7752000,
+      "annualMemberRevenueBRL": 473000,
+      "annualSponsorshipBRL": 5608000,
+      "annualDigitalRevenueBRL": 0,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 13833000,
+      "annualOperatingBudgetBRL": 11620000,
+      "annualPayrollBudgetBRL": 6740000,
+      "annualStadiumOperationsBRL": 3254000,
+      "annualTransfersBudgetBRL": 1626000,
+      "ticketNetPriceBRL": 23,
+      "annualMembershipFeeBRL": 190,
+      "annualDigitalYieldPerFollowerBRL": 0.82,
+      "stadiumOwnership": "compartilhado"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 92,
+      "warnings": [
+        "S02: símbolo fora dos preferidos do tema"
+      ],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-010",
+    "clubName": "Sporting da Fronteira",
+    "shortName": "SDF",
+    "nickname": "Fronteiriços",
+    "motto": "A fronteira é só o começo",
+    "foundationYear": 1948,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "RS",
+      "city": "Santana do Livramento",
+      "district": "Centro",
+      "clubOriginType": "elite"
+    },
+    "colors": {
+      "primaryColor": "#355D3B",
+      "secondaryColor": "#F9F1DA",
+      "accentColor": "#CC8E4B"
+    },
+    "visualIdentity": {
+      "crestShape": "brasao",
+      "crestIcon": "leao",
+      "crestStyle": "elegante",
+      "crestTextMode": "sigla",
+      "bannerStyle": "classico",
+      "bannerPattern": "chevron",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": false,
+      "flagLayout": "quartelada",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "institucional"
+    },
+    "stadium": {
+      "stadiumName": "Parque da Fronteira",
+      "stadiumNickname": "O Marco",
+      "capacity": 10900,
+      "pitchType": "grama-natural",
+      "stadiumStyle": "classico",
+      "atmosphere": "tradicional",
+      "supporterCulture": "familia",
+      "anthemName": "",
+      "anthemStyle": "popular"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "elitizado",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "serio",
+    "fanbase": {
+      "localSupporters": 36900,
+      "digitalFollowers": 5700,
+      "averageHomeAttendance": 8214,
+      "stadiumOccupancyRate": 0.754,
+      "attendanceParticipationRate": 0.2226,
+      "memberConversionRate": 0.0356,
+      "estimatedMembers": 1314,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "municipal",
+      "primaryFunding": "investidor",
+      "annualTicketRevenueBRL": 6210000,
+      "annualMemberRevenueBRL": 204000,
+      "annualSponsorshipBRL": 5382000,
+      "annualDigitalRevenueBRL": 9000,
+      "annualBackingBRL": 17480000,
+      "annualGrossRevenueBRL": 29285000,
+      "annualOperatingBudgetBRL": 24599000,
+      "annualPayrollBudgetBRL": 14267000,
+      "annualStadiumOperationsBRL": 6888000,
+      "annualTransfersBudgetBRL": 3444000,
+      "ticketNetPriceBRL": 42,
+      "annualMembershipFeeBRL": 155,
+      "annualDigitalYieldPerFollowerBRL": 1.58,
+      "stadiumOwnership": "alugado"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-011",
+    "clubName": "Atlético Boleto Vencido",
+    "shortName": "ABV",
+    "nickname": "Os Inadimplentes",
+    "motto": "Paga no próximo campeonato",
+    "foundationYear": 2024,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "SP",
+      "city": "São Paulo",
+      "district": "Centro",
+      "clubOriginType": "internet"
+    },
+    "colors": {
+      "primaryColor": "#A64B1D",
+      "secondaryColor": "#F8F0E4",
+      "accentColor": "#264B7A"
+    },
+    "visualIdentity": {
+      "crestShape": "escudo",
+      "crestIcon": "relogio",
+      "crestStyle": "popular",
+      "crestTextMode": "sigla",
+      "bannerStyle": "torcida",
+      "bannerPattern": "diagonal",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": true,
+      "flagLayout": "diagonal",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "torcida"
+    },
+    "stadium": {
+      "stadiumName": "Arena do Dia 10",
+      "stadiumNickname": "O Vencimento",
+      "capacity": 8500,
+      "pitchType": "grama-sintetica",
+      "stadiumStyle": "compacto",
+      "atmosphere": "caotica",
+      "supporterCulture": "cantos",
+      "anthemName": "",
+      "anthemStyle": "torcida"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "meme-carismatico",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "engracado",
+    "fanbase": {
+      "localSupporters": 35000,
+      "digitalFollowers": 35800,
+      "averageHomeAttendance": 6360,
+      "stadiumOccupancyRate": 0.748,
+      "attendanceParticipationRate": 0.1817,
+      "memberConversionRate": 0.0278,
+      "estimatedMembers": 973,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "municipal",
+      "primaryFunding": "patrocinio",
+      "annualTicketRevenueBRL": 3663000,
+      "annualMemberRevenueBRL": 345000,
+      "annualSponsorshipBRL": 1588000,
+      "annualDigitalRevenueBRL": 60000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 5656000,
+      "annualOperatingBudgetBRL": 4751000,
+      "annualPayrollBudgetBRL": 2756000,
+      "annualStadiumOperationsBRL": 1330000,
+      "annualTransfersBudgetBRL": 665000,
+      "ticketNetPriceBRL": 32,
+      "annualMembershipFeeBRL": 355,
+      "annualDigitalYieldPerFollowerBRL": 1.68,
+      "stadiumOwnership": "proprio"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 92,
+      "warnings": [
+        "S02: símbolo fora dos preferidos do tema"
+      ],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-012",
+    "clubName": "Grêmio Wi-Fi Caiu",
+    "shortName": "GWC",
+    "nickname": "Os Desconectados",
+    "motto": "O importante é não cair a conexão",
+    "foundationYear": 2020,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "SP",
+      "city": "Campinas",
+      "district": "Barão Geraldo",
+      "clubOriginType": "internet"
+    },
+    "colors": {
+      "primaryColor": "#124986",
+      "secondaryColor": "#F7FBFF",
+      "accentColor": "#43CBDB"
+    },
+    "visualIdentity": {
+      "crestShape": "moderno",
+      "crestIcon": "raio",
+      "crestStyle": "futurista",
+      "crestTextMode": "sigla",
+      "bannerStyle": "futurista",
+      "bannerPattern": "centralizado",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": false,
+      "flagLayout": "chevron",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "torcida"
+    },
+    "stadium": {
+      "stadiumName": "Servidor do Buffer Infinito",
+      "stadiumNickname": "O Loading",
+      "capacity": 9500,
+      "pitchType": "grama-sintetica",
+      "stadiumStyle": "moderno",
+      "atmosphere": "caotica",
+      "supporterCulture": "ultras",
+      "anthemName": "",
+      "anthemStyle": "torcida"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "internet",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "engracado",
+    "fanbase": {
+      "localSupporters": 37300,
+      "digitalFollowers": 2474000,
+      "averageHomeAttendance": 7229,
+      "stadiumOccupancyRate": 0.761,
+      "attendanceParticipationRate": 0.1938,
+      "memberConversionRate": 0.0345,
+      "estimatedMembers": 1287,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "municipal",
+      "primaryFunding": "digital",
+      "annualTicketRevenueBRL": 6116000,
+      "annualMemberRevenueBRL": 322000,
+      "annualSponsorshipBRL": 2983000,
+      "annualDigitalRevenueBRL": 866000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 10287000,
+      "annualOperatingBudgetBRL": 8641000,
+      "annualPayrollBudgetBRL": 5012000,
+      "annualStadiumOperationsBRL": 2419000,
+      "annualTransfersBudgetBRL": 1210000,
+      "ticketNetPriceBRL": 47,
+      "annualMembershipFeeBRL": 250,
+      "annualDigitalYieldPerFollowerBRL": 0.35,
+      "stadiumOwnership": "proprio"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-013",
+    "clubName": "Atlético do Café Frio",
+    "shortName": "ACF",
+    "nickname": "Os Requentados",
+    "motto": "Acorda para o segundo tempo",
+    "foundationYear": 2022,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "PR",
+      "city": "Curitiba",
+      "district": "Centro",
+      "clubOriginType": "popular"
+    },
+    "colors": {
+      "primaryColor": "#7A4325",
+      "secondaryColor": "#FFF3D7",
+      "accentColor": "#D4A44E"
+    },
+    "visualIdentity": {
+      "crestShape": "redondo",
+      "crestIcon": "cafe",
+      "crestStyle": "popular",
+      "crestTextMode": "sigla",
+      "bannerStyle": "torcida",
+      "bannerPattern": "chevron",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": true,
+      "flagLayout": "bicolor",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "torcida"
+    },
+    "stadium": {
+      "stadiumName": "Caldeirão do Expresso",
+      "stadiumNickname": "A Caneca",
+      "capacity": 7200,
+      "pitchType": "grama-natural",
+      "stadiumStyle": "compacto",
+      "atmosphere": "festiva",
+      "supporterCulture": "cantos",
+      "anthemName": "",
+      "anthemStyle": "torcida"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "meme-carismatico",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "engracado",
+    "fanbase": {
+      "localSupporters": 17300,
+      "digitalFollowers": 9100,
+      "averageHomeAttendance": 4368,
+      "stadiumOccupancyRate": 0.607,
+      "attendanceParticipationRate": 0.2525,
+      "memberConversionRate": 0.0567,
+      "estimatedMembers": 981,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "municipal",
+      "primaryFunding": "comunidade",
+      "annualTicketRevenueBRL": 3066000,
+      "annualMemberRevenueBRL": 240000,
+      "annualSponsorshipBRL": 914000,
+      "annualDigitalRevenueBRL": 10000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 4230000,
+      "annualOperatingBudgetBRL": 3553000,
+      "annualPayrollBudgetBRL": 2061000,
+      "annualStadiumOperationsBRL": 995000,
+      "annualTransfersBudgetBRL": 497000,
+      "ticketNetPriceBRL": 39,
+      "annualMembershipFeeBRL": 245,
+      "annualDigitalYieldPerFollowerBRL": 1.14,
+      "stadiumOwnership": "alugado"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-014",
+    "clubName": "Clube do TCC Atrasado",
+    "shortName": "CTA",
+    "nickname": "Os Orientandos",
+    "motto": "A defesa fica para segunda",
+    "foundationYear": 2019,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "RS",
+      "city": "Porto Alegre",
+      "district": "Cidade Baixa",
+      "clubOriginType": "universitario"
+    },
+    "colors": {
+      "primaryColor": "#42256E",
+      "secondaryColor": "#EFFFAC",
+      "accentColor": "#E68BDB"
+    },
+    "visualIdentity": {
+      "crestShape": "brasao",
+      "crestIcon": "livro",
+      "crestStyle": "academico",
+      "crestTextMode": "sigla",
+      "bannerStyle": "academico",
+      "bannerPattern": "diagonal",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": false,
+      "flagLayout": "diagonal",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "torcida"
+    },
+    "stadium": {
+      "stadiumName": "Estádio Última Revisão",
+      "stadiumNickname": "O Prazo",
+      "capacity": 4100,
+      "pitchType": "grama-sintetica",
+      "stadiumStyle": "compacto",
+      "atmosphere": "tecnica",
+      "supporterCulture": "familia",
+      "anthemName": "",
+      "anthemStyle": "torcida"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "academico",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "engracado",
+    "fanbase": {
+      "localSupporters": 20600,
+      "digitalFollowers": 54000,
+      "averageHomeAttendance": 2785,
+      "stadiumOccupancyRate": 0.679,
+      "attendanceParticipationRate": 0.1352,
+      "memberConversionRate": 0.0221,
+      "estimatedMembers": 455,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "local",
+      "primaryFunding": "associativo",
+      "annualTicketRevenueBRL": 1003000,
+      "annualMemberRevenueBRL": 86000,
+      "annualSponsorshipBRL": 625000,
+      "annualDigitalRevenueBRL": 69000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 1783000,
+      "annualOperatingBudgetBRL": 1498000,
+      "annualPayrollBudgetBRL": 869000,
+      "annualStadiumOperationsBRL": 419000,
+      "annualTransfersBudgetBRL": 210000,
+      "ticketNetPriceBRL": 20,
+      "annualMembershipFeeBRL": 190,
+      "annualDigitalYieldPerFollowerBRL": 1.27,
+      "stadiumOwnership": "alugado"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-015",
+    "clubName": "Esporte Clube Print Perdido",
+    "shortName": "EPP",
+    "nickname": "Os Arquivados",
+    "motto": "Com provas ou sem provas, é gol",
+    "foundationYear": 2023,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "SC",
+      "city": "Florianópolis",
+      "district": "Trindade",
+      "clubOriginType": "internet"
+    },
+    "colors": {
+      "primaryColor": "#4D2B66",
+      "secondaryColor": "#FFF5E6",
+      "accentColor": "#D8A84A"
+    },
+    "visualIdentity": {
+      "crestShape": "escudo",
+      "crestIcon": "pixel",
+      "crestStyle": "moderno",
+      "crestTextMode": "sigla",
+      "bannerStyle": "futurista",
+      "bannerPattern": "centralizado",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": true,
+      "flagLayout": "tricolor",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "torcida"
+    },
+    "stadium": {
+      "stadiumName": "Arena da Captura",
+      "stadiumNickname": "O Arquivo",
+      "capacity": 6200,
+      "pitchType": "grama-sintetica",
+      "stadiumStyle": "moderno",
+      "atmosphere": "festiva",
+      "supporterCulture": "misto",
+      "anthemName": "",
+      "anthemStyle": "torcida"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "internet",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "engracado",
+    "fanbase": {
+      "localSupporters": 15700,
+      "digitalFollowers": 119500,
+      "averageHomeAttendance": 3565,
+      "stadiumOccupancyRate": 0.575,
+      "attendanceParticipationRate": 0.2271,
+      "memberConversionRate": 0.0257,
+      "estimatedMembers": 403,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "municipal",
+      "primaryFunding": "investidor",
+      "annualTicketRevenueBRL": 1733000,
+      "annualMemberRevenueBRL": 119000,
+      "annualSponsorshipBRL": 2719000,
+      "annualDigitalRevenueBRL": 54000,
+      "annualBackingBRL": 12001000,
+      "annualGrossRevenueBRL": 16626000,
+      "annualOperatingBudgetBRL": 13966000,
+      "annualPayrollBudgetBRL": 8100000,
+      "annualStadiumOperationsBRL": 3910000,
+      "annualTransfersBudgetBRL": 1956000,
+      "ticketNetPriceBRL": 27,
+      "annualMembershipFeeBRL": 295,
+      "annualDigitalYieldPerFollowerBRL": 0.45,
+      "stadiumOwnership": "proprio"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-016",
+    "clubName": "Sociedade Modo Avião",
+    "shortName": "SMA",
+    "nickname": "Os Offline",
+    "motto": "Fora de área, dentro de campo",
+    "foundationYear": 2021,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "DF",
+      "city": "Brasília",
+      "district": "Asa Norte",
+      "clubOriginType": "internet"
+    },
+    "colors": {
+      "primaryColor": "#116B70",
+      "secondaryColor": "#F8F8F3",
+      "accentColor": "#1D3658"
+    },
+    "visualIdentity": {
+      "crestShape": "diamante",
+      "crestIcon": "asa",
+      "crestStyle": "futurista",
+      "crestTextMode": "sigla",
+      "bannerStyle": "futurista",
+      "bannerPattern": "chevron",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": false,
+      "flagLayout": "diagonal",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "torcida"
+    },
+    "stadium": {
+      "stadiumName": "Estádio Sem Sinal",
+      "stadiumNickname": "A Zona Morta",
+      "capacity": 7800,
+      "pitchType": "grama-hibrida",
+      "stadiumStyle": "compacto",
+      "atmosphere": "caotica",
+      "supporterCulture": "cantos",
+      "anthemName": "",
+      "anthemStyle": "torcida"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "internet",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "engracado",
+    "fanbase": {
+      "localSupporters": 19500,
+      "digitalFollowers": 143700,
+      "averageHomeAttendance": 4700,
+      "stadiumOccupancyRate": 0.603,
+      "attendanceParticipationRate": 0.241,
+      "memberConversionRate": 0.0447,
+      "estimatedMembers": 872,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "municipal",
+      "primaryFunding": "digital",
+      "annualTicketRevenueBRL": 3384000,
+      "annualMemberRevenueBRL": 231000,
+      "annualSponsorshipBRL": 2275000,
+      "annualDigitalRevenueBRL": 226000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 6116000,
+      "annualOperatingBudgetBRL": 5137000,
+      "annualPayrollBudgetBRL": 2979000,
+      "annualStadiumOperationsBRL": 1438000,
+      "annualTransfersBudgetBRL": 720000,
+      "ticketNetPriceBRL": 40,
+      "annualMembershipFeeBRL": 265,
+      "annualDigitalYieldPerFollowerBRL": 1.57,
+      "stadiumOwnership": "proprio"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 92,
+      "warnings": [
+        "S02: símbolo fora dos preferidos do tema"
+      ],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-017",
+    "clubName": "Unidos do Ctrl+Z",
+    "shortName": "UCZ",
+    "nickname": "Os Reversíveis",
+    "motto": "Se errar, volta a jogada",
+    "foundationYear": 2022,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "MG",
+      "city": "Belo Horizonte",
+      "district": "Savassi",
+      "clubOriginType": "internet"
+    },
+    "colors": {
+      "primaryColor": "#23614B",
+      "secondaryColor": "#F9F6FF",
+      "accentColor": "#B07BE0"
+    },
+    "visualIdentity": {
+      "crestShape": "moderno",
+      "crestIcon": "cursor",
+      "crestStyle": "moderno",
+      "crestTextMode": "sigla",
+      "bannerStyle": "torcida",
+      "bannerPattern": "diagonal",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": true,
+      "flagLayout": "chevron",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "torcida"
+    },
+    "stadium": {
+      "stadiumName": "Arena Desfazer",
+      "stadiumNickname": "O Atalho",
+      "capacity": 13000,
+      "pitchType": "grama-sintetica",
+      "stadiumStyle": "moderno",
+      "atmosphere": "festiva",
+      "supporterCulture": "ultras",
+      "anthemName": "",
+      "anthemStyle": "torcida"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "meme-carismatico",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "engracado",
+    "fanbase": {
+      "localSupporters": 50500,
+      "digitalFollowers": 94100,
+      "averageHomeAttendance": 7191,
+      "stadiumOccupancyRate": 0.553,
+      "attendanceParticipationRate": 0.1424,
+      "memberConversionRate": 0.0463,
+      "estimatedMembers": 2338,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "municipal",
+      "primaryFunding": "investidor",
+      "annualTicketRevenueBRL": 5436000,
+      "annualMemberRevenueBRL": 421000,
+      "annualSponsorshipBRL": 1695000,
+      "annualDigitalRevenueBRL": 50000,
+      "annualBackingBRL": 13497000,
+      "annualGrossRevenueBRL": 21099000,
+      "annualOperatingBudgetBRL": 17723000,
+      "annualPayrollBudgetBRL": 10279000,
+      "annualStadiumOperationsBRL": 4962000,
+      "annualTransfersBudgetBRL": 2482000,
+      "ticketNetPriceBRL": 42,
+      "annualMembershipFeeBRL": 180,
+      "annualDigitalYieldPerFollowerBRL": 0.53,
+      "stadiumOwnership": "compartilhado"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-018",
+    "clubName": "Clube Atlético Segunda-feira",
+    "shortName": "CAS",
+    "nickname": "Os Sobreviventes",
+    "motto": "Começamos cansados, terminamos campeões",
+    "foundationYear": 2018,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "GO",
+      "city": "Goiânia",
+      "district": "Setor Central",
+      "clubOriginType": "popular"
+    },
+    "colors": {
+      "primaryColor": "#2E323B",
+      "secondaryColor": "#F6F3ED",
+      "accentColor": "#DF5366"
+    },
+    "visualIdentity": {
+      "crestShape": "escudo",
+      "crestIcon": "sol",
+      "crestStyle": "classico",
+      "crestTextMode": "sigla",
+      "bannerStyle": "popular",
+      "bannerPattern": "centralizado",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": false,
+      "flagLayout": "vertical",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "torcida"
+    },
+    "stadium": {
+      "stadiumName": "Estádio do Despertador",
+      "stadiumNickname": "O Alarme",
+      "capacity": 10500,
+      "pitchType": "grama-natural",
+      "stadiumStyle": "compacto",
+      "atmosphere": "intimidante",
+      "supporterCulture": "cantos",
+      "anthemName": "",
+      "anthemStyle": "torcida"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "meme-carismatico",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "engracado",
+    "fanbase": {
+      "localSupporters": 48900,
+      "digitalFollowers": 20900,
+      "averageHomeAttendance": 8523,
+      "stadiumOccupancyRate": 0.812,
+      "attendanceParticipationRate": 0.1743,
+      "memberConversionRate": 0.0402,
+      "estimatedMembers": 1966,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "municipal",
+      "primaryFunding": "associativo",
+      "annualTicketRevenueBRL": 4449000,
+      "annualMemberRevenueBRL": 816000,
+      "annualSponsorshipBRL": 1302000,
+      "annualDigitalRevenueBRL": 27000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 6594000,
+      "annualOperatingBudgetBRL": 5539000,
+      "annualPayrollBudgetBRL": 3213000,
+      "annualStadiumOperationsBRL": 1551000,
+      "annualTransfersBudgetBRL": 775000,
+      "ticketNetPriceBRL": 29,
+      "annualMembershipFeeBRL": 415,
+      "annualDigitalYieldPerFollowerBRL": 1.31,
+      "stadiumOwnership": "alugado"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 92,
+      "warnings": [
+        "S02: símbolo fora dos preferidos do tema"
+      ],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-019",
+    "clubName": "Reunião Podia Ser E-mail FC",
+    "shortName": "RPE",
+    "nickname": "Os Convocados",
+    "motto": "Isso podia ser um passe",
+    "foundationYear": 2025,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "RS",
+      "city": "Porto Alegre",
+      "district": "Moinhos de Vento",
+      "clubOriginType": "internet"
+    },
+    "colors": {
+      "primaryColor": "#1F2A5E",
+      "secondaryColor": "#FFF5FC",
+      "accentColor": "#EE72BB"
+    },
+    "visualIdentity": {
+      "crestShape": "redondo",
+      "crestIcon": "cursor",
+      "crestStyle": "moderno",
+      "crestTextMode": "sigla",
+      "bannerStyle": "futurista",
+      "bannerPattern": "chevron",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": true,
+      "flagLayout": "bicolor",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "torcida"
+    },
+    "stadium": {
+      "stadiumName": "Arena Pauta Infinita",
+      "stadiumNickname": "A Sala",
+      "capacity": 5200,
+      "pitchType": "grama-sintetica",
+      "stadiumStyle": "compacto",
+      "atmosphere": "caotica",
+      "supporterCulture": "familia",
+      "anthemName": "",
+      "anthemStyle": "torcida"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "internet",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "engracado",
+    "fanbase": {
+      "localSupporters": 11800,
+      "digitalFollowers": 268900,
+      "averageHomeAttendance": 3053,
+      "stadiumOccupancyRate": 0.587,
+      "attendanceParticipationRate": 0.2587,
+      "memberConversionRate": 0.0468,
+      "estimatedMembers": 552,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "municipal",
+      "primaryFunding": "digital",
+      "annualTicketRevenueBRL": 1319000,
+      "annualMemberRevenueBRL": 94000,
+      "annualSponsorshipBRL": 3029000,
+      "annualDigitalRevenueBRL": 454000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 4896000,
+      "annualOperatingBudgetBRL": 4113000,
+      "annualPayrollBudgetBRL": 2386000,
+      "annualStadiumOperationsBRL": 1152000,
+      "annualTransfersBudgetBRL": 575000,
+      "ticketNetPriceBRL": 24,
+      "annualMembershipFeeBRL": 170,
+      "annualDigitalYieldPerFollowerBRL": 1.69,
+      "stadiumOwnership": "proprio"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 100,
+      "warnings": [],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  },
+  {
+    "schemaVersion": "1.0.0",
+    "clubId": "custom-example-020",
+    "clubName": "Atlético da Última Aba",
+    "shortName": "AUA",
+    "nickname": "Os Multitarefas",
+    "motto": "Abre espaço que eu abro outra aba",
+    "foundationYear": 2024,
+    "origin": {
+      "country": "Brasil",
+      "stateRegion": "RJ",
+      "city": "Niterói",
+      "district": "Icaraí",
+      "clubOriginType": "internet"
+    },
+    "colors": {
+      "primaryColor": "#24222A",
+      "secondaryColor": "#FFF7FB",
+      "accentColor": "#FF7EAE"
+    },
+    "visualIdentity": {
+      "crestShape": "moderno",
+      "crestIcon": "pixel",
+      "crestStyle": "futurista",
+      "crestTextMode": "sigla",
+      "bannerStyle": "futurista",
+      "bannerPattern": "diagonal",
+      "bannerSymbolFocus": true,
+      "bannerMottoVisible": false,
+      "flagLayout": "horizontal",
+      "flagSymbol": "mesmo-do-escudo",
+      "flagStyle": "torcida"
+    },
+    "stadium": {
+      "stadiumName": "Arena dos 99 Separadores",
+      "stadiumNickname": "O Navegador",
+      "capacity": 8800,
+      "pitchType": "grama-hibrida",
+      "stadiumStyle": "compacto",
+      "atmosphere": "festiva",
+      "supporterCulture": "cantos",
+      "anthemName": "",
+      "anthemStyle": "torcida"
+    },
+    "generation": {
+      "mode": "template",
+      "theme": "meme-carismatico",
+      "seed": null,
+      "lockedFields": []
+    },
+    "exampleType": "engracado",
+    "fanbase": {
+      "localSupporters": 48000,
+      "digitalFollowers": 152500,
+      "averageHomeAttendance": 6293,
+      "stadiumOccupancyRate": 0.715,
+      "attendanceParticipationRate": 0.1311,
+      "memberConversionRate": 0.0273,
+      "estimatedMembers": 1310,
+      "fanCatchment": "local/regional; seguidores digitais tratados separadamente"
+    },
+    "economy": {
+      "currency": "BRL",
+      "period": "annual",
+      "scale": "municipal",
+      "primaryFunding": "patrocinio",
+      "annualTicketRevenueBRL": 2945000,
+      "annualMemberRevenueBRL": 203000,
+      "annualSponsorshipBRL": 3743000,
+      "annualDigitalRevenueBRL": 197000,
+      "annualBackingBRL": 0,
+      "annualGrossRevenueBRL": 7088000,
+      "annualOperatingBudgetBRL": 5954000,
+      "annualPayrollBudgetBRL": 3453000,
+      "annualStadiumOperationsBRL": 1667000,
+      "annualTransfersBudgetBRL": 834000,
+      "ticketNetPriceBRL": 26,
+      "annualMembershipFeeBRL": 155,
+      "annualDigitalYieldPerFollowerBRL": 1.29,
+      "stadiumOwnership": "compartilhado"
+    },
+    "coherence": {
+      "generatorVersion": "1.1.0",
+      "score": 92,
+      "warnings": [
+        "S02: símbolo fora dos preferidos do tema"
+      ],
+      "exceptions": [],
+      "note": "Clube original preservado; torcida e orçamento gerados condicionalmente à capacidade original."
+    }
+  }
+]

@@ -1,0 +1,282 @@
+{
+  "schemaVersion": "2.0.0",
+  "name": "Manager estratégico — partidas online 1×1",
+  "status": "CONFIGURAÇÃO PARA IMPLEMENTAÇÃO; NÃO É SERVIDOR EXECUTÁVEL",
+  "extends": {
+    "gameDesign": "dados/game_design/parametros_game_design_v1.json",
+    "roster": "dados/jogadores/jogadores_110.json",
+    "clubGenerator": "dados/clubes/parametros_criador_clubes_v1.json",
+    "clubCoherence": "dados/clubes/config_coerencia_v1_1.json"
+  },
+  "priority": "multiplayer playable MVP > data integration > advanced progression/career",
+  "runtime": {
+    "frontend": "HTML/CSS/JavaScript, preserve current UI where possible",
+    "backend": "Node.js current LTS + HTTP + ws (WebSocket)",
+    "transport": "WebSocket (ws/wss) JSON",
+    "serverAuthoritative": true,
+    "serveClientAndSocketSameOrigin": true,
+    "httpPortEnv": "PORT",
+    "defaultLocalPort": 3000,
+    "healthEndpoint": "/health",
+    "wsEndpoint": "/ws",
+    "localCommand": "npm install && npm start",
+    "testCommand": "npm test",
+    "serverDeployment": "single always-available Node process with WebSocket upgrades enabled; no serverless request-only platform"
+  },
+  "mode": {
+    "id": "private_online_friendly_1v1",
+    "humanPlayers": 2,
+    "spectators": false,
+    "ranked": false,
+    "accountsRequired": false,
+    "inGameChat": false,
+    "publicMatchmaking": false,
+    "competitiveBudgetImpact": false,
+    "playerProgressionPersistent": false,
+    "persistentCareerIntegration": "deferred",
+    "sameBrowserTwoTabs": true,
+    "twoDevices": true
+  },
+  "room": {
+    "codeLength": 6,
+    "alphabet": "ABCDEFGHJKLMNPQRSTUVWXYZ23456789",
+    "codeCaseInsensitive": true,
+    "joinByLink": true,
+    "maxPlayers": 2,
+    "hostCanStartAlone": false,
+    "lobbyIdleTTLsec": 900,
+    "finishedResultTTLsec": 1800,
+    "privateByDefault": true,
+    "maxRoomsPerIp": 4,
+    "maxClientsPerIp": 8
+  },
+  "team": {
+    "eligibleRosterSize": 110,
+    "uniquePlayerAcrossTeams": true,
+    "playersPerHuman": 16,
+    "startingXI": 11,
+    "benchSize": 5,
+    "goalkeepersPerHumanMin": 2,
+    "goalkeepersOnField": 1,
+    "maxSubstitutions": 5,
+    "positionCompatibility": "use naturalPositions and existing positionFit/slotScore; 11 positions from chosen formation",
+    "noMultipleSelectSamePlayer": true,
+    "formations": [
+      "433",
+      "4231",
+      "343",
+      "442"
+    ],
+    "manualDraftMVP": false,
+    "rosterSelectionMVP": "server-balanced automatic assignment without duplicates; player can customize lineup/roles",
+    "manualDraftFuture": true,
+    "clubIdentityChoice": "create new, select 20 examples or randomized coherent",
+    "clubPresentationBudgetIsCosmeticInFriendly": true
+  },
+  "balance": {
+    "starterStrengthGapMaxRelative": 0.05,
+    "teamPowerEvaluation": "existing slotScore and role weights without RNG; do not conflate sign and current team ratings",
+    "categoryCoverageAim": [
+      "impact",
+      "creation",
+      "reading"
+    ],
+    "balancedSquadAlgorithm": "seeded role-bucket snake allocation + local swap heuristic; at most 100 retry seeds; fail visibly if no legal 2 squads",
+    "drawSeedGeneratedByServer": true,
+    "sameSeedGivesSameInitialRosters": true,
+    "clubFinancesDoNotAlterSquadAttributes": true,
+    "costOfPowersRespected": true
+  },
+  "preMatch": {
+    "bothPlayersNeedReady": true,
+    "clubAndSquadLockedOnBothReady": true,
+    "pregameTimerSeconds": 120,
+    "onPregameTimeout": "auto-pick valid XI and ready only if both seats connected; otherwise wait or expire",
+    "countdownAfterBothReadySec": 3,
+    "formationChangeInPrematch": true,
+    "lineupSwapInPrematch": true
+  },
+  "clock": {
+    "simulatedMinutes": 90,
+    "firstHalfEndMinute": 45,
+    "simMinuteDurationMs": 2000,
+    "firstHalfRealSeconds": 90,
+    "secondHalfRealSeconds": 90,
+    "halftimeRealSeconds": 30,
+    "earlyHalftimeContinueWhenBothReady": true,
+    "regulationOnly": true,
+    "allowDraw": true,
+    "extraTime": false,
+    "penalties": false,
+    "simulationRunsOnServer": true,
+    "renderFpsNotTiedToSimulation": true,
+    "serverTickDriftCorrection": true,
+    "tickCalculation": "monotonic server elapsed time + queued commands; never client timers for outcome",
+    "pauseControl": "only server pauses automatically for disconnect; no unilateral pause"
+  },
+  "match": {
+    "sharedEngine": "refactor current simulateEvent, playerActionScore, chooseAction and evolution out of DOM into pure/shared module",
+    "probabilityFormula": "sigmoid((attackScore-defenseScore)/13), then apply power matrix once, no double-count goals",
+    "categoryMatrixFromExistingSpec": true,
+    "duelCategoryBonusPP": 5,
+    "bothPowersCategoryBonusPP": 9,
+    "totalPowerModifierAbsClampPP": 15,
+    "noFixedSkillUseCount": true,
+    "keeperAndGoalkeepingStayInMatchResolution": true,
+    "tacticalInstructions": {
+      "pressing": {
+        "min": 0,
+        "max": 100,
+        "default": 55
+      },
+      "tempo": {
+        "min": 0,
+        "max": 100,
+        "default": 55
+      },
+      "freedom": {
+        "min": 0,
+        "max": 100,
+        "default": 55
+      },
+      "risk": {
+        "min": 0,
+        "max": 100,
+        "default": 55
+      },
+      "compactness": {
+        "min": 0,
+        "max": 100,
+        "default": 55
+      }
+    },
+    "individualRoles": "use original roleOptions for selected formation",
+    "instructionCooldownSimMinutes": 5,
+    "oneTacticChangePerCooldown": true,
+    "queuedCommandsAppliedAtNextSimMinute": true,
+    "currentPhaseOnServer": true,
+    "eventsPerSimMinute": "use plausible probabilistic possession events; avoid fixed number of chances each minute",
+    "2dViewScope": "MVP may use pitch positions, animation interpolation and event replay; do not pretend full football physics until implemented"
+  },
+  "powers": {
+    "exhibitionSignatureModeDefault": true,
+    "exhibitionTemporaryMastery": 40,
+    "masterRosterSkillStatusUnchanged": true,
+    "exhibitionOnlyOverridesPerMatch": true,
+    "newAwakeningsDuringRanked": false,
+    "persistentGrowthInFriendly": false,
+    "powerActivationRequiresTrigger": true,
+    "cycle": "reading > impact > creation > reading",
+    "neverGuaranteeGoal": true
+  },
+  "disconnect": {
+    "heartbeatIntervalSec": 20,
+    "connectionSilenceTimeoutSec": 60,
+    "reconnectGraceSec": 60,
+    "ifOneDisconnectsDuringMatch": "pause both and start 60s reconnect grace; resume from server snapshot if same user returns",
+    "ifGraceExpired": "forfeit for disconnected side; final event and authoritative result",
+    "ifBothDisconnect": "pause grace then abandon room",
+    "resumeToken": "cryptographically unpredictable token bound to seat/room; sent only to owning client; not stored in URL or game broadcast",
+    "resumeStorage": "sessionStorage recommended; clear at expiry",
+    "ifDisconnectBeforeStart": "room stays open until TTL; no unilateral match start"
+  },
+  "protocol": {
+    "version": 1,
+    "transport": "JSON envelopes: v, type, requestId/clientActionId, payload",
+    "maxMessageBytes": 16384,
+    "maxActionsPerSecondPerConnection": 8,
+    "maxBadMessagesBeforeClose": 5,
+    "serverSequenceCounter": true,
+    "idempotencyCachePerSeat": true,
+    "roomPublicStateOnly": "do not send private resume token, opponent hidden predispositions or future RNG rolls",
+    "serverEvents": [
+      "room_created",
+      "room_joined",
+      "room_state",
+      "squad_assigned",
+      "ready_changed",
+      "match_start",
+      "match_snapshot",
+      "match_event",
+      "halftime",
+      "match_end",
+      "player_disconnected",
+      "player_reconnected",
+      "command_accepted",
+      "error",
+      "pong"
+    ],
+    "clientEvents": [
+      "create_room",
+      "join_room",
+      "resume_room",
+      "set_club",
+      "reroll_club",
+      "request_auto_squads",
+      "set_lineup",
+      "set_ready",
+      "set_halftime_ready",
+      "set_tactics",
+      "substitute",
+      "ping"
+    ],
+    "errors": [
+      "INVALID_MESSAGE",
+      "ROOM_NOT_FOUND",
+      "ROOM_FULL",
+      "ROOM_EXPIRED",
+      "INVALID_STATE",
+      "NOT_AUTHORIZED",
+      "INVALID_CLUB",
+      "INVALID_PLAYER",
+      "INVALID_LINEUP",
+      "INVALID_SUBSTITUTION",
+      "RATE_LIMITED",
+      "STALE_ACTION",
+      "SERVER_ERROR"
+    ]
+  },
+  "security": {
+    "noClientAuthoritativeRandomness": true,
+    "validateAllMessagesServerSide": true,
+    "clientCannotSubmitGoalsOrFinalScore": true,
+    "clientCannotOverrideOpponentTeam": true,
+    "useCryptographicRoomAndResumeIds": true,
+    "sanitizeAllTextFields": true,
+    "renderUntrustedTextWithTextContent": true,
+    "noSensitiveTokensInLogs": true,
+    "originAllowListForDeployedFrontend": true,
+    "requireTLSInProduction": true,
+    "enforceWSSToHTTPS": true,
+    "boundedInMemoryRoomStorage": true,
+    "rateLimitRoomCreationAndCommands": true
+  },
+  "testTargets": {
+    "rosterSize": 110,
+    "uniquePlayerIds": 110,
+    "sampleClubs": 20,
+    "clientCount": 2,
+    "starterCountPerSide": 11,
+    "substituteCountPerSide": 5,
+    "totalSimulatedMinutes": 90,
+    "sameSnapshotsForBothClients": true,
+    "serverOnlyRandom": true,
+    "reconnectAndForfeitTests": true,
+    "twoRealBrowsersEndToEnd": true,
+    "noRegressionToOffline": true
+  },
+  "deferred": [
+    "ranking/elo",
+    "user accounts",
+    "database persisted across server restarts",
+    "tournaments",
+    "public matchmaking",
+    "game chat",
+    "complex transfer market",
+    "advanced career multi-season online",
+    "manual shared draft with timed picks",
+    "spectators",
+    "realistic continuous physics simulation",
+    "multiplayer coaching legacy"
+  ]
+}

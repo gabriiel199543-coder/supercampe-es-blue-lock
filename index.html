@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Supercampeoes Blue Lock - Manager v0.3</title>
+  <title>Supercampeoes Blue Lock - Manager v0.4</title>
   <style>
     :root {
       --bg: #07130f;
@@ -579,6 +579,8 @@
     .match-actions .panel-body { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
     .match-actions .button-row { min-width: 320px; }
     .match-actions p { margin: 7px 0 0; }
+.club-creator-link { display: block; padding: 12px; border: 1px solid var(--line); border-radius: 8px; color: var(--gold); text-decoration: none; text-align: center; }
+    .club-creator-link:hover { background: var(--panel2); }
     .session-note { margin: 18px 0 0; color: #8cab97; }
     #screen-squad .table-wrap { max-height: none; }
     #screen-squad table { min-width: 820px; }
@@ -697,8 +699,20 @@
             <select id="managerTeam">
               <option value="historia">Historia do Brasil FC</option>
               <option value="internet">Internet Brasileira FC</option>
+              <option value="mundo">Lendas do Mundo FC</option>
+              <option value="tvpop">TV &amp; Pop FC</option>
             </select>
           </div>
+<div class="field">
+                <label for="opponentTeam">Adversário</label>
+                <select id="opponentTeam">
+                  <option value="internet">Internet Brasileira FC</option>
+                  <option value="historia">História do Brasil FC</option>
+                  <option value="mundo">Lendas do Mundo FC</option>
+                  <option value="tvpop">TV &amp; Pop FC</option>
+                </select>
+              </div>
+              <a href="clubes.html" class="club-creator-link">Criar ou escolher clube →</a>
                 <div id="overviewPlan" class="detail-list"></div>
                 <div class="button-row"><button data-route="tactics" class="secondary">Revisar escalação</button><button data-route="training" class="secondary">Preparar treino</button></div>
               </div></section>
@@ -911,8 +925,8 @@
     </section>
   </main>
 
+  <script src="dados/jogadores/roster-compat.js"></script>
   <script>
-
     const screenDefinitions = {
       overview: { title: "Visão geral", section: "Clube", description: "O estado do clube e as próximas decisões." },
       tactics: { title: "Tática", section: "Equipe principal", description: "Organize os titulares, as funções e a identidade do time." },
@@ -1071,7 +1085,7 @@
       return placements;
     }
 
-    const roster = [
+    const roster = window.BANCO_ROSTER_110 || [
       ["hist-barao-rio-branco", "Barao do Rio Branco", "historia", "Historia do Brasil FC", "GK", "Diplomatic Keeper", "defense", "Tratado da Area", [58,62,86,64,90,70,88,74,30,84]],
       ["hist-dandara", "Dandara dos Palmares", "historia", "Historia do Brasil FC", "DF", "Quilombo Captain", "defense", "Corte de Palmares", [68,84,72,84,80,66,78,88,58,35]],
       ["hist-zumbi", "Zumbi dos Palmares", "historia", "Historia do Brasil FC", "DF", "Last Line Rebel", "defense", "Muralha do Quilombo", [66,88,70,86,74,60,75,90,62,35]],
@@ -1340,10 +1354,18 @@
     function resetGame() {
       seed = 20261014;
       const managerTeam = document.getElementById("managerTeam").value;
+      const rivalSelect = document.getElementById("opponentTeam");
+      Array.from(rivalSelect.options).forEach(function(option) { option.disabled = option.value === managerTeam; });
+      if (rivalSelect.value === managerTeam) rivalSelect.value = Array.from(rivalSelect.options).find(function(option) { return !option.disabled; }).value;
+      const rivalTeam = rivalSelect.value;
       const all = roster.map(makePlayer);
+      let savedClub = null;
+      try { savedClub = JSON.parse(localStorage.getItem("manager.club.v1") || "null"); } catch (error) {}
+
       state = {
         managed: all.filter(function(player) { return player.team === managerTeam; }),
-        opponent: all.filter(function(player) { return player.team !== managerTeam; }),
+        opponent: all.filter(function(player) { return player.team === rivalTeam; }),
+        club: savedClub,
         lineup: {},
         roles: {},
         week: 1,
@@ -1361,6 +1383,8 @@
         lastTraining: null,
         skillFeedback: null
       };
+      if (savedClub && typeof savedClub.clubName === "string") { savedClub.clubName = savedClub.clubName.replace(/[<>]/g, "").slice(0, 40); }
+      if (savedClub && savedClub.clubName) state.managed.forEach(function(player) { player.teamName = savedClub.clubName; });
       updateFocusOptions();
       buildLineup(true);
       addReport("coach", "Carreira iniciada. Agora a primeira tela importante e a prancheta: quem joga, onde joga e com que funcao.");
@@ -2206,6 +2230,7 @@
       document.getElementById("trainWeek").disabled = state.matchStarted;
       document.getElementById("autoLineup").disabled = state.matchStarted;
       document.getElementById("managerTeam").disabled = state.matchStarted;
+      document.getElementById("opponentTeam").disabled = state.matchStarted;
       document.getElementById("teamTalk").disabled = state.matchStarted;
       document.getElementById("training").disabled = state.matchStarted;
       document.getElementById("focusPlayer").disabled = state.matchStarted;
@@ -2225,7 +2250,7 @@
       const next = thresholds[player.stage + 1] || thresholds[3];
       const progress = player.stage >= 3 ? 100 : clamp(player.awakening / next * 100, 0, 100);
       return "<tr>" +
-        "<td><button type='button' class='player-link' data-player-profile='" + player.id + "' aria-label='Abrir ficha de " + player.name + "'>" + player.name + "</button><div class='tiny'>" + status + "</div></td>" +
+        "<td><button type='button' class='player-link' data-player-profile='" + player.id + "' aria-label='Abrir ficha de " + player.name.replace(/'/g, "&#39;") + "'>" + player.name + "</button><div class='tiny'>" + status + "</div></td>" +
         "<td><span class='role'>" + player.naturalPositions.join("/") + "</span><div class='tiny'>Estilo " + player.preferredStyle + "</div></td>" +
         "<td>TEC " + Math.round(attr(player, "technique")) + " | VIS " + Math.round(attr(player, "vision")) + " | EGO " + Math.round(attr(player, "ego")) + "<div class='tiny'>Skill: " + player.specialSkill + "</div></td>" +
         "<td>Mor " + Math.round(player.morale) + " | Cond " + Math.round(player.condition) + " | Rit " + Math.round(player.sharpness) + "<div class='bar'><div class='fill red' style='width:" + player.condition + "%'></div></div></td>" +
@@ -2269,6 +2294,7 @@
       render();
     });
     document.getElementById("managerTeam").addEventListener("change", resetGame);
+    document.getElementById("opponentTeam").addEventListener("change", resetGame);
     document.getElementById("autoLineup").addEventListener("click", function() {
       if (state.matchStarted) {
         addReport("warn", "Auto escalacao fica travada depois do apito. Use substituicoes e ajustes taticos.");

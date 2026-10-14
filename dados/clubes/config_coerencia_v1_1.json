@@ -1,0 +1,843 @@
+{
+  "schemaVersion": "1.1.0",
+  "extends": "parametros_criador_clubes_v1.json",
+  "currency": "BRL",
+  "financialPeriod": "annual",
+  "nominalCurrency": "Moeda fictícia do jogo, não preços reais do futebol brasileiro",
+  "audienceDefinitions": {
+    "localSupporters": "Pessoas torcedoras locais com propensão a acompanhar presencialmente; não público médio",
+    "digitalFollowers": "Seguidores online; não equivalem a sócios, torcedores locais ou compradores de ingresso",
+    "estimatedHomeAttendance": "Min(demanda presencial, lotação)"
+  },
+  "generationOrder": [
+    "origem/tema/historia",
+    "escala de atuação",
+    "perfil de financiamento",
+    "torcida local + alcance digital",
+    "demanda presencial",
+    "capacidade e vínculo do estádio",
+    "receita anual",
+    "orçamentos anuais",
+    "identidade visual coerente + validação"
+  ],
+  "originProfiles": {
+    "bairro": {
+      "fans": [
+        700,
+        50000
+      ],
+      "digital": [
+        100,
+        25000
+      ],
+      "participation": [
+        0.18,
+        0.3
+      ],
+      "members": [
+        0.025,
+        0.065
+      ],
+      "price": [
+        18,
+        38
+      ],
+      "sponsor": 0.65,
+      "styles": [
+        "popular",
+        "classico"
+      ],
+      "preferredFunding": [
+        "comunidade",
+        "associativo",
+        "patrocinio"
+      ],
+      "crowd": [
+        "cantos",
+        "familia",
+        "barra"
+      ],
+      "capacity": [
+        1500,
+        14000
+      ],
+      "premise": "forte identidade territorial, presença local e orçamento modesto"
+    },
+    "popular": {
+      "fans": [
+        4000,
+        260000
+      ],
+      "digital": [
+        1000,
+        220000
+      ],
+      "participation": [
+        0.17,
+        0.29
+      ],
+      "members": [
+        0.035,
+        0.085
+      ],
+      "price": [
+        20,
+        55
+      ],
+      "sponsor": 0.78,
+      "styles": [
+        "popular",
+        "classico"
+      ],
+      "preferredFunding": [
+        "associativo",
+        "comunidade",
+        "patrocinio"
+      ],
+      "crowd": [
+        "cantos",
+        "barra",
+        "misto"
+      ],
+      "capacity": [
+        3500,
+        48000
+      ],
+      "premise": "massa popular, receitas dependentes da comunidade e de bilheteria"
+    },
+    "historico": {
+      "fans": [
+        3500,
+        210000
+      ],
+      "digital": [
+        400,
+        180000
+      ],
+      "participation": [
+        0.15,
+        0.28
+      ],
+      "members": [
+        0.035,
+        0.08
+      ],
+      "price": [
+        22,
+        58
+      ],
+      "sponsor": 1.05,
+      "styles": [
+        "classico",
+        "brasao"
+      ],
+      "preferredFunding": [
+        "associativo",
+        "patrocinio",
+        "mecenato"
+      ],
+      "crowd": [
+        "tradicional",
+        "cantos",
+        "misto"
+      ],
+      "capacity": [
+        3000,
+        42000
+      ],
+      "premise": "identidade de tradição; estádio pode ter sido modernizado"
+    },
+    "universitario": {
+      "fans": [
+        800,
+        35000
+      ],
+      "digital": [
+        1000,
+        90000
+      ],
+      "participation": [
+        0.12,
+        0.24
+      ],
+      "members": [
+        0.02,
+        0.055
+      ],
+      "price": [
+        15,
+        40
+      ],
+      "sponsor": 0.78,
+      "styles": [
+        "academico",
+        "elegante"
+      ],
+      "preferredFunding": [
+        "institucional",
+        "patrocinio",
+        "associativo"
+      ],
+      "crowd": [
+        "familia",
+        "cantos",
+        "misto"
+      ],
+      "capacity": [
+        1500,
+        15000
+      ],
+      "premise": "comunidade acadêmica e potencial apoio institucional"
+    },
+    "escolar": {
+      "fans": [
+        350,
+        11000
+      ],
+      "digital": [
+        50,
+        25000
+      ],
+      "participation": [
+        0.12,
+        0.23
+      ],
+      "members": [
+        0.015,
+        0.04
+      ],
+      "price": [
+        12,
+        28
+      ],
+      "sponsor": 0.5,
+      "styles": [
+        "academico",
+        "classico"
+      ],
+      "preferredFunding": [
+        "institucional",
+        "comunidade"
+      ],
+      "crowd": [
+        "familia",
+        "cantos"
+      ],
+      "capacity": [
+        1500,
+        7000
+      ],
+      "premise": "escala formadora local"
+    },
+    "internet": {
+      "fans": [
+        800,
+        75000
+      ],
+      "digital": [
+        35000,
+        4000000
+      ],
+      "participation": [
+        0.13,
+        0.27
+      ],
+      "members": [
+        0.018,
+        0.05
+      ],
+      "price": [
+        20,
+        55
+      ],
+      "sponsor": 1.1,
+      "styles": [
+        "futurista",
+        "moderno"
+      ],
+      "preferredFunding": [
+        "digital",
+        "patrocinio",
+        "investidor"
+      ],
+      "crowd": [
+        "misto",
+        "cantos",
+        "familia"
+      ],
+      "capacity": [
+        1500,
+        22000
+      ],
+      "premise": "seguidores digitais não equivalem a público presencial"
+    },
+    "fantastico": {
+      "fans": [
+        3000,
+        250000
+      ],
+      "digital": [
+        1000,
+        300000
+      ],
+      "participation": [
+        0.15,
+        0.28
+      ],
+      "members": [
+        0.025,
+        0.075
+      ],
+      "price": [
+        20,
+        65
+      ],
+      "sponsor": 1,
+      "styles": [
+        "fantastico",
+        "agressivo"
+      ],
+      "preferredFunding": [
+        "patrocinio",
+        "mecenato",
+        "associativo"
+      ],
+      "crowd": [
+        "misto",
+        "cantos",
+        "barra"
+      ],
+      "capacity": [
+        4000,
+        55000
+      ],
+      "premise": "fantasia temática é visual; finanças seguem futebol plausível"
+    },
+    "elite": {
+      "fans": [
+        900,
+        85000
+      ],
+      "digital": [
+        1000,
+        250000
+      ],
+      "participation": [
+        0.11,
+        0.23
+      ],
+      "members": [
+        0.035,
+        0.085
+      ],
+      "price": [
+        40,
+        100
+      ],
+      "sponsor": 2.6,
+      "styles": [
+        "elegante",
+        "classico"
+      ],
+      "preferredFunding": [
+        "mecenato",
+        "investidor",
+        "patrocinio"
+      ],
+      "crowd": [
+        "tradicional",
+        "familia",
+        "misto"
+      ],
+      "capacity": [
+        3500,
+        43000
+      ],
+      "premise": "patrocínio e apoio privado podem superar receitas da torcida"
+    },
+    "operario": {
+      "fans": [
+        2300,
+        120000
+      ],
+      "digital": [
+        300,
+        85000
+      ],
+      "participation": [
+        0.17,
+        0.29
+      ],
+      "members": [
+        0.03,
+        0.08
+      ],
+      "price": [
+        18,
+        50
+      ],
+      "sponsor": 0.83,
+      "styles": [
+        "popular",
+        "classico"
+      ],
+      "preferredFunding": [
+        "comunidade",
+        "associativo",
+        "patrocinio"
+      ],
+      "crowd": [
+        "cantos",
+        "barra",
+        "misto"
+      ],
+      "capacity": [
+        3000,
+        35000
+      ],
+      "premise": "raízes populares, estádio característico, receitas locais"
+    },
+    "regional": {
+      "fans": [
+        1200,
+        170000
+      ],
+      "digital": [
+        200,
+        110000
+      ],
+      "participation": [
+        0.17,
+        0.29
+      ],
+      "members": [
+        0.02,
+        0.07
+      ],
+      "price": [
+        18,
+        50
+      ],
+      "sponsor": 0.9,
+      "styles": [
+        "popular",
+        "classico"
+      ],
+      "preferredFunding": [
+        "associativo",
+        "patrocinio",
+        "comunidade"
+      ],
+      "crowd": [
+        "cantos",
+        "misto",
+        "familia"
+      ],
+      "capacity": [
+        2000,
+        35000
+      ],
+      "premise": "identidade regional com base dispersa e fidelidade local"
+    }
+  },
+  "fundingTypes": {
+    "comunidade": {
+      "label": "Comunitário",
+      "external": [
+        0,
+        0
+      ],
+      "sponsorFactor": [
+        0.7,
+        1.02
+      ],
+      "weight": 2
+    },
+    "associativo": {
+      "label": "Associação e sócios",
+      "external": [
+        0,
+        0
+      ],
+      "sponsorFactor": [
+        0.85,
+        1.15
+      ],
+      "weight": 3
+    },
+    "patrocinio": {
+      "label": "Patrocínios",
+      "external": [
+        0,
+        0
+      ],
+      "sponsorFactor": [
+        1,
+        1.6
+      ],
+      "weight": 3
+    },
+    "mecenato": {
+      "label": "Mecenato privado",
+      "external": [
+        300000,
+        5000000
+      ],
+      "sponsorFactor": [
+        0.8,
+        1.2
+      ],
+      "weight": 2
+    },
+    "investidor": {
+      "label": "Investidor",
+      "external": [
+        1500000,
+        18000000
+      ],
+      "sponsorFactor": [
+        0.9,
+        1.4
+      ],
+      "weight": 2
+    },
+    "institucional": {
+      "label": "Institucional",
+      "external": [
+        200000,
+        4500000
+      ],
+      "sponsorFactor": [
+        0.7,
+        1.1
+      ],
+      "weight": 3
+    },
+    "digital": {
+      "label": "Receita de audiência digital",
+      "external": [
+        0,
+        0
+      ],
+      "sponsorFactor": [
+        1,
+        1.6
+      ],
+      "weight": 3
+    }
+  },
+  "scales": {
+    "local": {
+      "sponsorBase": [
+        150000,
+        900000
+      ],
+      "p": [
+        0.12,
+        0.24
+      ],
+      "targetCap": [
+        1500,
+        6000
+      ]
+    },
+    "municipal": {
+      "sponsorBase": [
+        600000,
+        2500000
+      ],
+      "p": [
+        0.14,
+        0.26
+      ],
+      "targetCap": [
+        3000,
+        17000
+      ]
+    },
+    "regional": {
+      "sponsorBase": [
+        1800000,
+        8500000
+      ],
+      "p": [
+        0.17,
+        0.28
+      ],
+      "targetCap": [
+        7500,
+        35000
+      ]
+    },
+    "nacional": {
+      "sponsorBase": [
+        5500000,
+        26000000
+      ],
+      "p": [
+        0.18,
+        0.31
+      ],
+      "targetCap": [
+        16000,
+        60000
+      ]
+    }
+  },
+  "rules": {
+    "hard": [
+      {
+        "id": "H01",
+        "rule": "1.500 <= stadium.capacity <= 60.000 e capacidade múltipla de 100"
+      },
+      {
+        "id": "H02",
+        "rule": "0 <= estimatedHomeAttendance <= stadium.capacity"
+      },
+      {
+        "id": "H03",
+        "rule": "budgetTotal >= 0; salários + manutenção + transferências <= budgetTotal"
+      },
+      {
+        "id": "H04",
+        "rule": "visualIdentity usa cores do próprio clube para escudo, bandeira e estandarte"
+      },
+      {
+        "id": "H05",
+        "rule": "clubId persistente e independente de nome/tema"
+      },
+      {
+        "id": "H06",
+        "rule": "mesma seed + mesmo estado de travas + mesmas entradas => mesmos resultados"
+      },
+      {
+        "id": "H07",
+        "rule": "todo valor financeiro tem unidade e período; BRL/ano"
+      },
+      {
+        "id": "H08",
+        "rule": "alterações manuais nunca são sobrescritas silenciosamente"
+      }
+    ],
+    "soft": [
+      {
+        "id": "S01",
+        "rule": "ocupação média entre 35% e 90%",
+        "penalty": 15
+      },
+      {
+        "id": "S02",
+        "rule": "símbolos, padrão e estilo com afinidade ao tema de origem",
+        "penalty": 8
+      },
+      {
+        "id": "S03",
+        "rule": "padrão estético e atmosfera coerentes com perfil de torcida",
+        "penalty": 5
+      },
+      {
+        "id": "S04",
+        "rule": "estádio preferencialmente na faixa temática, salvo legado, arrendamento ou investimento",
+        "penalty": 7
+      },
+      {
+        "id": "S05",
+        "rule": "contraste cromático entre primária e secundária >= 2.5",
+        "penalty": 12
+      },
+      {
+        "id": "S06",
+        "rule": "orçamento excepcionalmente alto por torcedor local requer justificativa de financiamento ou audiência digital",
+        "penalty": 12
+      },
+      {
+        "id": "S07",
+        "rule": "estádio novo muito maior que demanda exige projeto financiado ou empréstimo/compartilhamento",
+        "penalty": 8
+      }
+    ],
+    "acceptanceScoreMin": 75,
+    "maxRetries": 20,
+    "manualOverridePolicy": "aviso + justificativa, não corrigir valor travado",
+    "rareExceptionRateMax": 0.1
+  },
+  "financialModel": {
+    "homeMatchesPerYear": 18,
+    "attendanceTargetOccupancy": [
+      0.52,
+      0.84
+    ],
+    "annualMembershipFeeBRL": [
+      150,
+      450
+    ],
+    "digitalAnnualIncomePerFollowerBRL": [
+      0.2,
+      1.7
+    ],
+    "incomeFormula": "grossAnnual = attendance*18*netTicketPrice + round(localFans*memberConversion)*annualMemberFee + sponsorAnnual + digitalFollowers*digitalYield + committedAnnualBacking",
+    "budgetsFormula": "operatingAnnual = round(grossAnnual*0.84 / 1000)*1000; salariesAnnual = round(operatingAnnual*0.58); stadiumOpsAnnual = round(operatingAnnual*0.28); transfersAnnual = operatingAnnual - salariesAnnual - stadiumOpsAnnual",
+    "sponsorFormula": "sponsorAnnual = sponsorBaseByScale * originSponsorFactor * fundingSponsorFactor",
+    "stadiumRule": "sem estádio definido: selecionar capacidade proporcional à demanda esperada, com occupancy alvo 52%-84%, ajustando a escala; estádio já criado/travado: gerar demanda e torcida coerentes com ele, sem alterá-lo",
+    "fundingRule": "investidor, mecenato ou instituição permitem orçamento elevado com torcida pequena, exibindo fonte da receita; receita digital não cria público físico automático",
+    "participationNote": "taxas representam demanda média em um jogo típico a partir da base local, não comparecimento de todo torcedor em todos os jogos",
+    "sponsorBaseScaleRangesBRL": {
+      "local": [
+        150000,
+        900000
+      ],
+      "municipal": [
+        600000,
+        2500000
+      ],
+      "regional": [
+        1800000,
+        8500000
+      ],
+      "nacional": [
+        5500000,
+        26000000
+      ]
+    },
+    "notModeled": "endividamento, inflação, contratos individuais, direitos de TV e mercado de transferência — futuro módulo financeiro"
+  },
+  "visualModel": {
+    "alwaysSharePalette": [
+      "crest",
+      "flag",
+      "banner",
+      "kit"
+    ],
+    "originPreferredStyles": {
+      "bairro": [
+        "popular",
+        "classico"
+      ],
+      "popular": [
+        "popular",
+        "classico"
+      ],
+      "historico": [
+        "classico",
+        "brasao"
+      ],
+      "universitario": [
+        "academico",
+        "elegante"
+      ],
+      "escolar": [
+        "academico",
+        "classico"
+      ],
+      "internet": [
+        "futurista",
+        "moderno"
+      ],
+      "fantastico": [
+        "fantastico",
+        "agressivo"
+      ],
+      "elite": [
+        "elegante",
+        "classico"
+      ],
+      "operario": [
+        "popular",
+        "classico"
+      ],
+      "regional": [
+        "popular",
+        "classico"
+      ]
+    },
+    "shapeGuide": {
+      "historico": [
+        "brasao",
+        "escudo"
+      ],
+      "universitario": [
+        "brasao",
+        "redondo"
+      ],
+      "escolar": [
+        "redondo",
+        "escudo"
+      ],
+      "internet": [
+        "moderno",
+        "diamante"
+      ],
+      "elite": [
+        "brasao",
+        "escudo"
+      ],
+      "popular": [
+        "escudo",
+        "redondo"
+      ],
+      "bairro": [
+        "escudo",
+        "redondo"
+      ],
+      "operario": [
+        "escudo",
+        "redondo"
+      ],
+      "regional": [
+        "escudo",
+        "redondo"
+      ],
+      "fantastico": [
+        "escudo",
+        "diamante"
+      ]
+    },
+    "contrastPrimarySecondaryMin": 2.5,
+    "recommendedAccessibilityTextContrast": 4.5,
+    "bannerMustUseClubSymbol": true,
+    "flagSymbolMustUseClubSymbolOrDeclaredAlternative": true,
+    "visualNeverImpactsAttributes": true
+  },
+  "randomness": {
+    "algorithm": "stable deterministic PRNG (sugestão: hash(seed, clubId, fieldGroup, rerollIndex))",
+    "fieldGroups": [
+      "origem",
+      "financeiro",
+      "torcida",
+      "estadio",
+      "identidade"
+    ],
+    "sameSeedSameResult": true,
+    "rerollSemantics": "rerrolar apenas grupo destravado e dependentes; campos travados são preservados; invalidez gera aviso"
+  },
+  "legacyCompatibility": {
+    "existingClubSchema": "1.0.0",
+    "mode": "non-breaking additive",
+    "addFields": [
+      "economy",
+      "fanbase",
+      "coherence"
+    ],
+    "preserve": [
+      "clubId",
+      "clubName",
+      "colors",
+      "visualIdentity",
+      "stadium",
+      "origin",
+      "generation"
+    ]
+  },
+  "testCases": [
+    "operario com torcida grande e pouca verba",
+    "elite rica com poucos torcedores",
+    "internet viral sem estádio gigante",
+    "historico com estádio moderno reformado",
+    "universitario em estádio compartilhado",
+    "capacidade maior que demanda com justificativa de aluguel",
+    "campo travado no híbrido e reroll dos dependentes",
+    "seed reproduz resultados idênticos",
+    "logo e bandeira partilham paleta",
+    "fluxo 20 clubes sem valores negativos"
+  ]
+}

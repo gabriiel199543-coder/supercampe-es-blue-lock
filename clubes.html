@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Criar clube · Supercampeões</title><link rel="stylesheet" href="public/clubes.css"></head>
+<body><main><header><div><p class="eyebrow">CENTRAL DO TÉCNICO</p><h1>A identidade do seu clube</h1><p>Crie uma história, preserve suas escolhas e leve o clube para o jogo.</p></div><a href="index.html">← Voltar ao gerenciamento</a></header>
+<div class="layout"><section class="panel editor"><h2>Criação de clubes</h2><label>Clube predefinido<select id="preset"><option value="">Novo clube</option></select></label>
+<div class="row"><label>Tema<select id="theme"></select></label><label>Seed<input id="seed" value="meu-clube"></label></div>
+<div class="row"><button id="generate">Gerar clube</button><button id="newClub" class="secondary">Novo clube aleatório</button></div><p class="small">A mesma seed gera o mesmo clube. Marque o cadeado para preservar um campo nas próximas gerações.</p>
+<div id="fields"></div><div class="row"><button id="visual" class="secondary">Rerrolar só o visual</button><button id="save">Usar este clube</button></div><div id="feedback" role="status"></div></section>
+<section class="stack"><section class="panel identity"><p class="eyebrow">IDENTIDADE VISUAL</p><h2 id="clubName">Preparando clube…</h2><p id="motto"></p><div class="visuals"><figure><div id="crest"></div><figcaption>Escudo</figcaption></figure><figure><div id="flag"></div><figcaption>Bandeira</figcaption></figure><figure><div id="banner"></div><figcaption>Estandarte</figcaption></figure></div><p id="origin"></p><div id="stadium" class="stat"></div></section>
+<section class="panel"><h2>Torcida e orçamento</h2><p class="small">Seguidores digitais e público no estádio são medidas diferentes. O orçamento representa receitas anuais fictícias do clube.</p><div id="finances" class="stats"></div><div id="coherence"></div></section>
+<section class="panel"><h2>Seu elenco</h2><p>A identidade do clube será usada no gerenciamento. Na tela de visão geral, escolha uma das quatro equipes de origem e o adversário.</p><a class="button" href="index.html">Abrir o gerenciamento →</a></section></section></div></main>
+<script type="module" src="public/clubes.mjs"></script></body></html>

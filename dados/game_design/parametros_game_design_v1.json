@@ -1,0 +1,611 @@
+{
+  "spec_version": "1.0.0",
+  "kind": "PROPOSTA DE BALANCEAMENTO — NÃO IMPLEMENTADO",
+  "date": "2026-10-14",
+  "repo": "gabriiel199543-coder/supercampe-es-blue-lock",
+  "compatibility": {
+    "inspected": "index.html (main) em 2026-10-14; revalidar ao executar",
+    "existing_actions": [
+      "dribble",
+      "pass",
+      "sprint",
+      "shoot",
+      "special"
+    ],
+    "existing_training": [
+      "balanced",
+      "finishing",
+      "creation",
+      "defense",
+      "ego",
+      "rest"
+    ],
+    "existing_stage_thresholds": [
+      0,
+      60,
+      150,
+      300
+    ],
+    "existing_rng_seed": 20261014,
+    "existing_base_probability": "sigmoid((attackScore-defenseScore)/13)",
+    "source_of_truth": {
+      "ego": "player.attributes.ego",
+      "discipline": "player.attributes.discipline",
+      "morale": "player.morale",
+      "legacy_awakening": "player.awakening",
+      "legacy_signature": "player.specialSkill",
+      "legacy_skills": "player.skills",
+      "new_readiness": "player.development.readiness"
+    },
+    "preserve_existing_roster": true,
+    "preserve_existing_skills_and_stages": true,
+    "do_not_replace_legacy_awakening_with_readiness": true
+  },
+  "scales": {
+    "attributes": [
+      0,
+      100
+    ],
+    "affinities": [
+      0,
+      100
+    ],
+    "family_mastery": [
+      0,
+      100
+    ],
+    "power_mastery": [
+      0,
+      100
+    ],
+    "significant_experience": [
+      0,
+      100
+    ],
+    "readiness": [
+      0,
+      100
+    ],
+    "morale": [
+      0,
+      100
+    ],
+    "frustration": [
+      0,
+      100
+    ],
+    "personal_affinity": [
+      -100,
+      100
+    ],
+    "relationship_chemistry": [
+      0,
+      100
+    ],
+    "rivalry": [
+      0,
+      100
+    ],
+    "memory_importance": [
+      1,
+      5
+    ]
+  },
+  "families": {
+    "impact": {
+      "name": "Impacto",
+      "principle": "Potência, velocidade, pressão, explosão e imposição",
+      "counters": "creation",
+      "countered_by": "reading"
+    },
+    "creation": {
+      "name": "Criação",
+      "principle": "Improvisação, dribles, domínio e soluções imprevisíveis",
+      "counters": "reading",
+      "countered_by": "impact"
+    },
+    "reading": {
+      "name": "Leitura",
+      "principle": "Antecipação, tempo, percepção espacial e reconhecimento de padrões",
+      "counters": "impact",
+      "countered_by": "creation"
+    }
+  },
+  "match": {
+    "family_advantage_matrix_attack_vs_defense_pp": {
+      "impact": {
+        "impact": 0,
+        "creation": 5,
+        "reading": -5
+      },
+      "creation": {
+        "impact": -5,
+        "creation": 0,
+        "reading": 5
+      },
+      "reading": {
+        "impact": 5,
+        "creation": -5,
+        "reading": 0
+      }
+    },
+    "category_bonus_pp_normal": 5,
+    "category_bonus_pp_both_special_powers_active": 9,
+    "replace_not_stack_both_special_bonus": true,
+    "power_mastery_bonus_max_pp_per_side": 4,
+    "power_mastery_bonus_formula": "4 * mastery / 100 (only if activation valid)",
+    "tactical_synergy_delta_pp_clamp": [
+      -3,
+      3
+    ],
+    "total_new_modifier_pp_clamp": [
+      -15,
+      15
+    ],
+    "final_action_probability_clamp": [
+      0.03,
+      0.97
+    ],
+    "base_duel_probability": "sigmoid((attackScore-defenseScore)/13)",
+    "one_probability_roll_per_duel": true,
+    "power_effect_modifies_only_duel_step_not_goal_step_twice": true,
+    "power_only_on_valid_trigger": true,
+    "max_power_activations_per_match": null,
+    "categories_are_action_specific_not_player_classes": true,
+    "prevent_opponent_hidden_info_cheating": true,
+    "action_interpretations": {
+      "pass": {
+        "impact": "passe forte/direto",
+        "creation": "passe improvável ou de efeito",
+        "reading": "passe de antecipação ou timing"
+      },
+      "dribble": {
+        "impact": "drible de arranque",
+        "creation": "finta imprevisível",
+        "reading": "drible lendo o deslocamento do zagueiro"
+      },
+      "sprint": {
+        "impact": "arrancada explosiva",
+        "creation": "mudança imprevista de direção",
+        "reading": "corrida no espaço que será aberto"
+      },
+      "shoot": {
+        "impact": "chute de potência",
+        "creation": "efeito e finalização improvisada",
+        "reading": "finalização no melhor tempo e ângulo"
+      },
+      "special": {
+        "impact": "poder de imposição",
+        "creation": "poder de surpresa",
+        "reading": "poder de antecipação"
+      },
+      "defend": {
+        "impact": "pressão e contato",
+        "creation": "abordagem não convencional",
+        "reading": "posicionamento e interceptação"
+      },
+      "goalkeep": {
+        "impact": "reflexo explosivo",
+        "creation": "defesa pouco ortodoxa",
+        "reading": "antecipação da trajetória"
+      }
+    }
+  },
+  "training": {
+    "family_exposure_distribution": {
+      "balanced": {
+        "impact": 0.33,
+        "creation": 0.33,
+        "reading": 0.34
+      },
+      "finishing": {
+        "impact": 0.6,
+        "creation": 0.2,
+        "reading": 0.2
+      },
+      "creation": {
+        "impact": 0.05,
+        "creation": 0.55,
+        "reading": 0.4
+      },
+      "defense": {
+        "impact": 0.4,
+        "creation": 0.1,
+        "reading": 0.5
+      },
+      "ego": {
+        "impact": 0.2,
+        "creation": 0.4,
+        "reading": 0.4
+      },
+      "rest": {
+        "impact": 0,
+        "creation": 0,
+        "reading": 0
+      }
+    },
+    "existing_focus_boost_legacy": 1.85,
+    "keep_existing_training_types": true,
+    "train_only_new_power_unlock_allowed": false,
+    "clamp_all_exposure_to_0_100": true,
+    "independent_family_affinities_do_not_sum_to_100": true,
+    "implementation_note": "Preserve normal training of technical attributes; add separate family preparation/exposure and experience gates."
+  },
+  "development": {
+    "readiness_weights": {
+      "meaningful_experience": 0.5,
+      "training_preparation": 0.3,
+      "assimilation": 0.2
+    },
+    "readiness_threshold": 65,
+    "minimum_meaningful_confrontations_lifetime": 3,
+    "requires_new_meaningful_event_in_current_match": true,
+    "max_awakening_attempts_per_player_per_match": 1,
+    "awakening_probability_min": 0.04,
+    "awakening_probability_max": 0.1,
+    "awakening_probability_formula": "0.04 + 0.06 * clamp((readiness-65)/35,0,1)",
+    "awakening_family_probability_weights": {
+      "natural_affinity": 0.4,
+      "field_experience": 0.35,
+      "recent_training": 0.2,
+      "personality_tendency": 0.05
+    },
+    "min_family_probability_when_eligible": 0.02,
+    "normalize_family_inputs_before_weighted_sum": true,
+    "power_mastery_tiers": [
+      {
+        "range": [
+          0,
+          19
+        ],
+        "label": "Descoberta"
+      },
+      {
+        "range": [
+          20,
+          49
+        ],
+        "label": "Desenvolvimento"
+      },
+      {
+        "range": [
+          50,
+          74
+        ],
+        "label": "Especialização"
+      },
+      {
+        "range": [
+          75,
+          89
+        ],
+        "label": "Maestria"
+      },
+      {
+        "range": [
+          90,
+          100
+        ],
+        "label": "Genialidade"
+      }
+    ],
+    "hybrid": {
+      "enabled_after_normal_powers": true,
+      "min_mastery_each_of_two_families": 75,
+      "chance_when_hybrid_eligible_at_awakening": 0.03,
+      "double_category_bonus_allowed": false
+    },
+    "meaningful_event_types": {
+      "power_countered": 3,
+      "outplayed_by_stronger_rival": 2,
+      "adaptation_after_failures": 4,
+      "decisive_failure": 2,
+      "decisive_success": 3,
+      "new_partnership": 3,
+      "rivalry_breakthrough": 3,
+      "unusual_power_defended": 4
+    },
+    "event_weight_units": "heurística de relevância (não pontos automáticos de prontidão)",
+    "avoid_training_only_unlock": true
+  },
+  "personality": {
+    "stable_traits": {
+      "ego": "player.attributes.ego",
+      "discipline": "player.attributes.discipline",
+      "cooperation": "player.personality.cooperation",
+      "ambition": "player.personality.ambition",
+      "resilience": "player.personality.resilience",
+      "adaptability": "player.personality.adaptability"
+    },
+    "dynamic_states": {
+      "confidence": "player.psychology.confidence",
+      "morale": "player.morale",
+      "frustration": "player.psychology.frustration",
+      "coach_trust": "player.psychology.coachTrust"
+    },
+    "max_absolute_action_choice_probability_shift_pp_initial": 10,
+    "max_normal_trait_delta_per_week": 0.3,
+    "conversation_morale_shift_max_abs_initial": 3,
+    "conversation_coach_trust_shift_max_abs_initial": 5,
+    "conversations": [
+      "demand_protagonism",
+      "protect_from_pressure",
+      "emphasize_collective",
+      "challenge_individually"
+    ],
+    "no_deterministic_disobedience": true,
+    "ego_independent_from_discipline_and_cooperation": true,
+    "conversation_repeat_farming_prevented": true
+  },
+  "relationships": {
+    "key": "sorted_pair(playerA_id,playerB_id)",
+    "fields": {
+      "personalAffinity": [
+        -100,
+        100
+      ],
+      "chemistry": [
+        0,
+        100
+      ],
+      "rivalry": [
+        0,
+        100
+      ]
+    },
+    "rivalry_can_be_productive_or_destructive": true,
+    "chemistry_not_same_as_personal_affinity": true,
+    "synergy_must_not_double_count_base_team_chemistry": true,
+    "partnership_requirements": [
+      "relevant_shared_experience",
+      "position_compatibility",
+      "valid_opportunity",
+      "adequate_chemistry"
+    ]
+  },
+  "memories": {
+    "types": [
+      "countered_by_opponent",
+      "breakthrough",
+      "decisive_failure",
+      "decisive_success",
+      "rivalry_encounter",
+      "partnership",
+      "tactical_adaptation",
+      "special_power_encounter"
+    ],
+    "required_fields": [
+      "id",
+      "matchId",
+      "minute",
+      "subjectPlayerId",
+      "relatedPlayerIds",
+      "kind",
+      "family",
+      "importance",
+      "outcome",
+      "context",
+      "effectsApplied"
+    ],
+    "max_detailed_memories_per_player": 20,
+    "archive_old_memories_into_summaries": true,
+    "effect_application_idempotent": true,
+    "keep_lifetime_progress_counters_separately": true
+  },
+  "opponent_ai": {
+    "minimum_comparable_observations_before_counteradaptation": 3,
+    "never_read_hidden_category_or_future_result": true,
+    "scouting_from_public_actions_only": true,
+    "adaptation_not_certain": true
+  },
+  "skill_catalog": [
+    {
+      "id": "impact_burst_run",
+      "name": "Arrancada Explosiva",
+      "family": "impact",
+      "compatible_actions": [
+        "sprint"
+      ],
+      "trigger_description": "espaço para aceleração e condição física disponível",
+      "usually_countered_by_family": "reading",
+      "example_counterpower": "reading_spatial_awareness",
+      "physical_cost_points": 3,
+      "mental_cost_points": 2,
+      "mastery_range": [
+        0,
+        100
+      ],
+      "requires_existing_character": false,
+      "rarity": "common"
+    },
+    {
+      "id": "impact_power_shot",
+      "name": "Chute de Potência",
+      "family": "impact",
+      "compatible_actions": [
+        "shoot"
+      ],
+      "trigger_description": "posição para finalização e balanço de corpo",
+      "usually_countered_by_family": "reading",
+      "example_counterpower": "reading_timed_finish",
+      "physical_cost_points": 5,
+      "mental_cost_points": 3,
+      "mastery_range": [
+        0,
+        100
+      ],
+      "requires_existing_character": false,
+      "rarity": "common"
+    },
+    {
+      "id": "impact_press",
+      "name": "Pressão Devastadora",
+      "family": "impact",
+      "compatible_actions": [
+        "defend"
+      ],
+      "trigger_description": "proximidade do portador e fôlego",
+      "usually_countered_by_family": "reading",
+      "example_counterpower": "reading_spatial_awareness",
+      "physical_cost_points": 4,
+      "mental_cost_points": 2,
+      "mastery_range": [
+        0,
+        100
+      ],
+      "requires_existing_character": false,
+      "rarity": "common"
+    },
+    {
+      "id": "creation_unexpected_dribble",
+      "name": "Drible Inesperado",
+      "family": "creation",
+      "compatible_actions": [
+        "dribble"
+      ],
+      "trigger_description": "duelo 1 contra 1 em corredor viável",
+      "usually_countered_by_family": "impact",
+      "example_counterpower": "impact_press",
+      "physical_cost_points": 3,
+      "mental_cost_points": 3,
+      "mastery_range": [
+        0,
+        100
+      ],
+      "requires_existing_character": false,
+      "rarity": "common"
+    },
+    {
+      "id": "creation_unorthodox_pass",
+      "name": "Passe Imprevisível",
+      "family": "creation",
+      "compatible_actions": [
+        "pass"
+      ],
+      "trigger_description": "linha de passe alternativa aberta",
+      "usually_countered_by_family": "impact",
+      "example_counterpower": "impact_press",
+      "physical_cost_points": 2,
+      "mental_cost_points": 2,
+      "mastery_range": [
+        0,
+        100
+      ],
+      "requires_existing_character": false,
+      "rarity": "common"
+    },
+    {
+      "id": "creation_first_touch",
+      "name": "Domínio Inventivo",
+      "family": "creation",
+      "compatible_actions": [
+        "dribble",
+        "pass"
+      ],
+      "trigger_description": "recepção sob marcação",
+      "usually_countered_by_family": "impact",
+      "example_counterpower": "impact_press",
+      "physical_cost_points": 2,
+      "mental_cost_points": 2,
+      "mastery_range": [
+        0,
+        100
+      ],
+      "requires_existing_character": false,
+      "rarity": "common"
+    },
+    {
+      "id": "reading_spatial_awareness",
+      "name": "Leitura Espacial",
+      "family": "reading",
+      "compatible_actions": [
+        "pass",
+        "sprint",
+        "defend"
+      ],
+      "trigger_description": "padrão de movimentação observável",
+      "usually_countered_by_family": "creation",
+      "example_counterpower": "creation_unexpected_dribble",
+      "physical_cost_points": 2,
+      "mental_cost_points": 2,
+      "mastery_range": [
+        0,
+        100
+      ],
+      "requires_existing_character": false,
+      "rarity": "common"
+    },
+    {
+      "id": "reading_intercept",
+      "name": "Interceptação Antecipada",
+      "family": "reading",
+      "compatible_actions": [
+        "defend"
+      ],
+      "trigger_description": "trajetória de passe ou condução legível",
+      "usually_countered_by_family": "creation",
+      "example_counterpower": "creation_unorthodox_pass",
+      "physical_cost_points": 2,
+      "mental_cost_points": 2,
+      "mastery_range": [
+        0,
+        100
+      ],
+      "requires_existing_character": false,
+      "rarity": "common"
+    },
+    {
+      "id": "reading_timed_finish",
+      "name": "Finalização Antecipada",
+      "family": "reading",
+      "compatible_actions": [
+        "shoot"
+      ],
+      "trigger_description": "timing de chegada na zona de finalização",
+      "usually_countered_by_family": "creation",
+      "example_counterpower": "creation_first_touch",
+      "physical_cost_points": 3,
+      "mental_cost_points": 3,
+      "mastery_range": [
+        0,
+        100
+      ],
+      "requires_existing_character": false,
+      "rarity": "common"
+    }
+  ],
+  "ui_navigation_proposal": [
+    "Prancheta",
+    "Elenco",
+    "Jogador e Skills",
+    "Treinos e Desenvolvimento",
+    "Dinâmica do Elenco",
+    "Análise do Adversário",
+    "Partida e Relatórios",
+    "Pós-jogo"
+  ],
+  "implementation_phases": [
+    "0-auditoria_protecao",
+    "1-dados_compatibilidade",
+    "2-categorias_duelos_comuns",
+    "3-poderes_despertar",
+    "4-personalidade_conversas",
+    "5-relacoes_memorias",
+    "6-ia_interface",
+    "7-balanceamento_regressao"
+  ],
+  "integrity_invariants": [
+    "RNG não consumido durante renderização",
+    "Mesma seed + mesmo estado + mesmas escolhas = mesmos resultados",
+    "Máximo de 1 tentativa despertar por jogador por jogo",
+    "Treino sem jogos não gera poderes novos",
+    "Não apagar nomes ou poderes assinatura do elenco",
+    "Afinidades são independentes, não um simplex",
+    "Categoria de cada ação é situacional",
+    "IA não acessa decisões ocultas para escolher resposta",
+    "Nenhum modificador pode garantir vitória num confronto",
+    "Mesmos campos existentes devem continuar válidos",
+    "Rivalidade e entrosamento independentes",
+    "Memória aplicada exatamente uma vez"
+  ]
+}

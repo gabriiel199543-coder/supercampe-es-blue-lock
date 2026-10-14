@@ -1,130 +1,109 @@
-# Supercampeoes Blue Lock Prototype
+# Supercampeões — Manager v0.4 em desenvolvimento
 
-Prototype of a football manager RPG about coaching Brazilian historical figures,
-internet personas, meme characters, and creator collectives.
+Branch de trabalho: `development/manager-online-v2`.
 
-The current direction is closer to Football Manager than to direct arcade control:
-you act as the coach. Your job is to read the squad, build the starting XI,
-assign player roles, define training, choose a tactical identity, handle the team
-talk, and watch how the match engine turns those decisions into duels, goals,
-awakenings, fatigue, pressure, substitutions, tactical changes, and player
-evolution.
+Esta entrega implementa a preparação e uma parte funcional da integração de
+dados e clubes. **Ainda não é a versão multiplayer 1×1.** O protótipo anterior
+continua disponível, com escalação, funções, treino, partidas e substituições.
 
-## Play in the Browser
+## Começar a jogar
 
-Open `index.html` in a browser.
-
-If you are viewing the file on GitHub, the normal blob page shows the source
-instead of running the game. Download/open the raw `index.html` locally, or
-publish the repository with GitHub Pages when the prototype is ready to share.
-
-The interface is organized into six screens, accessible through the navigation menu:
-
-| Screen | Purpose |
-| --- | --- |
-| Visão geral | Club selection, readiness summary, current plan, and assistant report |
-| Tática | Formation, starting XI, individual roles, identity, and tactical sliders |
-| Elenco | Full squad table; click a player's name to open their profile |
-| Ficha e skills | Technical, mental, and physical attributes, evolution, and individual analysis |
-| Treinos | Weekly plan, focus player, training preview, and last applied week's feedback |
-| Dia de jogo | Team talk, simulation controls, momentum, match feed, bench, and change history |
-
-The score and match status stay visible above every screen. Navigation preserves
-the current career, selected player, training focus, tactics, and match minute.
-Browser Back/Forward and hash links such as `index.html#tactics` also navigate
-between screens. On small screens, the tactical board becomes a list of position
-cards so player and role controls remain readable.
-
-Suggested first session: review **Visão geral**, adjust **Tática**, inspect players
-through **Elenco**, apply a week in **Treinos**, then open **Dia de jogo** and
-simulate 15 minutes. Between blocks, return to **Tática** to react and go back to
-the match to continue.
-
-The current session lives in memory. Reloading the page starts a new career;
-there is no save/load yet. Each prototype team has exactly 11 players, so a
-complete starting XI leaves no substitutes available.
-
-Current manager actions:
-
-- choose which team to command
-- choose formation
-- fill all 11 pitch slots manually
-- assign a tactical role to every selected player
-- auto-pick a starting XI based on position and role fit
-- define tactical identity
-- choose weekly training
-- choose a focus player
-- set team talk before the match
-- tune pressing, tempo, creative freedom, and risk/ego
-- simulate 15-minute blocks or the whole match
-- use the bench during the match
-- make up to 5 substitutions
-- change formation, roles, and tactical sliders while the match is live
-- inspect each player's FM-style attribute and skill profile
-- define a player from the skill screen as weekly focus
-- read assistant feedback, squad condition, role fit, and match consequences
-
-## Run the Engine
+1. No GitHub, selecione a branch acima e use **Code → Download ZIP**, ou abra essa branch no Codex.
+2. Extraia o projeto e instale o Node.js 24 LTS se ainda não estiver instalado.
+3. Abra um terminal na pasta do projeto e execute:
 
 ```bash
+npm install
 npm test
-npm run demo
+npm start
 ```
 
-Or directly:
+Abra **http://localhost:3000/**. Para criar seu clube, clique em
+**Criar ou escolher clube** na visão geral ou abra
+**http://localhost:3000/clubes.html**.
+
+Escolha uma das quatro equipes de origem, selecione um adversário, ajuste a
+escalação e o treino, e simule a partida em blocos de 15 minutos ou até o fim.
+Com 25–35 jogadores por equipe, há reservas disponíveis para substituições.
+
+## O que está implementado
+
+- Os mesmos 110 IDs, nomes, dez atributos e assinaturas do pacote, carregados pelo adaptador compatível. Não há soma de bancos.
+- Quatro equipes: História do Brasil (25), Mundo (35), Internet (25), TV & Pop (25).
+- Seleção explícita de adversário: uma equipe, em vez da união de todas as outras.
+- As seis telas de gestão, treino, ficha, tática, banco e partida existentes.
+- 20 identidades de clube predefinidas com cores, origem, estádio e orçamento.
+- Editor manual, geração por seed, travas e rerrolagem apenas do visual.
+- Escudo, bandeira e estandarte em SVG com a mesma paleta.
+- Torcida local independente da audiência digital; orçamento derivado das receitas.
+- Uso do clube salvo como identidade do time no protótipo.
+- Servidor HTTP simples e healthcheck; **não há WebSocket de partida nesta fase**.
+- Módulos separados de dados/compatibilidade, RNG, clubes e desenvolvimento.
+- Desenvolvimento probabilístico, prontidão, conversas e memórias preparados em módulos; ainda não integrados ao motor da interface antiga.
+
+## Metadados completos do pacote
+
+O adaptador de 110 está incluído e já funciona. Para importar também o JSON
+completo de personalidade, afinidades e poderes exatamente como veio no ZIP,
+coloque `Manager_Online_1x1_Pacote_Completo_v2.zip` na pasta do projeto e rode:
 
 ```bash
-node examples/demo.js
+npm run import
 ```
 
-## Prototype Roster
+Nomes com `(1)` ou `(2)` também são reconhecidos. É possível indicar outro caminho
+com `npm run import -- caminho/do/pacote.zip`. O importador verifica hashes e
+contagens antes de escrever os bancos. A integração desses metadados ao novo
+motor continua pendente.
 
-The first roster has two 11-player teams:
+## Testes
 
-- `Historia do Brasil FC`: Brazilian historical figures.
-- `Internet Brasileira FC`: friendly public internet personas, meme figures,
-  streamers, and creator collectives.
+`npm test` executa os testes antigos, as regras de dados/clubes/desenvolvimento
+e o servidor HTTP. Há um teste de navegador para a nova interface:
 
-Important: the internet roster is for internal prototyping and tone discovery.
-Before any public or commercial release, replace living people and active brands
-with licensed, authorized, or clearly fictionalized characters.
+```bash
+npm install --no-save playwright
+npx playwright install chromium
+npm run test:browser
+```
 
-## Core Systems
+Consulte `IMPLEMENTATION_STATUS.md` para distinguir testes executados dos
+testes adicionados ainda sem execução. O workflow no GitHub executa ambos.
 
-- squad attributes and role fit
-- formation slots and player position fit
-- manager-style starting XI selection
-- role instructions for each player
-- six management screens with shared career state
-- browser history and direct screen links
-- responsive tactical board and player-profile shortcuts
-- FM-inspired player attribute profile
-- skill nodes based on awakening, style progress, and role mastery
-- bench management and substitution limits
-- in-match tactical changes
-- match state, score, xG, and momentum
-- training week effects
-- tactical identity and sliders
-- morale, condition, fatigue, pressure, and sharpness
-- 1v1 duel resolution inside the simulation
-- style-based evolution and special skills
-- assistant report after segments
+## Organização
 
-## Current Design Target
+- `index.html`: protótipo de gerenciamento ampliado para o banco de 110.
+- `legacy/index.html`: cópia integral da v0.3 antes das alterações.
+- `clubes.html` e `public/`: interface funcional do criador de clubes.
+- `shared/`: módulos sem DOM de compatibilidade, clubes, RNG e desenvolvimento.
+- `dados/` e `config/`: dados e parâmetros do pacote.
+- `src/engine.js`, `src/roster.js`: motor e banco legados, preservados.
+- `server/static.mjs`: servidor HTTP desta fase.
+- `scripts/import-package.mjs`: importação fiel do ZIP com validação de integridade.
+- `test/`: testes de regressão, regras e navegador.
 
-The browser prototype should answer one question first: "Did my coaching choices
-change the match in a readable way?"
+## Limites e próximos passos
 
-The short-term priority is depth of the manager loop, not graphics. Every new
-feature should make the coach experience clearer: team selection, roles,
-opposition scouting, substitutions, development, squad hierarchy, or season
-planning.
+Faltam o motor compartilhado de futebol com posse e movimentação em 15 zonas,
+a representação 2D das jogadas, poderes integrados aos duelos, o servidor
+autoritativo WebSocket, salas privadas, dois treinadores, reconexão e resultados
+sincronizados. Não há carreira multitemporadas, mercado ou ranking.
 
-## Next Steps
+O estado da partida continua em memória. A identidade do clube é salva no
+navegador. Os módulos de desenvolvimento não significam que esses sistemas já
+estão ativos na partida do protótipo.
 
-1. Make skill nodes affect role-specific bonuses more explicitly.
-2. Add opposition scouting before each fixture.
-3. Add player promises, hierarchy, and training feedback.
-4. Add a calendar with multiple fixtures and form history.
-5. Add post-match analysis with heat-map style summaries.
-6. Split the stable match logic into a WebAssembly-ready engine module.
+## Publicação
+
+O criador e o protótipo atual podem ser servidos como arquivos estáticos.
+Para a futura versão 1×1, GitHub Pages sozinho não serve: será necessário um
+processo Node persistente, HTTPS, WebSocket Upgrade e conexões WSS.
+
+Quando o servidor multiplayer estiver implementado e testado:
+1. hospedar o projeto em um serviço que aceite Node e WebSocket persistente;
+2. usar `npm install` e `npm start`, com a variável `PORT` da hospedagem;
+3. configurar o proxy para `/ws` e o domínio HTTPS;
+4. validar `/health`, os dois clientes e a reconexão antes de compartilhar o link.
+
+Nesta fase `npm start` inicia somente o servidor HTTP. Nenhum endereço público
+de partida online foi publicado.

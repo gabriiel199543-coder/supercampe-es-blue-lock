@@ -1,0 +1,2176 @@
+{
+  "schemaVersion": "1.0.0",
+  "name": "Criador de Clubes",
+  "language": "pt-BR",
+  "generation": {
+    "modes": [
+      "manual",
+      "aleatorio-total",
+      "hibrido",
+      "aleatorio-por-tema"
+    ],
+    "default": "hibrido",
+    "weightedThemeSelection": true,
+    "maxRetries": 20,
+    "clubNameMaxChars": 40,
+    "shortNameMinChars": 2,
+    "shortNameMaxChars": 5,
+    "stadiumCapacityLimits": [
+      1500,
+      60000
+    ],
+    "stadiumCapacityStep": 100,
+    "sameSeedSameResult": true,
+    "locksByFieldPath": true,
+    "fieldReroll": true,
+    "separateRngForRender": true
+  },
+  "themes": {
+    "popular-brasileiro": {
+      "label": "Popular brasileiro",
+      "weight": 22,
+      "origins": [
+        "bairro",
+        "popular"
+      ],
+      "styles": [
+        "popular",
+        "classico"
+      ],
+      "atmospheres": [
+        "festiva",
+        "intimidante"
+      ],
+      "stadium_size": [
+        8000,
+        36000
+      ],
+      "symbols": [
+        "estrela",
+        "tocha",
+        "leao",
+        "bola",
+        "punho",
+        "asa"
+      ],
+      "patterns": [
+        "listras",
+        "diagonal",
+        "bicolor"
+      ],
+      "name_structure": [
+        "prefixo referencia sufixo",
+        "prefixo da referencia"
+      ]
+    },
+    "historico": {
+      "label": "Histórico",
+      "weight": 12,
+      "origins": [
+        "historico",
+        "popular"
+      ],
+      "styles": [
+        "classico",
+        "brasao"
+      ],
+      "atmospheres": [
+        "tradicional",
+        "festiva"
+      ],
+      "stadium_size": [
+        5000,
+        32000
+      ],
+      "symbols": [
+        "livro",
+        "louro",
+        "tocha",
+        "estrela",
+        "sol"
+      ],
+      "patterns": [
+        "cruz",
+        "quartelada",
+        "bicolor"
+      ],
+      "name_structure": [
+        "prefixo da referencia",
+        "prefixo referencia sufixo"
+      ]
+    },
+    "academico": {
+      "label": "Acadêmico",
+      "weight": 10,
+      "origins": [
+        "universitario",
+        "escolar"
+      ],
+      "styles": [
+        "academico",
+        "elegante"
+      ],
+      "atmospheres": [
+        "tecnica",
+        "tradicional"
+      ],
+      "stadium_size": [
+        3000,
+        22000
+      ],
+      "symbols": [
+        "livro",
+        "coruja",
+        "engrenagem",
+        "estrela",
+        "sol"
+      ],
+      "patterns": [
+        "centralizado",
+        "bicolor",
+        "diagonal"
+      ],
+      "name_structure": [
+        "prefixo referencia",
+        "referencia sufixo"
+      ]
+    },
+    "internet": {
+      "label": "Internet",
+      "weight": 11,
+      "origins": [
+        "internet"
+      ],
+      "styles": [
+        "futurista",
+        "moderno"
+      ],
+      "atmospheres": [
+        "caotica",
+        "festiva"
+      ],
+      "stadium_size": [
+        4000,
+        27000
+      ],
+      "symbols": [
+        "raio",
+        "controle",
+        "pixel",
+        "saturno",
+        "cursor",
+        "cometa"
+      ],
+      "patterns": [
+        "diagonal",
+        "chevron",
+        "listras"
+      ],
+      "name_structure": [
+        "prefixo referencia sufixo",
+        "referencia sufixo"
+      ]
+    },
+    "fantastico": {
+      "label": "Fantástico",
+      "weight": 8,
+      "origins": [
+        "fantastico"
+      ],
+      "styles": [
+        "fantastico",
+        "agressivo"
+      ],
+      "atmospheres": [
+        "intimidante",
+        "caotica"
+      ],
+      "stadium_size": [
+        10000,
+        50000
+      ],
+      "symbols": [
+        "dragao",
+        "fenix",
+        "lobo",
+        "meteoro",
+        "coroa"
+      ],
+      "patterns": [
+        "chevron",
+        "quartelada",
+        "diagonal"
+      ],
+      "name_structure": [
+        "prefixo referencia sufixo",
+        "referencia sufixo"
+      ]
+    },
+    "elitizado": {
+      "label": "Tradicional de elite",
+      "weight": 6,
+      "origins": [
+        "elite"
+      ],
+      "styles": [
+        "elegante",
+        "classico"
+      ],
+      "atmospheres": [
+        "tradicional",
+        "tecnica"
+      ],
+      "stadium_size": [
+        9000,
+        45000
+      ],
+      "symbols": [
+        "coroa",
+        "leao",
+        "louro",
+        "flor-de-lis"
+      ],
+      "patterns": [
+        "vertical",
+        "centralizado",
+        "quartelada"
+      ],
+      "name_structure": [
+        "prefixo referencia sufixo",
+        "referencia sufixo"
+      ]
+    },
+    "operario": {
+      "label": "Operário",
+      "weight": 11,
+      "origins": [
+        "operario",
+        "popular"
+      ],
+      "styles": [
+        "popular",
+        "classico"
+      ],
+      "atmospheres": [
+        "intimidante",
+        "festiva"
+      ],
+      "stadium_size": [
+        6000,
+        32000
+      ],
+      "symbols": [
+        "engrenagem",
+        "martelo",
+        "tocha",
+        "trem",
+        "raio"
+      ],
+      "patterns": [
+        "listras",
+        "chevron",
+        "diagonal"
+      ],
+      "name_structure": [
+        "prefixo referencia sufixo",
+        "prefixo da referencia"
+      ]
+    },
+    "futurista": {
+      "label": "Futurista",
+      "weight": 8,
+      "origins": [
+        "fantastico",
+        "internet"
+      ],
+      "styles": [
+        "futurista",
+        "moderno"
+      ],
+      "atmospheres": [
+        "tecnica",
+        "caotica"
+      ],
+      "stadium_size": [
+        9000,
+        55000
+      ],
+      "symbols": [
+        "raio",
+        "pixel",
+        "orbita",
+        "cometa",
+        "engrenagem"
+      ],
+      "patterns": [
+        "chevron",
+        "diagonal",
+        "vertical"
+      ],
+      "name_structure": [
+        "referencia sufixo",
+        "prefixo referencia sufixo"
+      ]
+    },
+    "regional": {
+      "label": "Regional",
+      "weight": 7,
+      "origins": [
+        "regional",
+        "bairro"
+      ],
+      "styles": [
+        "classico",
+        "popular"
+      ],
+      "atmospheres": [
+        "festiva",
+        "tradicional"
+      ],
+      "stadium_size": [
+        3000,
+        26000
+      ],
+      "symbols": [
+        "sol",
+        "lobo",
+        "rio",
+        "araucaria",
+        "estrela"
+      ],
+      "patterns": [
+        "bicolor",
+        "horizontal",
+        "listras"
+      ],
+      "name_structure": [
+        "prefixo da referencia",
+        "referencia sufixo"
+      ]
+    },
+    "meme-carismatico": {
+      "label": "Meme carismático",
+      "weight": 5,
+      "origins": [
+        "internet",
+        "popular"
+      ],
+      "styles": [
+        "popular",
+        "moderno"
+      ],
+      "atmospheres": [
+        "caotica",
+        "festiva"
+      ],
+      "stadium_size": [
+        1500,
+        23000
+      ],
+      "symbols": [
+        "cafe",
+        "relógio",
+        "controle",
+        "raio",
+        "livro",
+        "cursor"
+      ],
+      "patterns": [
+        "diagonal",
+        "listras",
+        "bicolor"
+      ],
+      "name_structure": [
+        "prefixo referencia sufixo",
+        "referencia sufixo"
+      ]
+    }
+  },
+  "namePools": [
+    {
+      "pool": "prefixo",
+      "theme": "popular-brasileiro",
+      "text": "União",
+      "weight": 9
+    },
+    {
+      "pool": "prefixo",
+      "theme": "popular-brasileiro",
+      "text": "Atlético",
+      "weight": 10
+    },
+    {
+      "pool": "prefixo",
+      "theme": "popular-brasileiro",
+      "text": "Grêmio",
+      "weight": 8
+    },
+    {
+      "pool": "prefixo",
+      "theme": "popular-brasileiro",
+      "text": "Esporte Clube",
+      "weight": 7
+    },
+    {
+      "pool": "prefixo",
+      "theme": "popular-brasileiro",
+      "text": "Associação",
+      "weight": 4
+    },
+    {
+      "pool": "prefixo",
+      "theme": "popular-brasileiro",
+      "text": "Nacional",
+      "weight": 5
+    },
+    {
+      "pool": "prefixo",
+      "theme": "historico",
+      "text": "Sociedade",
+      "weight": 5
+    },
+    {
+      "pool": "prefixo",
+      "theme": "historico",
+      "text": "República",
+      "weight": 4
+    },
+    {
+      "pool": "prefixo",
+      "theme": "historico",
+      "text": "Independência",
+      "weight": 3
+    },
+    {
+      "pool": "prefixo",
+      "theme": "historico",
+      "text": "União",
+      "weight": 6
+    },
+    {
+      "pool": "prefixo",
+      "theme": "historico",
+      "text": "Clube Histórico",
+      "weight": 2
+    },
+    {
+      "pool": "prefixo",
+      "theme": "academico",
+      "text": "Associação Atlética",
+      "weight": 6
+    },
+    {
+      "pool": "prefixo",
+      "theme": "academico",
+      "text": "Academia",
+      "weight": 6
+    },
+    {
+      "pool": "prefixo",
+      "theme": "academico",
+      "text": "Universitário",
+      "weight": 9
+    },
+    {
+      "pool": "prefixo",
+      "theme": "academico",
+      "text": "Ateneu",
+      "weight": 4
+    },
+    {
+      "pool": "prefixo",
+      "theme": "internet",
+      "text": "Clube",
+      "weight": 5
+    },
+    {
+      "pool": "prefixo",
+      "theme": "internet",
+      "text": "União",
+      "weight": 6
+    },
+    {
+      "pool": "prefixo",
+      "theme": "internet",
+      "text": "Atlético",
+      "weight": 6
+    },
+    {
+      "pool": "prefixo",
+      "theme": "internet",
+      "text": "Grêmio Recreativo",
+      "weight": 5
+    },
+    {
+      "pool": "prefixo",
+      "theme": "fantastico",
+      "text": "Ordem",
+      "weight": 6
+    },
+    {
+      "pool": "prefixo",
+      "theme": "fantastico",
+      "text": "Legião",
+      "weight": 6
+    },
+    {
+      "pool": "prefixo",
+      "theme": "fantastico",
+      "text": "Atlético",
+      "weight": 4
+    },
+    {
+      "pool": "prefixo",
+      "theme": "fantastico",
+      "text": "Clã",
+      "weight": 3
+    },
+    {
+      "pool": "prefixo",
+      "theme": "elitizado",
+      "text": "Real",
+      "weight": 6
+    },
+    {
+      "pool": "prefixo",
+      "theme": "elitizado",
+      "text": "Sporting",
+      "weight": 7
+    },
+    {
+      "pool": "prefixo",
+      "theme": "elitizado",
+      "text": "Royal",
+      "weight": 3
+    },
+    {
+      "pool": "prefixo",
+      "theme": "elitizado",
+      "text": "Clube",
+      "weight": 4
+    },
+    {
+      "pool": "prefixo",
+      "theme": "operario",
+      "text": "Ferroviário",
+      "weight": 9
+    },
+    {
+      "pool": "prefixo",
+      "theme": "operario",
+      "text": "Operário",
+      "weight": 10
+    },
+    {
+      "pool": "prefixo",
+      "theme": "operario",
+      "text": "União",
+      "weight": 6
+    },
+    {
+      "pool": "prefixo",
+      "theme": "operario",
+      "text": "Atlético",
+      "weight": 4
+    },
+    {
+      "pool": "prefixo",
+      "theme": "futurista",
+      "text": "Neo",
+      "weight": 7
+    },
+    {
+      "pool": "prefixo",
+      "theme": "futurista",
+      "text": "Atlético",
+      "weight": 4
+    },
+    {
+      "pool": "prefixo",
+      "theme": "futurista",
+      "text": "Quantum",
+      "weight": 5
+    },
+    {
+      "pool": "prefixo",
+      "theme": "futurista",
+      "text": "União",
+      "weight": 3
+    },
+    {
+      "pool": "prefixo",
+      "theme": "regional",
+      "text": "Grêmio",
+      "weight": 8
+    },
+    {
+      "pool": "prefixo",
+      "theme": "regional",
+      "text": "Atlético",
+      "weight": 6
+    },
+    {
+      "pool": "prefixo",
+      "theme": "regional",
+      "text": "União",
+      "weight": 7
+    },
+    {
+      "pool": "prefixo",
+      "theme": "regional",
+      "text": "Esporte Clube",
+      "weight": 5
+    },
+    {
+      "pool": "prefixo",
+      "theme": "meme-carismatico",
+      "text": "Atlético",
+      "weight": 8
+    },
+    {
+      "pool": "prefixo",
+      "theme": "meme-carismatico",
+      "text": "Grêmio Recreativo",
+      "weight": 8
+    },
+    {
+      "pool": "prefixo",
+      "theme": "meme-carismatico",
+      "text": "União",
+      "weight": 5
+    },
+    {
+      "pool": "prefixo",
+      "theme": "meme-carismatico",
+      "text": "Sociedade Esportiva",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "popular-brasileiro",
+      "text": "Aurora",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "popular-brasileiro",
+      "text": "Liberdade",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "popular-brasileiro",
+      "text": "Horizonte",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "popular-brasileiro",
+      "text": "Esperança",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "popular-brasileiro",
+      "text": "Estrela",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "popular-brasileiro",
+      "text": "Resistência",
+      "weight": 3
+    },
+    {
+      "pool": "referencia",
+      "theme": "popular-brasileiro",
+      "text": "Progresso",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "popular-brasileiro",
+      "text": "Povo",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "popular-brasileiro",
+      "text": "União",
+      "weight": 3
+    },
+    {
+      "pool": "referencia",
+      "theme": "popular-brasileiro",
+      "text": "Vitória",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "historico",
+      "text": "República",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "historico",
+      "text": "Memória",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "historico",
+      "text": "Alvorada",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "historico",
+      "text": "Centenário",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "historico",
+      "text": "Conquista",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "historico",
+      "text": "Legado",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "historico",
+      "text": "Bandeira",
+      "weight": 4
+    },
+    {
+      "pool": "referencia",
+      "theme": "academico",
+      "text": "Sapiência",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "academico",
+      "text": "Cátedra",
+      "weight": 4
+    },
+    {
+      "pool": "referencia",
+      "theme": "academico",
+      "text": "Aurora",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "academico",
+      "text": "Politécnica",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "academico",
+      "text": "Horizonte",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "academico",
+      "text": "Biblioteca",
+      "weight": 3
+    },
+    {
+      "pool": "referencia",
+      "theme": "academico",
+      "text": "Teorema",
+      "weight": 4
+    },
+    {
+      "pool": "referencia",
+      "theme": "internet",
+      "text": "Pixel",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "internet",
+      "text": "Buffer",
+      "weight": 3
+    },
+    {
+      "pool": "referencia",
+      "theme": "internet",
+      "text": "Conexão",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "internet",
+      "text": "Algoritmo",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "internet",
+      "text": "Streaming",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "internet",
+      "text": "Nuvem",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "internet",
+      "text": "Latência",
+      "weight": 4
+    },
+    {
+      "pool": "referencia",
+      "theme": "fantastico",
+      "text": "Fênix",
+      "weight": 9
+    },
+    {
+      "pool": "referencia",
+      "theme": "fantastico",
+      "text": "Dragão",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "fantastico",
+      "text": "Eclipse",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "fantastico",
+      "text": "Nebulosa",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "fantastico",
+      "text": "Tempestade",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "fantastico",
+      "text": "Titãs",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "elitizado",
+      "text": "Magnólia",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "elitizado",
+      "text": "Imperial",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "elitizado",
+      "text": "Loureiro",
+      "weight": 4
+    },
+    {
+      "pool": "referencia",
+      "theme": "elitizado",
+      "text": "Colina",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "elitizado",
+      "text": "Aurora",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "elitizado",
+      "text": "Estrela",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "operario",
+      "text": "Fundição",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "operario",
+      "text": "Trilhos",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "operario",
+      "text": "Oficina",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "operario",
+      "text": "Sideral",
+      "weight": 3
+    },
+    {
+      "pool": "referencia",
+      "theme": "operario",
+      "text": "Ferro",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "operario",
+      "text": "Pioneiros",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "futurista",
+      "text": "Órbita",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "futurista",
+      "text": "Saturno",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "futurista",
+      "text": "Horizonte Zero",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "futurista",
+      "text": "Cometa",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "futurista",
+      "text": "Circuito",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "futurista",
+      "text": "Prisma",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "regional",
+      "text": "Pampa",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "regional",
+      "text": "Fronteira",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "regional",
+      "text": "Serra",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "regional",
+      "text": "Litoral",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "regional",
+      "text": "Ventos",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "regional",
+      "text": "Águas",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "regional",
+      "text": "Pinhal",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "regional",
+      "text": "Cerrado",
+      "weight": 4
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "Boleto Vencido",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "Café Frio",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "Última Aba",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "Print Perdido",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "Modo Avião",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "Segunda-feira",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "Wi-Fi Caiu",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "TCC Atrasado",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "Ctrl+Z",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "Autocorretor",
+      "weight": 7
+    },
+    {
+      "pool": "sufixo",
+      "theme": "all",
+      "text": "FC",
+      "weight": 9
+    },
+    {
+      "pool": "sufixo",
+      "theme": "all",
+      "text": "EC",
+      "weight": 7
+    },
+    {
+      "pool": "sufixo",
+      "theme": "all",
+      "text": "SC",
+      "weight": 6
+    },
+    {
+      "pool": "sufixo",
+      "theme": "all",
+      "text": "Clube",
+      "weight": 4
+    },
+    {
+      "pool": "sufixo",
+      "theme": "all",
+      "text": "Atlético",
+      "weight": 3
+    },
+    {
+      "pool": "sufixo",
+      "theme": "all",
+      "text": "Esportivo",
+      "weight": 3
+    },
+    {
+      "pool": "sufixo",
+      "theme": "historico",
+      "text": "AC",
+      "weight": 4
+    },
+    {
+      "pool": "sufixo",
+      "theme": "elitizado",
+      "text": "Sporting",
+      "weight": 2
+    },
+    {
+      "pool": "sufixo",
+      "theme": "internet",
+      "text": "United",
+      "weight": 3
+    },
+    {
+      "pool": "sufixo",
+      "theme": "meme-carismatico",
+      "text": "FC",
+      "weight": 9
+    },
+    {
+      "pool": "sufixo",
+      "theme": "futurista",
+      "text": "United",
+      "weight": 4
+    }
+  ],
+  "stadiumPools": [
+    {
+      "pool": "tipo",
+      "theme": "all",
+      "text": "Arena",
+      "weight": 10
+    },
+    {
+      "pool": "tipo",
+      "theme": "all",
+      "text": "Estádio",
+      "weight": 10
+    },
+    {
+      "pool": "tipo",
+      "theme": "all",
+      "text": "Parque",
+      "weight": 6
+    },
+    {
+      "pool": "tipo",
+      "theme": "popular-brasileiro",
+      "text": "Caldeirão",
+      "weight": 6
+    },
+    {
+      "pool": "tipo",
+      "theme": "popular-brasileiro",
+      "text": "Gigante",
+      "weight": 4
+    },
+    {
+      "pool": "tipo",
+      "theme": "historico",
+      "text": "Memorial",
+      "weight": 5
+    },
+    {
+      "pool": "tipo",
+      "theme": "academico",
+      "text": "Campus",
+      "weight": 6
+    },
+    {
+      "pool": "tipo",
+      "theme": "internet",
+      "text": "Servidor",
+      "weight": 3
+    },
+    {
+      "pool": "tipo",
+      "theme": "fantastico",
+      "text": "Fortaleza",
+      "weight": 7
+    },
+    {
+      "pool": "tipo",
+      "theme": "operario",
+      "text": "Oficina",
+      "weight": 4
+    },
+    {
+      "pool": "tipo",
+      "theme": "futurista",
+      "text": "Domo",
+      "weight": 7
+    },
+    {
+      "pool": "tipo",
+      "theme": "regional",
+      "text": "Campo",
+      "weight": 4
+    },
+    {
+      "pool": "tipo",
+      "theme": "meme-carismatico",
+      "text": "Caldeirão",
+      "weight": 7
+    },
+    {
+      "pool": "tipo",
+      "theme": "meme-carismatico",
+      "text": "Arena",
+      "weight": 10
+    },
+    {
+      "pool": "referencia",
+      "theme": "all",
+      "text": "da Aurora",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "all",
+      "text": "da Liberdade",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "all",
+      "text": "do Horizonte",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "all",
+      "text": "das Estrelas",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "all",
+      "text": "do Povo",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "all",
+      "text": "da Vitória",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "historico",
+      "text": "da República",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "historico",
+      "text": "da Memória",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "academico",
+      "text": "do Saber",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "academico",
+      "text": "da Cátedra",
+      "weight": 6
+    },
+    {
+      "pool": "referencia",
+      "theme": "internet",
+      "text": "do Pixel",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "internet",
+      "text": "da Conexão",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "fantastico",
+      "text": "do Dragão",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "fantastico",
+      "text": "da Fênix",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "elitizado",
+      "text": "da Colina",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "operario",
+      "text": "dos Trilhos",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "operario",
+      "text": "da Forja",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "futurista",
+      "text": "da Órbita",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "futurista",
+      "text": "Prismático",
+      "weight": 5
+    },
+    {
+      "pool": "referencia",
+      "theme": "regional",
+      "text": "do Pampa",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "regional",
+      "text": "da Serra",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "do Café",
+      "weight": 7
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "do Buffer Infinito",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "da Última Aba",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "do Ctrl+Z",
+      "weight": 8
+    },
+    {
+      "pool": "referencia",
+      "theme": "meme-carismatico",
+      "text": "do Anexo",
+      "weight": 7
+    }
+  ],
+  "mottoPools": [
+    {
+      "theme": "popular-brasileiro",
+      "motto": "Juntos até o último minuto",
+      "weight": 5
+    },
+    {
+      "theme": "popular-brasileiro",
+      "motto": "Raiz no bairro, olho no título",
+      "weight": 5
+    },
+    {
+      "theme": "popular-brasileiro",
+      "motto": "Onde a arquibancada joga junto",
+      "weight": 5
+    },
+    {
+      "theme": "popular-brasileiro",
+      "motto": "Força, coragem e união",
+      "weight": 5
+    },
+    {
+      "theme": "popular-brasileiro",
+      "motto": "A camisa é de todos",
+      "weight": 5
+    },
+    {
+      "theme": "popular-brasileiro",
+      "motto": "Nossa voz, nosso futebol",
+      "weight": 5
+    },
+    {
+      "theme": "historico",
+      "motto": "Memória que move o futuro",
+      "weight": 5
+    },
+    {
+      "theme": "historico",
+      "motto": "A história entra em campo",
+      "weight": 5
+    },
+    {
+      "theme": "historico",
+      "motto": "Tradição, coragem, conquista",
+      "weight": 5
+    },
+    {
+      "theme": "historico",
+      "motto": "O legado nunca recua",
+      "weight": 5
+    },
+    {
+      "theme": "historico",
+      "motto": "De geração em geração",
+      "weight": 5
+    },
+    {
+      "theme": "academico",
+      "motto": "A teoria encontra o gol",
+      "weight": 5
+    },
+    {
+      "theme": "academico",
+      "motto": "Aprender, criar, conquistar",
+      "weight": 5
+    },
+    {
+      "theme": "academico",
+      "motto": "Conhecimento em movimento",
+      "weight": 5
+    },
+    {
+      "theme": "academico",
+      "motto": "Nem todo passe é evidente",
+      "weight": 5
+    },
+    {
+      "theme": "academico",
+      "motto": "Pensar antes de avançar",
+      "weight": 5
+    },
+    {
+      "theme": "internet",
+      "motto": "Sem lag para a vitória",
+      "weight": 5
+    },
+    {
+      "theme": "internet",
+      "motto": "A conexão é nosso ataque",
+      "weight": 5
+    },
+    {
+      "theme": "internet",
+      "motto": "Todo mundo no mesmo servidor",
+      "weight": 5
+    },
+    {
+      "theme": "internet",
+      "motto": "Transmitindo futebol desde sempre",
+      "weight": 5
+    },
+    {
+      "theme": "internet",
+      "motto": "O algoritmo não marca ninguém",
+      "weight": 5
+    },
+    {
+      "theme": "fantastico",
+      "motto": "Até o impossível é treinável",
+      "weight": 5
+    },
+    {
+      "theme": "fantastico",
+      "motto": "Do mito nasce o gol",
+      "weight": 5
+    },
+    {
+      "theme": "fantastico",
+      "motto": "Acima do céu, além do campo",
+      "weight": 5
+    },
+    {
+      "theme": "fantastico",
+      "motto": "Uma lenda a cada partida",
+      "weight": 5
+    },
+    {
+      "theme": "fantastico",
+      "motto": "A chama jamais se apaga",
+      "weight": 5
+    },
+    {
+      "theme": "elitizado",
+      "motto": "Excelência em cada detalhe",
+      "weight": 5
+    },
+    {
+      "theme": "elitizado",
+      "motto": "Honra ao jogo, respeito à história",
+      "weight": 5
+    },
+    {
+      "theme": "elitizado",
+      "motto": "Classe dentro e fora do campo",
+      "weight": 5
+    },
+    {
+      "theme": "elitizado",
+      "motto": "Uma tradição de coragem",
+      "weight": 5
+    },
+    {
+      "theme": "operario",
+      "motto": "Da oficina para a área",
+      "weight": 5
+    },
+    {
+      "theme": "operario",
+      "motto": "O trabalho constrói vitórias",
+      "weight": 5
+    },
+    {
+      "theme": "operario",
+      "motto": "A união move os trilhos",
+      "weight": 5
+    },
+    {
+      "theme": "operario",
+      "motto": "Ninguém vence sozinho",
+      "weight": 5
+    },
+    {
+      "theme": "operario",
+      "motto": "Forjados na disputa",
+      "weight": 5
+    },
+    {
+      "theme": "futurista",
+      "motto": "O amanhã começa no apito",
+      "weight": 5
+    },
+    {
+      "theme": "futurista",
+      "motto": "Evoluir é nosso destino",
+      "weight": 5
+    },
+    {
+      "theme": "futurista",
+      "motto": "Além da linha do horizonte",
+      "weight": 5
+    },
+    {
+      "theme": "futurista",
+      "motto": "Precisão, invenção, movimento",
+      "weight": 5
+    },
+    {
+      "theme": "futurista",
+      "motto": "O futuro entra em campo",
+      "weight": 5
+    },
+    {
+      "theme": "regional",
+      "motto": "Nossa terra, nossa paixão",
+      "weight": 5
+    },
+    {
+      "theme": "regional",
+      "motto": "Onde o vento encontra a bola",
+      "weight": 5
+    },
+    {
+      "theme": "regional",
+      "motto": "Do chão que pisamos nasce a vitória",
+      "weight": 5
+    },
+    {
+      "theme": "regional",
+      "motto": "Raízes fortes, futebol livre",
+      "weight": 5
+    },
+    {
+      "theme": "regional",
+      "motto": "O mapa termina, o jogo não",
+      "weight": 5
+    },
+    {
+      "theme": "meme-carismatico",
+      "motto": "Paga no próximo campeonato",
+      "weight": 5
+    },
+    {
+      "theme": "meme-carismatico",
+      "motto": "A gente volta no segundo tempo",
+      "weight": 5
+    },
+    {
+      "theme": "meme-carismatico",
+      "motto": "Se travar, reinicia",
+      "weight": 5
+    },
+    {
+      "theme": "meme-carismatico",
+      "motto": "O gol fica em rascunhos",
+      "weight": 5
+    },
+    {
+      "theme": "meme-carismatico",
+      "motto": "Era só um amistoso",
+      "weight": 5
+    },
+    {
+      "theme": "meme-carismatico",
+      "motto": "Todo erro é uma assistência em potencial",
+      "weight": 5
+    },
+    {
+      "theme": "meme-carismatico",
+      "motto": "O VAR está digitando...",
+      "weight": 5
+    },
+    {
+      "theme": "meme-carismatico",
+      "motto": "O importante é não cair a conexão",
+      "weight": 5
+    },
+    {
+      "theme": "meme-carismatico",
+      "motto": "Isso podia ser um passe",
+      "weight": 5
+    }
+  ],
+  "symbolPool": [
+    {
+      "iconId": "estrela",
+      "label": "estrela",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "livro",
+      "label": "livro",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "tocha",
+      "label": "tocha",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "leao",
+      "label": "leão",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "coroa",
+      "label": "coroa",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "raio",
+      "label": "raio",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "engrenagem",
+      "label": "engrenagem",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "asa",
+      "label": "asa",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "bola",
+      "label": "bola",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "louro",
+      "label": "louro",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "sol",
+      "label": "sol",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "coruja",
+      "label": "coruja",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "trem",
+      "label": "trem",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "punho",
+      "label": "punho",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "lobo",
+      "label": "lobo",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "dragao",
+      "label": "dragão",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "fenix",
+      "label": "fênix",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "meteoro",
+      "label": "meteoro",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "pixel",
+      "label": "pixel",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "cursor",
+      "label": "cursor",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "controle",
+      "label": "controle",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "orbita",
+      "label": "órbita",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "cometa",
+      "label": "cometa",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "rio",
+      "label": "rio",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "araucaria",
+      "label": "araucária",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "cafe",
+      "label": "café",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "relogio",
+      "label": "relógio",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    },
+    {
+      "iconId": "flor-de-lis",
+      "label": "flor-de-lis",
+      "renderMethod": "svg-template",
+      "notes": "Ícone genérico original; não usar brasões de clubes reais."
+    }
+  ],
+  "colorPalettes": [
+    {
+      "paletteId": "azul-dourado",
+      "primaryColor": "#143A63",
+      "secondaryColor": "#F4F1E8",
+      "accentColor": "#D7A849",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "verde-branco",
+      "primaryColor": "#126A46",
+      "secondaryColor": "#F8F8F2",
+      "accentColor": "#E6B857",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "rubro-creme",
+      "primaryColor": "#8F2132",
+      "secondaryColor": "#FFF4DC",
+      "accentColor": "#D6A34D",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "grafite-ouro",
+      "primaryColor": "#212936",
+      "secondaryColor": "#FCF7E8",
+      "accentColor": "#C99A39",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "lilas-branco",
+      "primaryColor": "#6C4791",
+      "secondaryColor": "#FCF8FF",
+      "accentColor": "#F0B96A",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "azul-marinho-coral",
+      "primaryColor": "#162D55",
+      "secondaryColor": "#FFF4E7",
+      "accentColor": "#EF7A62",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "bordo-prata",
+      "primaryColor": "#6D2537",
+      "secondaryColor": "#EFEFEF",
+      "accentColor": "#9AB4C5",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "terra-areia",
+      "primaryColor": "#7A4325",
+      "secondaryColor": "#FFF3D7",
+      "accentColor": "#D4A44E",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "anil-branco",
+      "primaryColor": "#3041A0",
+      "secondaryColor": "#FFFFFF",
+      "accentColor": "#E1B962",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "verde-musgo-creme",
+      "primaryColor": "#355D3B",
+      "secondaryColor": "#F9F1DA",
+      "accentColor": "#CC8E4B",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "preto-amarelo",
+      "primaryColor": "#1D1D25",
+      "secondaryColor": "#FFE36E",
+      "accentColor": "#8BC8DD",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "azul-celeste-marinho",
+      "primaryColor": "#1764A2",
+      "secondaryColor": "#F5F9FF",
+      "accentColor": "#17365B",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "roxo-lima",
+      "primaryColor": "#42256E",
+      "secondaryColor": "#EFFFAC",
+      "accentColor": "#E68BDB",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "vermelho-azul",
+      "primaryColor": "#9C243A",
+      "secondaryColor": "#F4F9FF",
+      "accentColor": "#1D64B4",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "laranja-naval",
+      "primaryColor": "#A64B1D",
+      "secondaryColor": "#F8F0E4",
+      "accentColor": "#264B7A",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "verde-lima-escuro",
+      "primaryColor": "#22362B",
+      "secondaryColor": "#EAFFBC",
+      "accentColor": "#F3B84E",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "marinho-magenta",
+      "primaryColor": "#1F2A5E",
+      "secondaryColor": "#FFF5FC",
+      "accentColor": "#EE72BB",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "turquesa-marinho",
+      "primaryColor": "#116B70",
+      "secondaryColor": "#F8F8F3",
+      "accentColor": "#1D3658",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "cinza-vermelho",
+      "primaryColor": "#2E323B",
+      "secondaryColor": "#F6F3ED",
+      "accentColor": "#DF5366",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "violeta-ouro",
+      "primaryColor": "#4D2B66",
+      "secondaryColor": "#FFF5E6",
+      "accentColor": "#D8A84A",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "cobre-verde",
+      "primaryColor": "#81412F",
+      "secondaryColor": "#F8F2E5",
+      "accentColor": "#386B59",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "azul-ciano",
+      "primaryColor": "#124986",
+      "secondaryColor": "#F7FBFF",
+      "accentColor": "#43CBDB",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "verde-violeta",
+      "primaryColor": "#23614B",
+      "secondaryColor": "#F9F6FF",
+      "accentColor": "#B07BE0",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    },
+    {
+      "paletteId": "preto-rosa",
+      "primaryColor": "#24222A",
+      "secondaryColor": "#FFF7FB",
+      "accentColor": "#FF7EAE",
+      "accessibleForegroundOnPrimary": "#FFFFFF"
+    }
+  ],
+  "rules": [
+    {
+      "group": "design",
+      "key": "idioma",
+      "value": "pt-BR",
+      "explanation": "Nomes e descrições em português; identificadores técnicos ASCII."
+    },
+    {
+      "group": "geracao",
+      "key": "modos",
+      "value": "manual | aleatorio-total | hibrido | aleatorio-por-tema",
+      "explanation": "Geração por tema também aceita campos travados."
+    },
+    {
+      "group": "geracao",
+      "key": "seed",
+      "value": "string curta ou inteiro",
+      "explanation": "Mesma seed + mesmo catálogo/versão + mesmos bloqueios = mesmo clube."
+    },
+    {
+      "group": "geracao",
+      "key": "tamanho nome",
+      "value": "3–40 caracteres",
+      "explanation": "Até 40; evitar repetição de FC/Clube."
+    },
+    {
+      "group": "geracao",
+      "key": "sigla",
+      "value": "2–5 caracteres A-Z e 0-9",
+      "explanation": "Derivar de palavras relevantes; resolver colisões."
+    },
+    {
+      "group": "geracao",
+      "key": "unicidade",
+      "value": "clubName e clubId normalizados",
+      "explanation": "Checar contra os criados e nomes reservados do banco existente."
+    },
+    {
+      "group": "geracao",
+      "key": "locks",
+      "value": "campo por campo",
+      "explanation": "Não sortear campos bloqueados; campos dependentes recalculados somente quando destravados."
+    },
+    {
+      "group": "geracao",
+      "key": "regeracao",
+      "value": "sorteio independente por bloco",
+      "explanation": "Identidade, cores, escudo, bandeira, estandarte, estádio."
+    },
+    {
+      "group": "geracao",
+      "key": "tentativas",
+      "value": "máximo 20",
+      "explanation": "Em caso de impossibilidade por bloqueios, oferecer correção manual; não ficar em loop."
+    },
+    {
+      "group": "paleta",
+      "key": "distancia minima",
+      "value": "delta RGB >= 100",
+      "explanation": "E contraste visual recomendado >= 3:1 entre cores dominantes."
+    },
+    {
+      "group": "paleta",
+      "key": "texto sobre fundo",
+      "value": "contraste WCAG AA",
+      "explanation": "Usar cor de texto automático; não usar cor secundária sobre fundo sem contraste."
+    },
+    {
+      "group": "visual",
+      "key": "escudo",
+      "value": "SVG original com componentes geométricos",
+      "explanation": "Não copiar logotipos de clubes reais; renderizar por shape, icon, cores e texto."
+    },
+    {
+      "group": "visual",
+      "key": "bandeira",
+      "value": "proporção 3:2",
+      "explanation": "Padrões e emblemas derivados da identidade escolhida."
+    },
+    {
+      "group": "visual",
+      "key": "estandarte",
+      "value": "proporção 2:3",
+      "explanation": "Formato vertical; nome/lema opcional; mesmo símbolo de referência."
+    },
+    {
+      "group": "visual",
+      "key": "estilos permitidos",
+      "value": "enum do dicionario",
+      "explanation": "Fallback padrão quando catálogo for ampliado."
+    },
+    {
+      "group": "estadio",
+      "key": "capacidade absoluta",
+      "value": "1.500–60.000",
+      "explanation": "Usar faixas sugeridas por tema, não uma trava rígida."
+    },
+    {
+      "group": "estadio",
+      "key": "capacidade arredondada",
+      "value": "múltiplos de 100",
+      "explanation": "Evitar números absurdamente aleatórios ou sem sentido."
+    },
+    {
+      "group": "estadio",
+      "key": "nome unico",
+      "value": "por clube",
+      "explanation": "Evitar nomes de estádios reais quando gerado automaticamente."
+    },
+    {
+      "group": "estadio",
+      "key": "efeito em partida",
+      "value": "cosmético na primeira versão",
+      "explanation": "Torcida e atmosfera só impactam jogabilidade em fase posterior com balanceamento."
+    },
+    {
+      "group": "compatibilidade",
+      "key": "identidade distinta de elenco",
+      "value": "clubId != teamId existente",
+      "explanation": "Criar clube sem apagar equipes/jogadores; integrar seleção de elenco depois."
+    },
+    {
+      "group": "compatibilidade",
+      "key": "versao do schema",
+      "value": "1.0.0",
+      "explanation": "Importar/exportar sem perda de campos; preservar campos desconhecidos."
+    },
+    {
+      "group": "armazenamento",
+      "key": "persistência",
+      "value": "JSON versionado",
+      "explanation": "Permitir reabrir e editar o clube salvo."
+    },
+    {
+      "group": "interface",
+      "key": "edição manual",
+      "value": "sem ações irreversíveis",
+      "explanation": "Prévia ao vivo, confirmar/cancelar, validação junto ao campo."
+    },
+    {
+      "group": "interface",
+      "key": "aleatoriedade coerente",
+      "value": "tema define pesos",
+      "explanation": "Nenhum tema exige determinada cor ou símbolo; são preferências."
+    },
+    {
+      "group": "seguranca",
+      "key": "entrada do usuário",
+      "value": "escape + validação",
+      "explanation": "Não inserir HTML do nome/lema diretamente em innerHTML ou SVG."
+    },
+    {
+      "group": "acessibilidade",
+      "key": "cores",
+      "value": "não depender só de cor",
+      "explanation": "Cores combinadas com padrões, ícones e rótulos."
+    }
+  ],
+  "display": {
+    "flagRatio": "3:2",
+    "bannerRatio": "2:3",
+    "crestFormat": "svg",
+    "useOriginalSvgIcons": true
+  },
+  "integration": {
+    "currentRosterShouldStayIntact": true,
+    "playerPoolAttachment": "future-phase",
+    "customClubsAreDistinctEntities": true
+  }
+}
