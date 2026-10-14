@@ -174,6 +174,46 @@
       gap: 8px;
     }
 
+    .sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap: 8px;
+      align-items: end;
+    }
+
+    .bench-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bench-card {
+      border: 1px solid rgba(237, 247, 239, .14);
+      border-radius: 8px;
+      background: rgba(255,255,255,.04);
+      padding: 9px;
+    }
+
+    .bench-card strong {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .change-log {
+      display: grid;
+      gap: 6px;
+      max-height: 160px;
+      overflow: auto;
+    }
+
+    .change-item {
+      border-left: 3px solid var(--gold);
+      padding-left: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
     button {
       border: 1px solid rgba(237, 247, 239, .24);
       border-radius: 8px;
@@ -536,6 +576,31 @@
 
         <section class="panel">
           <div class="panel-head">
+            <h2>Banco e mudanças</h2>
+            <span id="subsStatus" class="tiny">0/5 substituições</span>
+          </div>
+          <div class="panel-body stack">
+            <div class="sub-grid">
+              <div class="field">
+                <label for="subOut">Sai</label>
+                <select id="subOut"></select>
+              </div>
+              <div class="field">
+                <label for="subIn">Entra</label>
+                <select id="subIn"></select>
+              </div>
+              <button id="applySub">Substituir</button>
+            </div>
+            <div id="benchList" class="bench-list"></div>
+            <div>
+              <h3>Histórico de mudanças</h3>
+              <div id="changeLog" class="change-log"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
             <h2>Elenco</h2>
             <span id="squadSummary" class="tiny">22 jogadores</span>
           </div>
@@ -849,12 +914,17 @@
         matchStarted: false,
         matchOver: false,
         feed: [],
-        report: []
+        report: [],
+        substitutions: [],
+        tacticalChanges: [],
+        maxSubs: 5,
+        lastFormation: document.getElementById("formation").value
       };
       updateFocusOptions();
       buildLineup(true);
       addReport("coach", "Carreira iniciada. Agora a primeira tela importante e a prancheta: quem joga, onde joga e com que funcao.");
       addReport("coach", "Use Auto escalar para uma base. Depois ajuste jogadores e funcoes por posicao.");
+      addReport("coach", "Durante o jogo, use o banco para substituir e os controles taticos para reagir ao placar.");
       render();
     }
 
@@ -874,6 +944,19 @@
     function defaultRole(position) {
       const options = roleOptions[position] || roleOptions.CM;
       return options[0][0];
+    }
+
+    function roleValidForPosition(position, roleId) {
+      const options = roleOptions[position] || roleOptions.CM;
+      return options.some(function(option) { return option[0] === roleId; });
+    }
+
+    function ensureRolesForCurrentFormation() {
+      formationSlots().forEach(function(slot) {
+        if (!roleValidForPosition(slot.position, state.roles[slot.id])) {
+          state.roles[slot.id] = defaultRole(slot.position);
+        }
+      });
     }
 
     function buildLineup(autoPick) {
@@ -909,13 +992,46 @@
       });
     }
 
-    function benchPlayers() {
+    function selectedPlayerIds() {
       const selected = {};
-      Object.keys(state.lineup).forEach(function(slotId) { selected[state.lineup[slotId]] = true; });
-      return state.managed.filter(function(player) { return !selected[player.id]; });
+      Object.keys(state.lineup).forEach(function(slotId) {
+        if (state.lineup[slotId]) selected[state.lineup[slotId]] = true;
+      });
+      return selected;
+    }
+
+    function subbedOutIds() {
+      const ids = {};
+      state.substitutions.forEach(function(change) { ids[change.outId] = true; });
+      return ids;
+    }
+
+    function benchPlayers(includeUnavailable) {
+      const selected = selectedPlayerIds();
+      const unavailable = subbedOutIds();
+      return state.managed.filter(function(player) {
+        if (selected[player.id]) return false;
+        if (!includeUnavailable && unavailable[player.id]) return false;
+        return true;
+      });
+    }
+
+    function availableBenchPlayers() {
+      return benchPlayers(false);
+    }
+
+    function substitutionForPlayer(playerId, direction) {
+      return state.substitutions.find(function(change) {
+        return direction === "in" ? change.inId === playerId : change.outId === playerId;
+      });
     }
 
     function onSlotPlayerChange(slotId, playerId) {
+      if (state.matchStarted) {
+        addReport("warn", "Com a bola rolando, troca de jogador precisa passar pelo painel de substituicoes.");
+        render();
+        return;
+      }
       Object.keys(state.lineup).forEach(function(otherSlot) {
         if (otherSlot !== slotId && state.lineup[otherSlot] === playerId) {
           state.lineup[otherSlot] = "";
@@ -926,8 +1042,136 @@
     }
 
     function onSlotRoleChange(slotId, roleId) {
+      const slot = formationSlots().find(function(item) { return item.id === slotId; });
       state.roles[slotId] = roleId;
+      if (state.matchStarted && slot) {
+        recordTacticalChange("Funcao em " + slot.position + " virou " + roleName(slot.position, roleId));
+      }
       render();
+    }
+
+    function recordTacticalChange(text) {
+      if (!state || !state.matchStarted || state.matchOver) return;
+      state.tacticalChanges.unshift({ minute: state.minute, text: text });
+      state.tacticalChanges = state.tacticalChanges.slice(0, 12);
+      addFeed("coach", state.minute + "' Ajuste do tecnico: " + text + ".");
+    }
+
+    function applySubstitution() {
+      if (!state.matchStarted || state.matchOver) {
+        addReport("warn", "Substituicoes ficam disponiveis depois do apito inicial.");
+        render();
+        return;
+      }
+      if (state.substitutions.length >= state.maxSubs) {
+        addReport("warn", "Limite de substituicoes atingido.");
+        render();
+        return;
+      }
+
+      const slotId = document.getElementById("subOut").value;
+      const incomingId = document.getElementById("subIn").value;
+      const slot = formationSlots().find(function(item) { return item.id === slotId; });
+      const outgoing = state.managed.find(function(player) { return player.id === state.lineup[slotId]; });
+      const incoming = state.managed.find(function(player) { return player.id === incomingId; });
+
+      if (!slot || !outgoing || !incoming) {
+        addReport("warn", "Escolha quem sai e quem entra antes de confirmar.");
+        render();
+        return;
+      }
+      if (subbedOutIds()[incoming.id]) {
+        addReport("warn", incoming.name + " ja saiu da partida e nao pode voltar.");
+        render();
+        return;
+      }
+      if (selectedPlayerIds()[incoming.id]) {
+        addReport("warn", incoming.name + " ja esta em campo.");
+        render();
+        return;
+      }
+
+      state.lineup[slotId] = incoming.id;
+      incoming.pressure = clamp(incoming.pressure + 3, 0, 100);
+      incoming.sharpness = clamp(incoming.sharpness + 3, 1, 100);
+      incoming.morale = clamp(incoming.morale + 1, 1, 100);
+      outgoing.morale = clamp(outgoing.morale - (state.score.managed < state.score.opponent ? 1 : 3), 1, 100);
+
+      const change = {
+        minute: state.minute,
+        slotId: slotId,
+        position: slot.position,
+        roleId: state.roles[slotId] || defaultRole(slot.position),
+        outId: outgoing.id,
+        outName: outgoing.name,
+        inId: incoming.id,
+        inName: incoming.name
+      };
+      state.substitutions.push(change);
+
+      const fit = positionFit(incoming, slot.position);
+      addFeed("coach", state.minute + "' Substituicao: entra " + incoming.name + ", sai " + outgoing.name + " em " + slot.position + ".");
+      if (fit < 70) {
+        addReport("warn", incoming.name + " entrou fora da zona natural em " + slot.position + ". Pode resolver, mas o encaixe sofre.");
+      } else {
+        addReport("coach", incoming.name + " entrou com encaixe " + Math.round(fit) + " para " + slot.position + ".");
+      }
+      render();
+    }
+
+    function bestBenchUse(player) {
+      const slots = formationSlots();
+      let best = null;
+      slots.forEach(function(slot) {
+        const roleId = state.roles[slot.id] || defaultRole(slot.position);
+        const score = slotScore(player, slot, roleId);
+        if (!best || score > best.score) {
+          best = { slot: slot, roleId: roleId, score: score };
+        }
+      });
+      return best;
+    }
+
+    function renderSubPanel() {
+      const outSelect = document.getElementById("subOut");
+      const inSelect = document.getElementById("subIn");
+      const applyButton = document.getElementById("applySub");
+      const activeEntries = lineupPlayers().filter(function(item) { return item.player; });
+      const available = availableBenchPlayers();
+
+      outSelect.innerHTML = activeEntries.map(function(item) {
+        return "<option value='" + item.slot.id + "'>" + item.player.name + " | " + item.slot.position + " | Cond " + Math.round(item.player.condition) + "</option>";
+      }).join("");
+      inSelect.innerHTML = available.map(function(player) {
+        const best = bestBenchUse(player);
+        const label = player.name + " | " + player.naturalPositions.join("/") + " | melhor " + (best ? best.slot.position + " " + Math.round(best.score) : "-");
+        return "<option value='" + player.id + "'>" + label + "</option>";
+      }).join("");
+
+      const locked = !state.matchStarted || state.matchOver || state.substitutions.length >= state.maxSubs || !activeEntries.length || !available.length;
+      applyButton.disabled = locked;
+      document.getElementById("subsStatus").textContent = state.substitutions.length + "/" + state.maxSubs + " substituicoes | Banco: " + available.length;
+
+      const benchHtml = available.length ? available.map(function(player) {
+        const best = bestBenchUse(player);
+        return "<article class='bench-card'>" +
+          "<strong><span>" + player.name + "</span><span class='pos'>" + player.naturalPositions.join("/") + "</span></strong>" +
+          "<div class='tiny'>" + player.archetype + " | Cond " + Math.round(player.condition) + " | Mor " + Math.round(player.morale) + "</div>" +
+          "<div class='tiny'>Melhor entrada: " + (best ? best.slot.position + " como " + roleName(best.slot.position, best.roleId) + " (" + Math.round(best.score) + ")" : "sem leitura") + "</div>" +
+        "</article>";
+      }).join("") : "<div class='note warn'><span class='tag'>banco</span>Nenhum jogador disponivel para entrar.</div>";
+      document.getElementById("benchList").innerHTML = benchHtml;
+
+      const subHistory = state.substitutions.map(function(change) {
+        return change.minute + "' " + change.inName + " entrou no lugar de " + change.outName + " (" + change.position + ")";
+      });
+      const tacticHistory = state.tacticalChanges.map(function(change) {
+        return change.minute + "' " + change.text;
+      });
+      const history = subHistory.concat(tacticHistory).slice(0, 12);
+      document.getElementById("changeLog").innerHTML = history.length
+        ? history.map(function(item) { return "<div class='change-item'>" + item + "</div>"; }).join("")
+        : "<div class='tiny'>As mudanças de banco, formação, função e sliders aparecem aqui.</div>";
     }
 
     function teamRatings(team, tactic, useLineup) {
@@ -1075,6 +1319,7 @@
       })[0];
       const fragile = entries.filter(function(item) { return item.player && item.player.condition < 68; });
       const volatile = entries.filter(function(item) { return item.player && attr(item.player, "ego") > 84 && attr(item.player, "discipline") < 60; });
+      const substituteTargets = entries.filter(function(item) { return item.player && item.player.condition < 64; });
       const ratings = teamRatings(state.managed, tactic, true);
 
       if (missing.length) addReport("warn", "Ha posicoes sem titular. O motor vai sofrer ate voce preencher o XI.");
@@ -1082,6 +1327,7 @@
       if (top) addReport("coach", "Pilar do plano: " + top.player.name + " como " + roleName(top.slot.position, top.roleId) + ". E o melhor encaixe do XI.");
       if (fragile.length) addReport("warn", "Condicao baixa: " + fragile.map(function(item) { return item.player.name; }).join(", ") + ". Pense em baixar ritmo ou pressao.");
       if (volatile.length) addReport("coach", "Ego inflamavel: " + volatile.map(function(item) { return item.player.name; }).join(", ") + ". Pode decidir ou quebrar o plano.");
+      if (state.matchStarted && substituteTargets.length && state.substitutions.length < state.maxSubs) addReport("coach", "Substituicao sugerida: " + substituteTargets[0].player.name + " esta cansando em " + substituteTargets[0].slot.position + ".");
       if (ratings.chemistry > 82) addReport("coach", "O XI esta coerente. A quimica esta alta para esta formacao.");
       if (ratings.attack < ratings.defense - 10) addReport("coach", "O time esta mais protegido do que perigoso. Bom para segurar placar, ruim para buscar jogo.");
       if (ratings.attack > ratings.defense + 12) addReport("coach", "O plano esta agressivo. Vai criar, mas deixa duelos defensivos expostos.");
@@ -1292,6 +1538,8 @@
       const tactic = currentTactic();
       const ratings = teamRatings(state.managed, tactic, true);
       if (ratings.condition < 62) addReport("warn", "Condicao caindo. Reduzir pressao ou ritmo pode evitar colapso no fim.");
+      const tired = lineupPlayers().filter(function(item) { return item.player && item.player.condition < 58; })[0];
+      if (tired && state.substitutions.length < state.maxSubs) addReport("coach", "Banco pede jogo: " + tired.player.name + " esta no limite em " + tired.slot.position + ".");
       if (state.score.managed < state.score.opponent && tactic.risk < 65) addReport("coach", "Estamos atras. Sugestao: subir risco/ego ou mudar para vertical.");
       if (state.score.managed > state.score.opponent && tactic.risk > 70) addReport("coach", "Vantagem no placar, mas o risco ainda esta alto. Da para controlar melhor.");
       if (ratings.chemistry > 82) addReport("coach", "O XI esta coerente. A quimica esta sustentando os duelos.");
@@ -1335,7 +1583,7 @@
         return "<article class='slot' style='left:" + slot.x + "%; top:" + slot.y + "%'>" +
           "<div class='slot-title'><strong>" + (player ? player.name : "Vago") + "</strong><span class='pos'>" + slot.position + "</span></div>" +
           "<div class='tiny'>" + sub + "</div>" +
-          "<select data-player-slot='" + slot.id + "'>" + playerOptions + "</select>" +
+          "<select data-player-slot='" + slot.id + "'" + (state.matchStarted ? " disabled" : "") + ">" + playerOptions + "</select>" +
           "<select data-role-slot='" + slot.id + "'>" + roleSelect + "</select>" +
           "<span class='fit-pill'>Rendimento " + fit + " | Pos " + Math.round(posFit) + "</span>" +
           "<div class='bar'><div class='fill green' style='width:" + clamp(fit, 0, 100) + "%'></div></div>" +
@@ -1351,6 +1599,7 @@
     }
 
     function render() {
+      ensureRolesForCurrentFormation();
       const tactic = currentTactic();
       const ratings = teamRatings(state.managed, tactic, true);
       const rivalRatings = teamRatings(state.opponent, opponentTactic(), false);
@@ -1386,12 +1635,22 @@
         return "<div class='note " + item.type + "'><span class='tag'>" + label + "</span>" + item.text + "</div>";
       }).join("");
       document.getElementById("trainWeek").disabled = state.matchStarted;
+      document.getElementById("autoLineup").disabled = state.matchStarted;
+      document.getElementById("managerTeam").disabled = state.matchStarted;
+      document.getElementById("teamTalk").disabled = state.matchStarted;
+      document.getElementById("training").disabled = state.matchStarted;
+      document.getElementById("focusPlayer").disabled = state.matchStarted;
       renderPitch();
+      renderSubPanel();
     }
 
     function playerRow(player) {
       const usedEntry = lineupPlayers().find(function(item) { return item.player && item.player.id === player.id; });
-      const status = usedEntry ? usedEntry.slot.position + " | " + roleName(usedEntry.slot.position, usedEntry.roleId) : "Banco";
+      const subIn = substitutionForPlayer(player.id, "in");
+      const subOut = substitutionForPlayer(player.id, "out");
+      let status = usedEntry ? usedEntry.slot.position + " | " + roleName(usedEntry.slot.position, usedEntry.roleId) : "Banco";
+      if (subIn && usedEntry) status = "Entrou " + subIn.minute + "' | " + status;
+      if (subOut && !usedEntry) status = "Substituido " + subOut.minute + "'";
       const next = thresholds[player.stage + 1] || thresholds[3];
       const progress = player.stage >= 3 ? 100 : clamp(player.awakening / next * 100, 0, 100);
       return "<tr>" +
@@ -1404,28 +1663,56 @@
     }
 
     ["pressing", "tempo", "freedom", "risk"].forEach(function(id) {
+      const labels = { pressing: "Pressao", tempo: "Ritmo", freedom: "Liberdade criativa", risk: "Risco/ego" };
       document.getElementById(id).addEventListener("input", function(event) {
         document.getElementById(id + "Val").textContent = event.target.value;
+        if (state) render();
+      });
+      document.getElementById(id).addEventListener("change", function(event) {
+        if (state) recordTacticalChange(labels[id] + " para " + event.target.value);
         if (state) render();
       });
     });
 
     ["identity", "teamTalk", "training", "focusPlayer"].forEach(function(id) {
-      document.getElementById(id).addEventListener("change", function() { if (state) render(); });
+      document.getElementById(id).addEventListener("change", function(event) {
+        if (!state) return;
+        if (id === "identity") recordTacticalChange("Identidade virou " + labelIdentity(event.target.value));
+        render();
+      });
     });
 
-    document.getElementById("formation").addEventListener("change", function() {
+    document.getElementById("formation").addEventListener("change", function(event) {
       if (!state) return;
+      const previous = state.lastFormation || "?";
+      ensureRolesForCurrentFormation();
+      state.lastFormation = event.target.value;
+      if (state.matchStarted && !state.matchOver) {
+        recordTacticalChange("Formacao " + previous + " para " + event.target.value);
+        addReport("coach", "Mudanca de formacao aplicada sem gastar substituicao. Confira funcoes e encaixes.");
+        render();
+        return;
+      }
       buildLineup(true);
-      addReport("coach", "Formacao alterada. A escalação foi refeita automaticamente para evitar buracos.");
+      addReport("coach", "Formacao alterada. A escalacao foi refeita automaticamente para evitar buracos.");
       render();
     });
     document.getElementById("managerTeam").addEventListener("change", resetGame);
-    document.getElementById("autoLineup").addEventListener("click", function() { buildLineup(true); addReport("coach", "Autoescalação refeita com base no rendimento por posição e função."); render(); });
+    document.getElementById("autoLineup").addEventListener("click", function() {
+      if (state.matchStarted) {
+        addReport("warn", "Auto escalacao fica travada depois do apito. Use substituicoes e ajustes taticos.");
+        render();
+        return;
+      }
+      buildLineup(true);
+      addReport("coach", "Autoescalacao refeita com base no rendimento por posicao e funcao.");
+      render();
+    });
     document.getElementById("assistantLineup").addEventListener("click", generateAssistantReport);
     document.getElementById("trainWeek").addEventListener("click", applyTraining);
     document.getElementById("simulateSegment").addEventListener("click", simulateSegment);
     document.getElementById("simulateMatch").addEventListener("click", simulateFullMatch);
+    document.getElementById("applySub").addEventListener("click", applySubstitution);
     document.getElementById("resetGame").addEventListener("click", resetGame);
 
     resetGame();
