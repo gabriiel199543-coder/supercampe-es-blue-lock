@@ -214,6 +214,109 @@
       line-height: 1.35;
     }
 
+    .skill-card {
+      display: grid;
+      gap: 10px;
+      border: 1px solid rgba(237, 247, 239, .16);
+      border-radius: 8px;
+      background: rgba(255,255,255,.04);
+      padding: 10px;
+    }
+
+    .skill-card h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .attribute-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .attribute-column {
+      border: 1px solid rgba(237,247,239,.12);
+      border-radius: 8px;
+      padding: 8px;
+      background: rgba(0,0,0,.12);
+    }
+
+    .attribute-column h4 {
+      margin: 0 0 6px;
+      color: var(--gold);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .attribute-row {
+      display: grid;
+      grid-template-columns: 1fr 28px;
+      gap: 6px;
+      align-items: center;
+      padding: 3px 0;
+      font-size: 12px;
+      border-bottom: 1px solid rgba(237,247,239,.08);
+    }
+
+    .attribute-row:last-child { border-bottom: 0; }
+
+    .attribute-row b {
+      color: #fff8d7;
+      text-align: right;
+      font-size: 13px;
+    }
+
+    .attribute-row .elite { color: #56f08a; }
+    .attribute-row .good { color: var(--gold); }
+    .attribute-row .weak { color: #ff8f8f; }
+
+    .skill-tree {
+      display: grid;
+      gap: 8px;
+    }
+
+    .skill-node {
+      border: 1px solid rgba(237,247,239,.13);
+      border-radius: 8px;
+      padding: 9px;
+      background: rgba(0,0,0,.16);
+    }
+
+    .skill-node.unlocked {
+      border-color: rgba(86,240,138,.48);
+      background: rgba(86,240,138,.08);
+    }
+
+    .skill-node.locked {
+      opacity: .72;
+    }
+
+    .node-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .node-head strong {
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .node-state {
+      color: var(--gold);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .skill-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
     button {
       border: 1px solid rgba(237, 247, 239, .24);
       border-radius: 8px;
@@ -642,13 +745,34 @@
         </section>
       </section>
 
-      <aside class="panel">
-        <div class="panel-head">
-          <h2>Assistente técnico</h2>
-        </div>
-        <div class="panel-body">
-          <div id="assistantReport" class="report"></div>
-        </div>
+      <aside class="stack">
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Assistente técnico</h2>
+          </div>
+          <div class="panel-body">
+            <div id="assistantReport" class="report"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Ficha e skills</h2>
+            <span id="skillStage" class="tiny">Stage 0</span>
+          </div>
+          <div class="panel-body stack">
+            <div class="field">
+              <label for="skillPlayer">Jogador</label>
+              <select id="skillPlayer"></select>
+            </div>
+            <div id="skillProfile" class="skill-card"></div>
+            <div id="skillTree" class="skill-tree"></div>
+            <div class="skill-actions">
+              <button id="skillSetFocus">Definir como foco</button>
+              <button id="skillAssistant" class="secondary">Analisar skills</button>
+            </div>
+          </div>
+        </section>
       </aside>
     </section>
   </main>
@@ -759,6 +883,28 @@
       sprint: ["Lightning Runner", "Lightning Lane", { physique: 6, technique: 2, ego: 2 }],
       special: ["Awakened Egoist", "Ego Zone", { ego: 5, creativity: 4, emotionalControl: 3 }],
       defense: ["Shadow Wall", "Blackout Marking", { defense: 6, physique: 3, discipline: 3 }]
+    };
+
+    const skillTracks = {
+      dribble: ["Controle de corpo", "Drible fantasma", "Quebra-marcação", "Forma impossível"],
+      shoot: ["Instinto de área", "Chute assinatura", "Sangue frio", "Predador final"],
+      pass: ["Leitura curta", "Passe impossível", "Maestro de zona", "Olho absoluto"],
+      sprint: ["Explosão curta", "Linha relâmpago", "Ataque ao espaço", "Velocidade-limite"],
+      special: ["Ego desperto", "Técnica autoral", "Zona do protagonista", "Forma mítica"],
+      defense: ["Cobertura base", "Marcação sombra", "Parede mental", "Anulação total"]
+    };
+
+    const attributeLabels = {
+      technique: "Técnica",
+      physique: "Físico",
+      vision: "Visão",
+      ego: "Ego",
+      discipline: "Disciplina",
+      creativity: "Criatividade",
+      emotionalControl: "Controle emocional",
+      defense: "Defesa",
+      finishing: "Finalização",
+      goalkeeping: "Goleiro"
     };
 
     let seed = 20261014;
@@ -929,10 +1075,11 @@
     }
 
     function updateFocusOptions() {
-      const select = document.getElementById("focusPlayer");
-      select.innerHTML = state.managed.map(function(player) {
+      const options = state.managed.map(function(player) {
         return "<option value='" + player.id + "'>" + player.name + " (" + player.naturalPositions.join("/") + ")</option>";
       }).join("");
+      document.getElementById("focusPlayer").innerHTML = options;
+      document.getElementById("skillPlayer").innerHTML = options;
     }
 
     function formationSlots() {
@@ -1130,6 +1277,123 @@
         }
       });
       return best;
+    }
+
+    function currentSkillPlayer() {
+      const selectedId = document.getElementById("skillPlayer").value;
+      return state.managed.find(function(player) { return player.id === selectedId; }) || state.managed[0];
+    }
+
+    function attributeTone(value) {
+      if (value >= 85) return "elite";
+      if (value >= 72) return "good";
+      if (value < 55) return "weak";
+      return "";
+    }
+
+    function attributeRow(player, key) {
+      const value = Math.round(attr(player, key));
+      return "<div class='attribute-row'><span>" + attributeLabels[key] + "</span><b class='" + attributeTone(value) + "'>" + value + "</b></div>";
+    }
+
+    function renderAttributeColumn(title, player, keys) {
+      return "<div class='attribute-column'><h4>" + title + "</h4>" +
+        keys.map(function(key) { return attributeRow(player, key); }).join("") +
+      "</div>";
+    }
+
+    function skillNodes(player) {
+      const track = skillTracks[player.preferredStyle] || skillTracks.special;
+      const styleProgress = player.styleCounters[player.preferredStyle] || 0;
+      const bestUse = bestBenchUse(player);
+      return [
+        {
+          title: track[0],
+          requirement: 0,
+          progress: player.awakening,
+          effect: "Base do estilo. Entra no cálculo de duelos e evolução."
+        },
+        {
+          title: player.specialSkill,
+          requirement: 60,
+          progress: Math.max(player.awakening, styleProgress),
+          effect: "Técnica assinatura. Desbloqueia quando o despertar passa do primeiro corte."
+        },
+        {
+          title: track[1],
+          requirement: 100,
+          progress: styleProgress,
+          effect: "Especialização no estilo " + player.preferredStyle + ". Cresce vencendo esse tipo de duelo."
+        },
+        {
+          title: bestUse ? "Maestria: " + roleName(bestUse.slot.position, bestUse.roleId) : "Maestria de função",
+          requirement: 150,
+          progress: player.awakening,
+          effect: bestUse ? "Melhor encaixe atual: " + bestUse.slot.position + " com rendimento " + Math.round(bestUse.score) + "." : "Depende do encaixe tático."
+        },
+        {
+          title: track[2],
+          requirement: 220,
+          progress: Math.max(player.awakening, styleProgress),
+          effect: "Camada avançada: reduz oscilação em decisões de alta pressão."
+        },
+        {
+          title: track[3],
+          requirement: 300,
+          progress: player.awakening,
+          effect: "Forma final da temporada. Deve mudar aparência e bônus de arquétipo no futuro."
+        }
+      ];
+    }
+
+    function analyzeSkillPlayer() {
+      const player = currentSkillPlayer();
+      if (!player) return;
+      const best = bestBenchUse(player);
+      const topAttrs = Object.keys(player.attributes).sort(function(a, b) {
+        return attr(player, b) - attr(player, a);
+      }).slice(0, 3).map(function(key) {
+        return attributeLabels[key] + " " + Math.round(attr(player, key));
+      });
+      addReport("coach", "Skills de " + player.name + ": pontos fortes em " + topAttrs.join(", ") + ".");
+      if (best) addReport("coach", "Melhor uso agora: " + best.slot.position + " como " + roleName(best.slot.position, best.roleId) + ", rendimento " + Math.round(best.score) + ".");
+      if (player.awakening < 60) addReport("coach", "Ainda esta cru. Dê minutos ou treino foco para abrir a primeira skill.");
+      else if (player.awakening < 150) addReport("coach", "Primeira técnica já aparece. Próximo salto vem com repetição do estilo preferido.");
+      else addReport("coach", "Jogador em zona de evolução. Agora vale ajustar função para explorar a forma atual.");
+      render();
+    }
+
+    function renderSkillScreen() {
+      const player = currentSkillPlayer();
+      if (!player) return;
+      const usedEntry = lineupPlayers().find(function(item) { return item.player && item.player.id === player.id; });
+      const best = usedEntry || bestBenchUse(player);
+      const roleText = usedEntry ? usedEntry.slot.position + " | " + roleName(usedEntry.slot.position, usedEntry.roleId) : "Banco | melhor " + (best ? best.slot.position : "-");
+      const next = thresholds[player.stage + 1] || thresholds[3];
+      const awakeningProgress = player.stage >= 3 ? 100 : clamp(player.awakening / next * 100, 0, 100);
+      document.getElementById("skillStage").textContent = "Stage " + player.stage;
+
+      document.getElementById("skillProfile").innerHTML =
+        "<div><h3>" + player.name + "</h3><div class='tiny'>" + player.archetype + " | " + roleText + "</div></div>" +
+        "<div><span class='tag'>Estilo</span> " + player.preferredStyle + " <span class='tag'>Skill</span> " + player.specialSkill + "</div>" +
+        "<div class='tiny'>Despertar " + Math.round(player.awakening) + " / " + next + " | " + player.evolutionTitle + "</div>" +
+        "<div class='bar'><div class='fill' style='width:" + awakeningProgress + "%'></div></div>" +
+        "<div class='attribute-grid'>" +
+          renderAttributeColumn("Técnico", player, ["technique", "finishing", "creativity"]) +
+          renderAttributeColumn("Mental", player, ["vision", "ego", "discipline", "emotionalControl"]) +
+          renderAttributeColumn("Físico/Defesa", player, ["physique", "defense", "goalkeeping"]) +
+        "</div>";
+
+      document.getElementById("skillTree").innerHTML = skillNodes(player).map(function(node) {
+        const unlocked = node.progress >= node.requirement;
+        const pct = node.requirement === 0 ? 100 : clamp(node.progress / node.requirement * 100, 0, 100);
+        return "<article class='skill-node " + (unlocked ? "unlocked" : "locked") + "'>" +
+          "<div class='node-head'><strong>" + node.title + "</strong><span class='node-state'>" + (unlocked ? "liberada" : "bloqueada") + "</span></div>" +
+          "<div class='tiny'>" + node.effect + "</div>" +
+          "<div class='bar'><div class='fill green' style='width:" + pct + "%'></div></div>" +
+          "<div class='tiny'>Progresso " + Math.round(node.progress) + " / " + node.requirement + "</div>" +
+        "</article>";
+      }).join("");
     }
 
     function renderSubPanel() {
@@ -1642,6 +1906,7 @@
       document.getElementById("focusPlayer").disabled = state.matchStarted;
       renderPitch();
       renderSubPanel();
+      renderSkillScreen();
     }
 
     function playerRow(player) {
@@ -1674,7 +1939,7 @@
       });
     });
 
-    ["identity", "teamTalk", "training", "focusPlayer"].forEach(function(id) {
+    ["identity", "teamTalk", "training", "focusPlayer", "skillPlayer"].forEach(function(id) {
       document.getElementById(id).addEventListener("change", function(event) {
         if (!state) return;
         if (id === "identity") recordTacticalChange("Identidade virou " + labelIdentity(event.target.value));
@@ -1709,6 +1974,14 @@
       render();
     });
     document.getElementById("assistantLineup").addEventListener("click", generateAssistantReport);
+    document.getElementById("skillAssistant").addEventListener("click", analyzeSkillPlayer);
+    document.getElementById("skillSetFocus").addEventListener("click", function() {
+      const player = currentSkillPlayer();
+      if (!player) return;
+      document.getElementById("focusPlayer").value = player.id;
+      addReport("coach", player.name + " virou foco individual da semana.");
+      render();
+    });
     document.getElementById("trainWeek").addEventListener("click", applyTraining);
     document.getElementById("simulateSegment").addEventListener("click", simulateSegment);
     document.getElementById("simulateMatch").addEventListener("click", simulateFullMatch);
