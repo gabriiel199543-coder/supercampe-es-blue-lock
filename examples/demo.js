@@ -1,17 +1,18 @@
 "use strict";
 
-const { sampleTeams, simulateMatch } = require("../src/engine");
+const { simulateMatch } = require("../src/engine");
+const { splitTeams } = require("../src/roster");
 
-const { home, away } = sampleTeams();
+const { home, away } = splitTeams();
 const result = simulateMatch({
   home,
   away,
-  seed: "gabriel-blue-lock-manager-v0",
-  events: 14
+  seed: "brazilian-roster-v0",
+  events: 22
 });
 
 console.log("Final score");
-console.log(`Home ${result.score.home} x ${result.score.away} Away`);
+console.log(`${home[0].teamName} ${result.score.home} x ${result.score.away} ${away[0].teamName}`);
 console.log("");
 console.log("Duel log");
 for (const event of result.log) {
@@ -20,11 +21,13 @@ for (const event of result.log) {
 }
 
 console.log("");
-console.log("Home evolution state");
-for (const player of result.home) {
-  console.log(
-    `${player.name}: stage ${player.stage}, ${player.evolutionTitle}, awakening ${Math.round(
-      player.awakening
-    )}, skills [${player.skills.join(", ") || "none"}], appearance: ${player.appearance}`
-  );
+console.log("Evolution state");
+for (const player of [...result.home, ...result.away]) {
+  if (player.stage > 0 || player.awakening > 20) {
+    console.log(
+      `${player.name}: stage ${player.stage}, ${player.evolutionTitle}, awakening ${Math.round(
+        player.awakening
+      )}, skills [${player.skills.join(", ") || "none"}], appearance: ${player.appearance}`
+    );
+  }
 }
