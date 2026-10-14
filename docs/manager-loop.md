@@ -36,6 +36,8 @@ train a weakness, release ego, or calm the squad down.
 - Tactical Board: all 11 pitch slots with player and role selection.
 - Bench and Changes: substitutes, recommended entries, substitution history, and
   tactical-change history.
+- Skill Profile: FM-style attribute columns, awakening progress, locked/unlocked
+  skill nodes, and best tactical use.
 - Squad Table: natural positions, current slot, role, condition, morale,
   sharpness, and awakening stage.
 - Match Feed: goals, duels, pressure swings, evolution events, substitutions, and
@@ -52,8 +54,8 @@ Each selected player contributes through four layers:
   bad fits create performance drag
 - role fit: the role weights the attributes that matter for that tactical job
 - tactical context: identity, pressing, tempo, freedom, risk, team talk, morale,
-  condition, chemistry, fatigue, substitutions, and live tactical changes modify
-  the final result
+  condition, chemistry, fatigue, substitutions, skill progress, and live tactical
+  changes modify the final result
 
 The match simulator uses those ratings to create readable pressure phases and
 1v1 duels. Individual actions still matter, but the coach should understand why
@@ -90,8 +92,9 @@ Players evolve through the kind of football they repeatedly succeed at:
 - special actions push ego evolution
 
 Evolution should eventually change both numbers and appearance. In this version,
-the browser prototype already tracks awakening stage and special-skill growth;
-the visual form changes are a future UI layer.
+the browser prototype tracks awakening stage, special-skill growth, style-specific
+skill nodes, and a player profile screen inspired by Football Manager attributes.
+The visual form changes are a future UI layer.
 
 ## Design Rule
 
