@@ -1,0 +1,34 @@
+QUERO QUE VOCÊ IMPLEMENTE UMA NOVA VERSÃO FUNCIONAL DO MEU JOGO WEB, INCLUINDO PARTIDAS ONLINE 1×1, USANDO O PACOTE ANEXADO COMO CONTRATO DE REQUISITOS.
+
+REPOSITÓRIO: gabriiel199543-coder/supercampe-es-blue-lock
+
+LEIA NESTA ORDEM:
+00_COMECE_AQUI.md
+02_PLANO_DE_IMPLEMENTACAO.md
+config/online_1x1_v1.json
+docs/01_MULTIPLAYER_1x1.md
+docs/02_PROTOCOLO_WEBSOCKET.md
+03_TESTES_FIM_A_FIM.md
+dados/game_design/LEIA_NO_CODEX.md
+dados/game_design/parametros_game_design_v1.json
+docs/03_MOTOR_FUTEBOL_E_TREINADOR.md
+dados/jogadores/jogadores_110.json
+dados/clubes/parametros_criador_clubes_v1.json
+dados/clubes/config_coerencia_v1_1.json
+dados/clubes/clubes_exemplo_20_coerentes.json
+
+OBJETIVO: jogo de gerenciamento de futebol no navegador, com 110 jogadores, criação aleatória/manual de clubes, sistema de poderes Impacto/Criação/Leitura, instruções táticas, treinamento e uma sala privada para 2 treinadores humanos disputarem uma partida real sincronizada.
+
+MANDATÓRIO:
+- Inspecione o código ATUAL do repositório e preserve tudo o que já funciona. Crie branch/commit de segurança e não sobrescreva index.html cegamente.
+- Priorize entregar um MVP realmente jogável: localhost com npm install + npm start, dois navegadores acessando a mesma sala por código/link, equipes completas, opções táticas, 90 minutos simulados, resultado idêntico e reconexão.
+- Crie Node.js HTTP + WebSocket (ws), com simulação AUTORITATIVA no servidor. Não finja multiplayer com localStorage, dois estados locais, polling que gere jogos diferentes ou duas IAs disfarçadas de pessoas.
+- Reuse/adapte chooseAction, playerActionScore, simulateEvent etc. Tire a dependência de DOM do núcleo de simulação. É proibido aceitar placar, gols ou rolagens de RNG enviados pelo cliente.
+- Em amistoso online as habilidades de assinatura podem estar temporariamente habilitadas para ambos os lados (domínio 40) a fim de mostrar os poderes sem destruir a lógica de evolução da carreira.
+- Importe apenas o banco canônico de 110 (não somar 100+110). Importe 20 clubes coerentes e pools, respeitando IDs; partidas online usam 11 titulares + 5 reservas por lado, sem atletas duplicados.
+- Preserve técnicas legadas, atributos e a distinção awakening (XP acumulado) vs development.readiness (0–100). Um treinador NÃO controla diretamente a bola.
+- Execute npm test e, se disponível, verificação com dois navegadores/cabeças, além de conferir ausência de erros no console.
+- Não exponha URL pública nem afirme online funcional sem conseguir executar/validar backend acessível. Se faltar hospedeiro, forneça passos precisos e mantenha localhost funcionando.
+- Entregue um resumo honesto por fase (feito/pendente/testado), comandos exatos para eu jogar, URL local e orientação de publicação HTTPS/WSS. Se houver limites de contexto, primeiro complete fases 0–4 do plano e registre tarefas restantes para continuação.
+
+IMPORTANTE: não tente entregar todas as expansões antes da primeira partida funcional. Trabalhe em commits pequenos e testes a cada fase. Todos os dados, textos e interfaces em pt-BR. Não reescreva os nomes e habilidades humorísticas dos personagens.
