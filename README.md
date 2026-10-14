@@ -7,7 +7,8 @@ The current direction is closer to Football Manager than to direct arcade contro
 you act as the coach. Your job is to read the squad, build the starting XI,
 assign player roles, define training, choose a tactical identity, handle the team
 talk, and watch how the match engine turns those decisions into duels, goals,
-awakenings, fatigue, pressure, and player evolution.
+awakenings, fatigue, pressure, substitutions, tactical changes, and player
+evolution.
 
 ## Play in the Browser
 
@@ -27,9 +28,12 @@ Current manager actions:
 - define tactical identity
 - choose weekly training
 - choose a focus player
-- set team talk
+- set team talk before the match
 - tune pressing, tempo, creative freedom, and risk/ego
 - simulate 15-minute blocks or the whole match
+- use the bench during the match
+- make up to 5 substitutions
+- change formation, roles, and tactical sliders while the match is live
 - read assistant feedback, squad condition, role fit, and match consequences
 
 ## Run the Engine
@@ -63,6 +67,8 @@ with licensed, authorized, or clearly fictionalized characters.
 - formation slots and player position fit
 - manager-style starting XI selection
 - role instructions for each player
+- bench management and substitution limits
+- in-match tactical changes
 - match state, score, xG, and momentum
 - training week effects
 - tactical identity and sliders
@@ -83,8 +89,8 @@ planning.
 
 ## Next Steps
 
-1. Add substitutes and in-match tactical changes.
-2. Add opposition scouting before each fixture.
-3. Add player promises, hierarchy, and training feedback.
-4. Add a calendar with multiple fixtures and form history.
+1. Add opposition scouting before each fixture.
+2. Add player promises, hierarchy, and training feedback.
+3. Add a calendar with multiple fixtures and form history.
+4. Add post-match analysis with heat-map style summaries.
 5. Split the stable match logic into a WebAssembly-ready engine module.
