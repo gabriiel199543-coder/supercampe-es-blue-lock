@@ -34,6 +34,8 @@ Current manager actions:
 - use the bench during the match
 - make up to 5 substitutions
 - change formation, roles, and tactical sliders while the match is live
+- inspect each player's FM-style attribute and skill profile
+- define a player from the skill screen as weekly focus
 - read assistant feedback, squad condition, role fit, and match consequences
 
 ## Run the Engine
@@ -67,6 +69,8 @@ with licensed, authorized, or clearly fictionalized characters.
 - formation slots and player position fit
 - manager-style starting XI selection
 - role instructions for each player
+- FM-inspired player attribute profile
+- skill nodes based on awakening, style progress, and role mastery
 - bench management and substitution limits
 - in-match tactical changes
 - match state, score, xG, and momentum
@@ -89,8 +93,9 @@ planning.
 
 ## Next Steps
 
-1. Add opposition scouting before each fixture.
-2. Add player promises, hierarchy, and training feedback.
-3. Add a calendar with multiple fixtures and form history.
-4. Add post-match analysis with heat-map style summaries.
-5. Split the stable match logic into a WebAssembly-ready engine module.
+1. Make skill nodes affect role-specific bonuses more explicitly.
+2. Add opposition scouting before each fixture.
+3. Add player promises, hierarchy, and training feedback.
+4. Add a calendar with multiple fixtures and form history.
+5. Add post-match analysis with heat-map style summaries.
+6. Split the stable match logic into a WebAssembly-ready engine module.
