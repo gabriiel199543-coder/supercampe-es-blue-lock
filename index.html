@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Supercampeoes Blue Lock - Prototype</title>
+  <style>
+    :root {
+      --bg: #07130f;
+      --panel: #10231b;
+      --panel-2: #163124;
+      --line: #2a5b42;
+      --pitch: #0f5c35;
+      --grass: #1b7b48;
+      --text: #edf7ef;
+      --muted: #a9c8b5;
+      --gold: #f4c95d;
+      --red: #f26d5b;
+      --blue: #73b7ff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #123626 0, var(--bg) 48%, #020806 100%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button, select {
+      font: inherit;
+    }
+
+    .app {
+      width: min(1180px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: 18px 0 28px;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 4vw, 42px);
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .scoreboard {
+      min-width: 320px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(16, 35, 27, 0.92);
+      padding: 14px;
+      text-align: center;
+    }
+
+    .scoreline {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 12px;
+      align-items: center;
+      font-weight: 700;
+    }
+
+    .score {
+      font-size: 42px;
+      color: var(--gold);
+    }
+
+    .minute {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr) 280px;
+      gap: 14px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(16, 35, 27, 0.94);
+      overflow: hidden;
+    }
+
+    .panel h2 {
+      margin: 0;
+      padding: 12px 14px;
+      font-size: 16px;
+      background: var(--panel-2);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .team-list {
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      max-height: 680px;
+      overflow: auto;
+    }
+
+    .player-card {
+      border: 1px solid rgba(169, 200, 181, 0.22);
+      border-radius: 8px;
+      padding: 9px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .player-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: baseline;
+      margin-bottom: 5px;
+    }
+
+    .player-name {
+      font-weight: 700;
+    }
+
+    .role {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .bar {
+      height: 7px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--blue), var(--gold));
+      transition: width 180ms ease;
+    }
+
+    .pitch {
+      position: relative;
+      min-height: 680px;
+      border: 2px solid rgba(237, 247, 239, 0.28);
+      border-radius: 8px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px) center/50% 100% no-repeat,
+        repeating-linear-gradient(90deg, var(--pitch) 0 72px, var(--grass) 72px 144px);
+      overflow: hidden;
+    }
+
+    .pitch::before {
+      content: "";
+      position: absolute;
+      inset: 9%;
+      border: 2px solid rgba(237, 247, 239, 0.2);
+      border-radius: 8px;
+      pointer-events: none;
+    }
+
+    .center-circle {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 160px;
+      height: 160px;
+      transform: translate(-50%, -50%);
+      border: 2px solid rgba(237, 247, 239, 0.2);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .match-ui {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .duel-box {
+      border: 1px solid rgba(237, 247, 239, 0.28);
+      border-radius: 8px;
+      background: rgba(7, 19, 15, 0.78);
+      padding: 14px;
+    }
+
+    .duel-title {
+      margin: 0 0 10px;
+      font-size: 20px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .actions button, .secondary-actions button {
+      border: 1px solid rgba(237, 247, 239, 0.24);
+      border-radius: 8px;
+      background: #e8f6ea;
+      color: #082015;
+      padding: 10px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .actions button:hover, .secondary-actions button:hover {
+      background: var(--gold);
+    }
+
+    .secondary-actions {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .log {
+      max-height: 278px;
+      overflow: auto;
+      display: grid;
+      gap: 8px;
+    }
+
+    .log-entry {
+      border-left: 4px solid var(--gold);
+      padding: 8px 10px;
+      background: rgba(0, 0, 0, 0.24);
+      border-radius: 4px;
+      line-height: 1.35;
+    }
+
+    .goal { border-left-color: var(--red); }
+
+    .duel-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .focus-card {
+      border: 1px solid rgba(237, 247, 239, 0.22);
+      border-radius: 8px;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    @media (max-width: 980px) {
+      header, .layout {
+        grid-template-columns: 1fr;
+      }
+      .scoreboard { min-width: 0; }
+      .pitch { min-height: auto; }
+      .team-list { max-height: 420px; }
+    }
+
+    @media (max-width: 680px) {
+      .actions, .secondary-actions, .duel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div>
+        <h1>Supercampeoes Blue Lock</h1>
+        <p class="subtitle">Protótipo interno: futebol de duelos, despertar e evolucao de estilo com personagens historicos do Brasil e personas brasileiras da internet.</p>
+      </div>
+      <section class="scoreboard" aria-label="Placar">
+        <div class="scoreline">
+          <span id="homeName">Historia</span>
+          <span class="score"><span id="homeScore">0</span> x <span id="awayScore">0</span></span>
+          <span id="awayName">Internet</span>
+        </div>
+        <div class="minute"><span id="minute">0</span>' - posse: <span id="possession">Historia</span></div>
+      </section>
+    </header>
+
+    <section class="layout">
+      <aside class="panel">
+        <h2>Historia do Brasil FC</h2>
+        <div id="homeList" class="team-list"></div>
+      </aside>
+
+      <section class="pitch">
+        <div class="center-circle"></div>
+        <div class="match-ui">
+          <section class="duel-box">
+            <h2 class="duel-title">Escolha o proximo lance</h2>
+            <div class="duel-grid">
+              <div class="focus-card">
+                <div class="small">Atacante provavel</div>
+                <strong id="focusAttacker">Aguardando lance</strong>
+                <div id="focusAttackInfo" class="small"></div>
+              </div>
+              <div class="focus-card">
+                <div class="small">Defensor provavel</div>
+                <strong id="focusDefender">Aguardando lance</strong>
+                <div id="focusDefenseInfo" class="small"></div>
+              </div>
+            </div>
+            <div class="actions">
+              <button data-action="dribble">Drible</button>
+              <button data-action="pass">Passe</button>
+              <button data-action="sprint">Arrancada</button>
+              <button data-action="shoot">Finalizar</button>
+              <button data-action="special">Tecnica especial</button>
+            </div>
+          </section>
+
+          <section class="duel-box">
+            <div class="secondary-actions">
+              <button id="randomPlay">Lance aleatorio</button>
+              <button id="burstPlay">Simular 10 lances</button>
+              <button id="resetMatch">Reiniciar partida</button>
+            </div>
+          </section>
+
+          <section class="duel-box">
+            <h2 class="duel-title">Relato da partida</h2>
+            <div id="log" class="log"></div>
+          </section>
+        </div>
+      </section>
+
+      <aside class="panel">
+        <h2>Internet Brasileira FC</h2>
+        <div id="awayList" class="team-list"></div>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const roster = [
+      ["hist-barao-rio-branco", "Barao do Rio Branco", "historia", "Historia do Brasil FC", "GK", "Diplomatic Keeper", "defense", "Tratado da Area", [58,62,86,64,90,70,88,74,30,84]],
+      ["hist-dandara", "Dandara dos Palmares", "historia", "Historia do Brasil FC", "DF", "Quilombo Captain", "defense", "Corte de Palmares", [68,84,72,84,80,66,78,88,58,35]],
+      ["hist-zumbi", "Zumbi dos Palmares", "historia", "Historia do Brasil FC", "DF", "Last Line Rebel", "defense", "Muralha do Quilombo", [66,88,70,86,74,60,75,90,62,35]],
+      ["hist-maria-quiteria", "Maria Quiteria", "historia", "Historia do Brasil FC", "DF", "Independence Tackler", "defense", "Carrinho da Independencia", [64,80,68,76,86,58,82,84,56,35]],
+      ["hist-luiz-gama", "Luiz Gama", "historia", "Historia do Brasil FC", "MF", "Legal Playmaker", "pass", "Recurso Impossivel", [78,66,90,74,88,84,86,72,64,35]],
+      ["hist-chiquinha", "Chiquinha Gonzaga", "historia", "Historia do Brasil FC", "MF", "Maestra de Pressao", "pass", "Partitura Taticamente Perfeita", [84,56,88,74,82,94,84,58,67,35]],
+      ["hist-machado", "Machado de Assis", "historia", "Historia do Brasil FC", "AM", "Bruxo do Meio-Campo", "pass", "Ironia Obliqua", [86,48,96,72,88,94,92,55,74,35]],
+      ["hist-santos-dumont", "Santos Dumont", "historia", "Historia do Brasil FC", "WG", "Aerial Winger", "sprint", "14-Bis na Linha de Fundo", [82,70,88,70,80,92,78,52,72,35]],
+      ["hist-tarsila", "Tarsila do Amaral", "historia", "Historia do Brasil FC", "WG", "Modernist Dribbler", "dribble", "Abaporu Cut", [84,58,78,78,70,96,76,48,70,35]],
+      ["hist-anita-garibaldi", "Anita Garibaldi", "historia", "Historia do Brasil FC", "FW", "Farroupilha Striker", "sprint", "Arrancada Farrapa", [76,84,70,84,76,72,80,66,80,35]],
+      ["hist-aleijadinho", "Aleijadinho", "historia", "Historia do Brasil FC", "FW", "Baroque Finisher", "shoot", "Escultura no Angulo", [90,46,76,72,82,90,84,44,84,35]],
+      ["net-gaules", "Gaules", "internet", "Internet Brasileira FC", "GK", "Tribo Keeper", "defense", "Defesa da Tribo", [62,68,80,72,78,72,90,76,35,86]],
+      ["net-chorume-gremio", "Chorume do Gremio", "internet", "Internet Brasileira FC", "DF", "Imortal Corneteiro", "defense", "Corneta Imortal", [62,76,74,90,52,82,54,86,58,35]],
+      ["net-nobru", "Nobru", "internet", "Internet Brasileira FC", "DF", "Reflex Defender", "sprint", "Capa no Carrinho", [84,80,78,78,70,76,74,76,66,35]],
+      ["net-casimiro", "Casimiro", "internet", "Internet Brasileira FC", "MF", "People's Regista", "pass", "Meteu Essa Assistencia", [76,64,90,70,74,84,92,62,68,35]],
+      ["net-cellbit", "Cellbit", "internet", "Internet Brasileira FC", "MF", "Puzzle Midfielder", "pass", "Enigma Entrelinhas", [80,58,92,76,82,92,78,60,70,35]],
+      ["net-manoel-gomes", "Manoel Gomes", "internet", "Internet Brasileira FC", "MF", "Caneta Maestro", "pass", "Caneta Azul na Gaveta", [74,60,80,78,68,88,82,54,76,35]],
+      ["net-orochinho", "Orochinho", "internet", "Internet Brasileira FC", "AM", "Chaos Creator", "dribble", "Corte do Caos", [82,62,78,86,54,94,62,42,76,35]],
+      ["net-alanzoka", "Alanzoka", "internet", "Internet Brasileira FC", "WG", "Reaction Winger", "dribble", "Reflexo de Live", [86,74,76,74,70,84,76,50,74,35]],
+      ["net-peewee-squad", "PeeWee Squad", "internet", "Internet Brasileira FC", "WG", "Cinema Winger", "pass", "Review em Diagonal", [78,62,84,72,76,88,80,52,70,35]],
+      ["net-luva", "Luva de Pedreiro", "internet", "Internet Brasileira FC", "FW", "Receba Striker", "shoot", "Receba no Angulo", [76,88,66,94,62,76,72,46,90,35]],
+      ["net-ines-brasil", "Ines Brasil", "internet", "Internet Brasileira FC", "FW", "Showtime Striker", "special", "Aloka do Contra-Ataque", [78,66,72,96,48,92,72,40,82,35]]
+    ];
+
+    const attrNames = ["technique", "physique", "vision", "ego", "discipline", "creativity", "emotionalControl", "defense", "finishing", "goalkeeping"];
+    const thresholds = [0, 60, 150, 300];
+    const archetypes = {
+      dribble: ["Phantom Dribbler", "Phantom Step", { technique: 5, creativity: 4, ego: 3 }],
+      shoot: ["Box Predator", "Meteor Shot", { finishing: 6, ego: 4, emotionalControl: 2 }],
+      pass: ["False Nine Visionary", "Impossible Angle", { vision: 6, technique: 3, discipline: 3 }],
+      sprint: ["Lightning Runner", "Lightning Lane", { physique: 6, technique: 2, ego: 2 }],
+      special: ["Awakened Egoist", "Ego Zone", { ego: 5, creativity: 4, emotionalControl: 3 }],
+      defense: ["Shadow Wall", "Blackout Marking", { defense: 6, physique: 3, discipline: 3 }]
+    };
+    const actions = {
+      dribble: { label: "Drible", cost: 8, variance: 8, atk: { technique: .32, creativity: .2, ego: .18, physique: .12, emotionalControl: .1, vision: .08 }, def: { defense: .34, physique: .2, discipline: .16, emotionalControl: .12, technique: .1, vision: .08 } },
+      pass: { label: "Passe impossivel", cost: 5, variance: 6, atk: { vision: .34, technique: .2, discipline: .15, creativity: .15, emotionalControl: .1, ego: .06 }, def: { defense: .26, vision: .22, discipline: .2, physique: .12, emotionalControl: .1, technique: .1 } },
+      sprint: { label: "Arrancada", cost: 10, variance: 7, atk: { physique: .35, technique: .16, ego: .16, emotionalControl: .1, creativity: .1, vision: .08, discipline: .05 }, def: { physique: .3, defense: .26, discipline: .16, emotionalControl: .12, vision: .1, technique: .06 } },
+      shoot: { label: "Finalizacao", cost: 9, variance: 9, atk: { finishing: .34, technique: .2, ego: .2, emotionalControl: .14, physique: .07, creativity: .05 }, def: { goalkeeping: .38, defense: .18, emotionalControl: .16, physique: .12, vision: .1, discipline: .06 } },
+      special: { label: "Tecnica especial", cost: 16, variance: 12, atk: { technique: .24, ego: .24, creativity: .18, emotionalControl: .14, finishing: .12, physique: .08 }, def: { defense: .28, emotionalControl: .18, physique: .16, vision: .14, discipline: .12, technique: .12 } }
+    };
+
+    let seed = 4201983;
+    let state;
+
+    function rng() {
+      seed += 0x6d2b79f5;
+      let t = seed;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    }
+
+    function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
+    function sigmoid(value) { return 1 / (1 + Math.exp(-value)); }
+    function pick(items) { return items[Math.floor(rng() * items.length)] || items[0]; }
+    function round(value) { return Math.round(value * 100) / 100; }
+
+    function makePlayer(row) {
+      const attributes = {};
+      attrNames.forEach((name, index) => attributes[name] = row[8][index]);
+      return {
+        id: row[0], name: row[1], team: row[2], teamName: row[3], role: row[4], archetype: row[5],
+        preferredStyle: row[6], specialSkill: row[7], attributes,
+        stage: 0, awakening: 0, skills: [], evolutionTitle: "Raw Talent",
+        state: { stamina: 100, confidence: 50, pressure: 0, heat: 0 }, styleCounters: {}
+      };
+    }
+
+    function reset() {
+      seed = 4201983;
+      state = {
+        home: roster.filter(row => row[2] === "historia").map(makePlayer),
+        away: roster.filter(row => row[2] === "internet").map(makePlayer),
+        score: { home: 0, away: 0 }, minute: 0, possession: "home", last: null, log: []
+      };
+      addLog("Jogo iniciado. Escolha uma acao para criar o primeiro duelo.");
+      render();
+    }
+
+    function valueOf(player, attr) { return clamp(player.attributes[attr] ?? 50, 1, 100); }
+    function weighted(player, weights) {
+      let total = 0, weight = 0;
+      Object.keys(weights).forEach(attr => { total += valueOf(player, attr) * weights[attr]; weight += weights[attr]; });
+      return weight ? total / weight : 50;
+    }
+
+    function scorePlayer(player, weights, actionName, variance) {
+      const base = weighted(player, weights);
+      const pressurePenalty = (player.state.pressure / 100) * ((100 - valueOf(player, "emotionalControl")) / 100) * 14;
+      const egoSurge = ((valueOf(player, "ego") - 50) / 50) * 4;
+      const stamina = (player.state.stamina - 50) * .1;
+      const confidence = (player.state.confidence - 50) * .12;
+      const heat = (player.state.heat / 100) * 4;
+      const reckless = actionName === "special" && valueOf(player, "discipline") < 50 ? 4 : 0;
+      return base + player.stage * 2.5 + stamina + confidence + heat + egoSurge - pressurePenalty - reckless + (rng() * variance * 2 - variance);
+    }
+
+    function rolesForAttack(actionName) {
+      return actionName === "shoot" || actionName === "special" ? ["FW", "AM"] : ["FW", "AM", "MF", "WG"];
+    }
+
+    function rolesForDefense(actionName) {
+      return actionName === "shoot" ? ["GK"] : ["DF", "MF", "GK"];
+    }
+
+    function pickByRole(players, roles) {
+      const pool = players.filter(player => roles.includes(player.role));
+      return pick(pool.length ? pool : players);
+    }
+
+    function applyProgress(player, won, actionName, margin) {
+      const style = won ? (actionName === "tackle" ? "defense" : actionName) : "defense";
+      const progress = won ? 12 + margin * .16 + (player.preferredStyle === style ? 5 : 0) : 5;
+      player.styleCounters[style] = (player.styleCounters[style] || 0) + progress;
+      player.awakening += won ? progress : progress * .55;
+      player.state.confidence = clamp(player.state.confidence + (won ? 8 : -5), 0, 100);
+      player.state.pressure = clamp(player.state.pressure + (won ? -6 : 8), 0, 100);
+      player.state.heat = clamp(player.state.heat + (won ? 12 : 4), 0, 100);
+      evolve(player);
+    }
+
+    function evolve(player) {
+      while (player.stage < 3 && player.awakening >= thresholds[player.stage + 1]) {
+        player.stage += 1;
+        const entries = Object.entries(player.styleCounters).sort((a, b) => b[1] - a[1]);
+        const style = entries[0] ? entries[0][0] : player.preferredStyle;
+        const evo = archetypes[style] || archetypes.special;
+        player.evolutionTitle = `${evo[0]} ${player.stage}`;
+        if (!player.skills.includes(evo[1])) player.skills.push(evo[1]);
+        Object.keys(evo[2]).forEach(attr => player.attributes[attr] = clamp(player.attributes[attr] + evo[2][attr], 1, 100));
+        addLog(`${player.name} despertou: ${player.evolutionTitle}. Nova tecnica: ${evo[1]}.`);
+      }
+    }
+
+    function play(actionName) {
+      if (state.minute >= 90) return;
+      const action = actions[actionName];
+      const attackSide = state.possession;
+      const defenseSide = attackSide === "home" ? "away" : "home";
+      const attacker = pickByRole(state[attackSide], rolesForAttack(actionName));
+      const defender = pickByRole(state[defenseSide], rolesForDefense(actionName));
+      state.minute = Math.min(90, state.minute + 3 + Math.floor(rng() * 6));
+
+      attacker.state.stamina = clamp(attacker.state.stamina - action.cost, 0, 100);
+      defender.state.stamina = clamp(defender.state.stamina - action.cost * .65, 0, 100);
+
+      const atkScore = scorePlayer(attacker, action.atk, actionName, action.variance);
+      const defWeights = actionName === "shoot" && defender.role !== "GK" ? { defense: .34, physique: .18, emotionalControl: .16, discipline: .14, vision: .1, technique: .08 } : action.def;
+      const defScore = scorePlayer(defender, defWeights, actionName, action.variance);
+      const probability = sigmoid((atkScore - defScore) / 12);
+      const roll = rng();
+      const attackWins = roll <= probability;
+      const margin = Math.abs(atkScore - defScore);
+      const isGoal = attackWins && (actionName === "shoot" || actionName === "special");
+
+      applyProgress(attacker, attackWins, actionName, margin);
+      applyProgress(defender, !attackWins, actionName, margin);
+
+      if (isGoal) state.score[attackSide] += 1;
+      if (!attackWins || isGoal || rng() > .68) state.possession = defenseSide;
+
+      state.last = { attacker, defender, actionName, probability: round(probability), roll: round(roll), attackWins, isGoal };
+      const resultText = attackWins
+        ? `${attacker.name} venceu ${defender.name} com ${action.label}.`
+        : `${defender.name} parou ${attacker.name} em ${action.label}.`;
+      addLog(`${state.minute}' ${resultText} Chance: ${Math.round(probability * 100)}%.` + (isGoal ? " GOL." : ""), isGoal);
+      if (state.minute >= 90) addLog(`Fim de jogo: ${state.home[0].teamName} ${state.score.home} x ${state.score.away} ${state.away[0].teamName}.`);
+      render();
+    }
+
+    function addLog(text, goal) {
+      state.log.unshift({ text, goal: !!goal });
+      state.log = state.log.slice(0, 18);
+    }
+
+    function playerCard(player) {
+      const next = thresholds[player.stage + 1] || thresholds[3];
+      const progress = player.stage >= 3 ? 100 : clamp((player.awakening / next) * 100, 0, 100);
+      return `<article class="player-card">
+        <div class="player-top"><span class="player-name">${player.name}</span><span class="role">${player.role}</span></div>
+        <div class="small">${player.archetype}</div>
+        <div class="small">Skill: ${player.specialSkill}</div>
+        <div class="small">TEC ${player.attributes.technique} | EGO ${player.attributes.ego} | VIS ${player.attributes.vision} | FIN ${player.attributes.finishing}</div>
+        <div class="small">Stage ${player.stage}: ${player.evolutionTitle}</div>
+        <div class="bar"><div class="fill" style="width:${progress}%"></div></div>
+      </article>`;
+    }
+
+    function render() {
+      document.getElementById("homeName").textContent = state.home[0].teamName;
+      document.getElementById("awayName").textContent = state.away[0].teamName;
+      document.getElementById("homeScore").textContent = state.score.home;
+      document.getElementById("awayScore").textContent = state.score.away;
+      document.getElementById("minute").textContent = state.minute;
+      document.getElementById("possession").textContent = state[state.possession][0].teamName;
+      document.getElementById("homeList").innerHTML = state.home.map(playerCard).join("");
+      document.getElementById("awayList").innerHTML = state.away.map(playerCard).join("");
+      document.getElementById("log").innerHTML = state.log.map(item => `<div class="log-entry ${item.goal ? "goal" : ""}">${item.text}</div>`).join("");
+
+      if (state.last) {
+        document.getElementById("focusAttacker").textContent = state.last.attacker.name;
+        document.getElementById("focusDefender").textContent = state.last.defender.name;
+        document.getElementById("focusAttackInfo").textContent = `${state.last.attacker.role} | ${state.last.attacker.archetype} | ${state.last.attacker.evolutionTitle}`;
+        document.getElementById("focusDefenseInfo").textContent = `${state.last.defender.role} | ${state.last.defender.archetype} | ${state.last.defender.evolutionTitle}`;
+      }
+    }
+
+    document.querySelectorAll("[data-action]").forEach(button => button.addEventListener("click", () => play(button.dataset.action)));
+    document.getElementById("randomPlay").addEventListener("click", () => play(pick(Object.keys(actions))));
+    document.getElementById("burstPlay").addEventListener("click", () => { for (let i = 0; i < 10 && state.minute < 90; i += 1) play(pick(Object.keys(actions))); });
+    document.getElementById("resetMatch").addEventListener("click", reset);
+    reset();
+  </script>
+</body>
+</html>
