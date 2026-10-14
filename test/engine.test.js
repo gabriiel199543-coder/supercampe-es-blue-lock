@@ -7,6 +7,7 @@ const {
   sampleTeams,
   simulateMatch
 } = require("../src/engine");
+const { PLAYER_BLUEPRINTS, getRoster, splitTeams } = require("../src/roster");
 
 function testDeterministicDuel() {
   const attacker = makePlayer("p1", "Test Striker", "FW", {
@@ -112,9 +113,44 @@ function testMatchSimulationShape() {
   assert.strictEqual(result.away.length, away.length);
 }
 
+function testBrazilianRosterShape() {
+  const roster = getRoster();
+  const { home, away } = splitTeams();
+
+  assert.strictEqual(PLAYER_BLUEPRINTS.length, 22);
+  assert.strictEqual(roster.length, 22);
+  assert.strictEqual(home.length, 11);
+  assert.strictEqual(away.length, 11);
+  assert(home.some((player) => player.role === "GK"));
+  assert(away.some((player) => player.role === "GK"));
+
+  for (const player of roster) {
+    assert(player.id);
+    assert(player.name);
+    assert(player.teamName);
+    assert(player.archetype);
+    assert(player.specialSkill);
+    for (const value of Object.values(player.attributes)) {
+      assert(value >= 1 && value <= 100);
+    }
+  }
+}
+
+function testBrazilianRosterMatchRuns() {
+  const { home, away } = splitTeams();
+  const result = simulateMatch({ home, away, seed: "brazilian-roster-test", events: 22 });
+
+  assert.strictEqual(result.log.length, 22);
+  assert.strictEqual(result.home.length, 11);
+  assert.strictEqual(result.away.length, 11);
+  assert(result.log.some((event) => event.action === "shoot" || event.action === "special"));
+}
+
 testDeterministicDuel();
 testProbabilityFavorsStrongAttacker();
 testEvolutionChangesPlayer();
 testMatchSimulationShape();
+testBrazilianRosterShape();
+testBrazilianRosterMatchRuns();
 
 console.log("All engine tests passed.");
