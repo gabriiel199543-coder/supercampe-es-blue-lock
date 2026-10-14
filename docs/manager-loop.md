@@ -30,19 +30,35 @@ train a weakness, release ego, or calm the squad down.
 13. Watch morale, fatigue, pressure, xG, goals, and awakening change.
 14. Repeat across fixtures.
 
-## Screen Layers
+## Management Screens
 
-- Coach Room: formation, identity, training, focus player, team talk, sliders.
-- Tactical Board: all 11 pitch slots with player and role selection.
-- Bench and Changes: substitutes, recommended entries, substitution history, and
-  tactical-change history.
-- Skill Profile: FM-style attribute columns, awakening progress, locked/unlocked
-  skill nodes, and best tactical use.
-- Squad Table: natural positions, current slot, role, condition, morale,
-  sharpness, and awakening stage.
-- Match Feed: goals, duels, pressure swings, evolution events, substitutions, and
-  coaching adjustments.
-- Assistant Report: actionable warnings and next tactical suggestions.
+| Screen | Controls and information |
+| --- | --- |
+| Visão geral | Club selection, condition/morale/sharpness averages, current tactical plan, preparation checks, assistant report, and shortcuts |
+| Tática | Formation, identity, pressing/tempo/freedom/risk, all 11 pitch slots, role selection, auto lineup, and team ratings |
+| Elenco | Natural positions, current slot and role, condition, morale, sharpness, and awakening; player names open the profile |
+| Ficha e skills | Player selector, attribute columns, awakening progress, skill nodes, assistant analysis, and a shortcut to set the training focus |
+| Treinos | Weekly training and focus, expected effects, squad development summary, and feedback from the last applied week |
+| Dia de jogo | Team talk, 15-minute/full-match simulation, xG, momentum, match feed, substitutions, and tactical-change history |
+
+The scoreboard stays outside the screen containers. Every control is mounted
+once and has one ID; navigation only changes visibility. It must never reset the
+career, recompute the lineup, consume a simulated minute, change the selected
+player, or apply training. URL hashes and browser history mirror the active
+screen. Invalid hashes fall back to Visão geral.
+
+The profile's focus action opens Treinos with the selected player. Its assistant
+analysis appears on the profile itself and is also added to the general report.
+Training feedback appears in Treinos, even when the assistant report changes.
+During a match, training, focus selection, and free starter changes remain
+locked; tactical adjustments stay available between simulation blocks.
+
+The tactical pitch uses formation rows and grid columns to keep cards apart.
+Below 600px, it becomes a full-width list with the same player and role controls.
+The squad table can scroll horizontally without widening the whole page.
+
+This prototype keeps state in memory only. Reloading starts a fresh career.
+The roster has 11 players per side, so a full XI has no available reserves yet.
 
 ## Calculation Model
 

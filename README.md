@@ -12,11 +12,37 @@ evolution.
 
 ## Play in the Browser
 
-Open \`index.html\` in a browser.
+Open `index.html` in a browser.
 
 If you are viewing the file on GitHub, the normal blob page shows the source
-instead of running the game. Download/open the raw \`index.html\` locally, or
+instead of running the game. Download/open the raw `index.html` locally, or
 publish the repository with GitHub Pages when the prototype is ready to share.
+
+The interface is organized into six screens, accessible through the navigation menu:
+
+| Screen | Purpose |
+| --- | --- |
+| Visão geral | Club selection, readiness summary, current plan, and assistant report |
+| Tática | Formation, starting XI, individual roles, identity, and tactical sliders |
+| Elenco | Full squad table; click a player's name to open their profile |
+| Ficha e skills | Technical, mental, and physical attributes, evolution, and individual analysis |
+| Treinos | Weekly plan, focus player, training preview, and last applied week's feedback |
+| Dia de jogo | Team talk, simulation controls, momentum, match feed, bench, and change history |
+
+The score and match status stay visible above every screen. Navigation preserves
+the current career, selected player, training focus, tactics, and match minute.
+Browser Back/Forward and hash links such as `index.html#tactics` also navigate
+between screens. On small screens, the tactical board becomes a list of position
+cards so player and role controls remain readable.
+
+Suggested first session: review **Visão geral**, adjust **Tática**, inspect players
+through **Elenco**, apply a week in **Treinos**, then open **Dia de jogo** and
+simulate 15 minutes. Between blocks, return to **Tática** to react and go back to
+the match to continue.
+
+The current session lives in memory. Reloading the page starts a new career;
+there is no save/load yet. Each prototype team has exactly 11 players, so a
+complete starting XI leaves no substitutes available.
 
 Current manager actions:
 
@@ -40,23 +66,23 @@ Current manager actions:
 
 ## Run the Engine
 
-\`\`\`bash
+```bash
 npm test
 npm run demo
-\`\`\`
+```
 
 Or directly:
 
-\`\`\`bash
+```bash
 node examples/demo.js
-\`\`\`
+```
 
 ## Prototype Roster
 
 The first roster has two 11-player teams:
 
-- \`Historia do Brasil FC\`: Brazilian historical figures.
-- \`Internet Brasileira FC\`: friendly public internet personas, meme figures,
+- `Historia do Brasil FC`: Brazilian historical figures.
+- `Internet Brasileira FC`: friendly public internet personas, meme figures,
   streamers, and creator collectives.
 
 Important: the internet roster is for internal prototyping and tone discovery.
@@ -69,6 +95,9 @@ with licensed, authorized, or clearly fictionalized characters.
 - formation slots and player position fit
 - manager-style starting XI selection
 - role instructions for each player
+- six management screens with shared career state
+- browser history and direct screen links
+- responsive tactical board and player-profile shortcuts
 - FM-inspired player attribute profile
 - skill nodes based on awakening, style progress, and role mastery
 - bench management and substitution limits

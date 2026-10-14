@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Supercampeoes Blue Lock - Manager v0.2</title>
+  <title>Supercampeoes Blue Lock - Manager v0.3</title>
   <style>
     :root {
       --bg: #07130f;
@@ -531,18 +531,120 @@
       background: linear-gradient(90deg, var(--gold), var(--red));
     }
 
-    @media (max-width: 1180px) {
-      header, .main-grid { grid-template-columns: 1fr; }
-      .scoreboard { min-width: 0; }
-      .pitch { min-height: 760px; }
-      .slot { width: min(180px, 42vw); }
-    }
 
-    @media (max-width: 760px) {
-      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .scoreline, .match-strip, .button-row { grid-template-columns: 1fr; }
-      .slot { width: 150px; }
-      .slot select { font-size: 11px; }
+    /* Management workspace: one view at a time, one shared career state. */
+    [hidden] { display: none !important; }
+    .app { width: min(1680px, calc(100% - 32px)); }
+    header { grid-template-columns: minmax(0, 1fr) minmax(360px, 440px); margin-bottom: 20px; }
+    h1 { font-size: clamp(22px, 3vw, 32px); }
+    .subtitle { font-size: 13px; }
+    .score { font-size: 32px; }
+    .workspace-shell { display: grid; grid-template-columns: 216px minmax(0, 1fr); gap: 20px; align-items: start; }
+    .workspace-main, .screen, .two-columns > *, .tactic-layout > * { min-width: 0; }
+    .sidebar { position: sticky; top: 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel3); overflow: hidden; }
+    .sidebar-club { display: grid; gap: 8px; padding: 20px 16px; border-bottom: 1px solid var(--line); }
+    .sidebar-club strong { line-height: 1.35; }
+    .eyebrow { display: block; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; }
+    .main-nav { display: grid; gap: 4px; padding: 10px; }
+    .nav-item { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; background: transparent; color: var(--muted); border-color: transparent; padding: 13px 10px; font-size: 13px; }
+    .nav-index { font-size: 10px; font-weight: 400; opacity: .7; }
+    .nav-item[aria-current="page"] { background: #214333; border-color: var(--line); color: var(--gold); }
+    .nav-item:hover { background: #1a3729; color: var(--text); }
+    .sidebar-footer { padding: 14px; border-top: 1px solid var(--line); }
+    .sidebar-footer button { width: 100%; font-size: 12px; }
+    .screen-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 6px 0 18px; }
+    .screen-heading h2 { margin-top: 6px; font-size: 28px; }
+    .screen-heading p { margin: 8px 0 0; font-size: 13px; }
+    .phase-pill { border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; color: var(--gold); background: var(--panel3); font-size: 12px; white-space: nowrap; }
+    .overview-hero { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 24px; border: 1px solid var(--line); border-radius: 10px; background: linear-gradient(110deg, #1a4530, #0f241a); }
+    .overview-hero h3 { margin-top: 8px; font-size: 25px; }
+    .overview-hero p { margin: 10px 0 0; font-size: 13px; }
+    .overview-hero button { min-width: 170px; }
+    .summary-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .summary-grid .kpi { padding: 15px; background: var(--panel); }
+    .summary-grid strong { font-size: 26px; }
+    .two-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: start; }
+    .overview-columns { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
+    .skills-columns { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); }
+    .match-columns { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+    .tactic-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 16px; align-items: start; }
+    .panel-body { padding: 16px; }
+    .detail-list { display: grid; gap: 10px; }
+    .detail-row { display: flex; justify-content: space-between; align-items: start; gap: 16px; border-bottom: 1px solid rgba(237,247,239,.1); padding-bottom: 10px; font-size: 13px; }
+    .detail-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .detail-row span { color: var(--muted); }
+    .detail-row strong { text-align: right; line-height: 1.4; }
+    .context-strip { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .compact-button { padding: 8px 10px; font-size: 12px; }
+    .match-actions .panel-body { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .match-actions .button-row { min-width: 320px; }
+    .match-actions p { margin: 7px 0 0; }
+    .session-note { margin: 18px 0 0; color: #8cab97; }
+    #screen-squad .table-wrap { max-height: none; }
+    #screen-squad table { min-width: 820px; }
+    #screen-squad th, #screen-squad td { padding: 14px; }
+    .player-link { padding: 0; border: 0; border-radius: 2px; background: transparent; color: var(--text); text-align: left; line-height: 1.4; }
+    .player-link:hover, .player-link[aria-pressed="true"] { color: var(--gold); background: transparent; text-decoration: underline; }
+    .selected-player { background: rgba(244,201,93,.05); }
+    .attribute-grid { gap: 12px; }
+    .attribute-column { padding: 12px; }
+    .attribute-row { padding: 7px 0; }
+    .skill-card { background: transparent; border: 0; padding: 0; gap: 16px; }
+    .skill-node { padding: 14px; }
+    .report { max-height: 650px; }
+    .feed { max-height: 650px; min-height: 180px; }
+    .sub-grid { grid-template-columns: 1fr 1fr; }
+    .sub-grid button { grid-column: 1 / -1; }
+    .pitch { min-height: 860px; display: grid; grid-template-columns: repeat(12, minmax(0,1fr)); gap: 26px 8px; padding: 28px 12px; align-items: center; }
+    .slot { position: relative; transform: none; width: 100%; max-width: none; min-width: 0; padding: 7px; }
+    .slot-title { gap: 4px; align-items: start; min-height: 30px; }
+    .slot-title strong { font-size: 12px; line-height: 1.25; }
+    .slot .tiny { min-height: 30px; font-size: 10px; }
+    .slot select { min-width: 0; padding: 5px 2px; font-size: 11px; }
+    .fit-pill { font-size: 10px; padding: 2px 3px; }
+    button:focus-visible, select:focus-visible, input:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    @media (max-width: 1320px) {
+      .tactic-layout { grid-template-columns: 1fr; }
+      .tactic-layout > .panel:first-child .panel-body { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .skills-columns { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 1020px) {
+      header { grid-template-columns: 1fr; }
+      .scoreboard { min-width: 0; }
+      .workspace-shell { grid-template-columns: 1fr; gap: 14px; }
+      .sidebar { position: static; }
+      .sidebar-club { display: none; }
+      .main-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .nav-item { justify-content: center; padding: 12px 6px; }
+      .sidebar-footer { display: flex; justify-content: flex-end; padding: 8px 10px; }
+      .sidebar-footer p { display: none; }
+      .sidebar-footer button { width: auto; padding: 7px 10px; }
+      .two-columns { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .app { width: calc(100% - 20px); padding-top: 12px; }
+      .scoreline { gap: 6px; font-size: 11px; }
+      .score { font-size: 27px; }
+      .screen-heading h2 { font-size: 24px; }
+      .screen-heading { align-items: start; gap: 10px; }
+      .phase-pill { padding: 6px 8px; font-size: 11px; }
+      .overview-hero { flex-direction: column; align-items: stretch; padding: 18px; }
+      .summary-grid, .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .nav-index { display: none; }
+      .nav-item { font-size: 12px; }
+      .match-actions .panel-body { flex-direction: column; align-items: stretch; }
+      .match-actions .button-row { min-width: 0; }
+      .tactic-layout > .panel:first-child .panel-body { grid-template-columns: 1fr; }
+      .pitch { min-height: 0; grid-template-columns: 1fr; gap: 10px; padding: 12px; }
+      .pitch:before, .pitch:after { display: none; }
+      .slot { grid-column: 1 / -1 !important; grid-row: auto !important; position: static; transform: none; width: 100%; max-width: none; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; padding: 12px; }
+      .slot .slot-title, .slot .tiny, .slot .bar { grid-column: 1 / -1; min-height: 0; }
+      .slot-title strong { font-size: 14px; }
+      .slot select { font-size: 12px; padding: 8px; }
+      .slot .fit-pill { grid-column: 1 / -1; margin-top: 0; }
+      .attribute-grid { grid-template-columns: 1fr; }
+      .match-strip { grid-template-columns: 1fr; }
+      .match-strip > strong { text-align: center; }
     }
   </style>
 </head>
@@ -551,7 +653,7 @@
     <header>
       <div>
         <h1>Supercampeoes Blue Lock</h1>
-        <p class="subtitle">v0.2 manager: monte a escalação, escolha funções individuais, ajuste treino e tática, receba relatório do assistente e simule a partida a partir das suas decisões.</p>
+        <p class="subtitle">Central de gestão • Prepare o elenco, defina o plano e comande o time durante a partida.</p>
       </div>
       <section class="scoreboard">
         <div class="scoreline">
@@ -563,21 +665,60 @@
       </section>
     </header>
 
-    <section class="main-grid">
-      <aside class="panel">
-        <div class="panel-head">
-          <h2>Gabinete do técnico</h2>
-        </div>
-        <div class="panel-body stack">
-          <div class="field">
+
+    <section class="workspace-shell">
+      <aside class="sidebar">
+        <div class="sidebar-club"><span class="eyebrow">Central do técnico</span><strong id="sidebarTeam">Seu clube</strong><span class="tiny" id="sidebarPhase">Preparação</span></div>
+        <nav class="main-nav" aria-label="Áreas de gestão">
+          <button type="button" class="nav-item" data-route="overview" data-nav-screen="overview" aria-controls="screen-overview" aria-current="page"><span class="nav-index">01</span>Visão geral</button>
+          <button type="button" class="nav-item" data-route="tactics" data-nav-screen="tactics" aria-controls="screen-tactics"><span class="nav-index">02</span>Tática</button>
+          <button type="button" class="nav-item" data-route="squad" data-nav-screen="squad" aria-controls="screen-squad"><span class="nav-index">03</span>Elenco</button>
+          <button type="button" class="nav-item" data-route="skills" data-nav-screen="skills" aria-controls="screen-skills"><span class="nav-index">04</span>Ficha e skills</button>
+          <button type="button" class="nav-item" data-route="training" data-nav-screen="training" aria-controls="screen-training"><span class="nav-index">05</span>Treinos</button>
+          <button type="button" class="nav-item" data-route="match" data-nav-screen="match" aria-controls="screen-match"><span class="nav-index">06</span>Dia de jogo</button>
+        </nav>
+        <div class="sidebar-footer"><p class="tiny">Organize o clube, prepare o time e acompanhe as consequências em campo.</p><button id="resetGame" class="secondary">Reiniciar carreira</button></div>
+      </aside>
+      <div class="workspace-main">
+        <div class="screen-heading"><div><span class="eyebrow" id="screenSection">Clube</span><h2 id="screenTitle" tabindex="-1">Visão geral</h2><p id="screenDescription" class="tiny">O estado do clube e as próximas decisões.</p></div><span class="phase-pill" id="screenPhase">Pré-jogo</span></div>
+        <section id="screen-overview" class="screen stack" data-screen="overview" aria-labelledby="screenTitle">
+          <div class="overview-hero"><div><span class="eyebrow">Gabinete do técnico</span><h3 id="overviewHeadline">Prepare o seu time</h3><p class="tiny" id="overviewNext">Comece pela escalação e pelo plano tático.</p></div><button data-route="tactics" id="overviewAction">Abrir tática</button></div>
+          <div class="summary-grid">
+            <div class="kpi"><span class="tiny">Titulares</span><strong id="overviewXi">11 / 11</strong></div>
+            <div class="kpi"><span class="tiny">Condição média</span><strong id="overviewCondition">96</strong></div>
+            <div class="kpi"><span class="tiny">Moral média</span><strong id="overviewMorale">62</strong></div>
+            <div class="kpi"><span class="tiny">Ritmo de jogo</span><strong id="overviewSharpness">54</strong></div>
+          </div>
+          <div class="two-columns overview-columns">
+            <div class="stack">
+              <section class="panel"><div class="panel-head"><h2>Seu clube</h2></div><div class="panel-body stack">
+                <div class="field">
             <label for="managerTeam">Comandar</label>
             <select id="managerTeam">
               <option value="historia">Historia do Brasil FC</option>
               <option value="internet">Internet Brasileira FC</option>
             </select>
           </div>
+                <div id="overviewPlan" class="detail-list"></div>
+                <div class="button-row"><button data-route="tactics" class="secondary">Revisar escalação</button><button data-route="training" class="secondary">Preparar treino</button></div>
+              </div></section>
+              <section class="panel"><div class="panel-head"><h2>Preparação e decisões</h2></div><div class="panel-body stack"><div id="overviewChecklist" class="detail-list"></div><div class="button-row"><button data-route="squad" class="secondary">Consultar elenco</button><button data-route="match">Ir para o jogo</button></div></div></section>
+            </div>
+            <section class="panel">
+          <div class="panel-head">
+            <h2>Assistente técnico</h2><button id="assistantLineup" class="secondary compact-button">Atualizar relatório</button>
+          </div>
+          <div class="panel-body">
+            <div id="assistantReport" class="report"></div>
+          </div>
+        </section>
+          </div>
+        </section>
 
-          <div class="field">
+        <section id="screen-tactics" class="screen stack" data-screen="tactics" aria-labelledby="screenTitle" hidden>
+          <div class="tactic-layout">
+            <section class="panel"><div class="panel-head"><h2>Plano de jogo</h2></div><div class="panel-body stack">
+              <div class="field">
             <label for="formation">Formação</label>
             <select id="formation">
               <option value="433">4-3-3</option>
@@ -586,8 +727,7 @@
               <option value="442">4-4-2</option>
             </select>
           </div>
-
-          <div class="field">
+              <div class="field">
             <label for="identity">Identidade</label>
             <select id="identity">
               <option value="control">Controle narrativo</option>
@@ -596,71 +736,28 @@
               <option value="ego">Liberar o ego</option>
             </select>
           </div>
-
-          <div class="field">
-            <label for="training">Treino da semana</label>
-            <select id="training">
-              <option value="balanced">Equilíbrio coletivo</option>
-              <option value="finishing">Finalização e frieza</option>
-              <option value="creation">Criação e passe</option>
-              <option value="defense">Bloco defensivo</option>
-              <option value="ego">Despertar do ego</option>
-              <option value="rest">Recuperação e moral</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="focusPlayer">Jogador foco</label>
-            <select id="focusPlayer"></select>
-          </div>
-
-          <div class="field">
-            <label for="teamTalk">Preleção</label>
-            <select id="teamTalk">
-              <option value="calm">Calma: controlar pressão</option>
-              <option value="fire">Fogo: jogar com ego</option>
-              <option value="discipline">Disciplina: cumprir plano</option>
-              <option value="collective">Coletivo: um joga pelo outro</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label>Pressão</label>
+              <div class="field">
+            <label for="pressing">Pressão</label>
             <div class="range-row"><input id="pressing" type="range" min="20" max="100" value="62"><span id="pressingVal" class="range-value">62</span></div>
           </div>
-
-          <div class="field">
-            <label>Ritmo</label>
+              <div class="field">
+            <label for="tempo">Ritmo</label>
             <div class="range-row"><input id="tempo" type="range" min="20" max="100" value="58"><span id="tempoVal" class="range-value">58</span></div>
           </div>
-
-          <div class="field">
-            <label>Liberdade criativa</label>
+              <div class="field">
+            <label for="freedom">Liberdade criativa</label>
             <div class="range-row"><input id="freedom" type="range" min="20" max="100" value="64"><span id="freedomVal" class="range-value">64</span></div>
           </div>
-
-          <div class="field">
-            <label>Risco / ego</label>
+              <div class="field">
+            <label for="risk">Risco / ego</label>
             <div class="range-row"><input id="risk" type="range" min="20" max="100" value="55"><span id="riskVal" class="range-value">55</span></div>
           </div>
-
-          <div class="buttons">
-            <div class="button-row">
               <button id="autoLineup">Auto escalar</button>
-              <button id="assistantLineup" class="secondary">Relatório</button>
-            </div>
-            <button id="trainWeek">Aplicar treino da semana</button>
-            <div class="button-row">
-              <button id="simulateSegment">Simular 15 minutos</button>
-              <button id="simulateMatch">Simular jogo</button>
-            </div>
-            <button id="resetGame" class="secondary">Reiniciar carreira</button>
-          </div>
-        </div>
-      </aside>
-
-      <section class="stack">
-        <section class="panel">
+              <div class="note coach tiny" id="tacticHelp">Escolha um titular e uma função em cada posição.</div>
+              <button data-route="overview" class="secondary">Consultar assistente</button>
+              <button data-route="match" class="secondary">Voltar ao dia de jogo</button>
+            </div></section>
+            <section class="panel">
           <div class="panel-head">
             <h2>Prancheta tática</h2>
             <span id="lineupStatus" class="tiny">11 titulares</span>
@@ -676,8 +773,113 @@
           </div>
           <div id="pitch" class="pitch"></div>
         </section>
+          </div>
+        </section>
 
-        <section class="panel">
+        <section id="screen-squad" class="screen stack" data-screen="squad" aria-labelledby="screenTitle" hidden>
+          <div class="context-strip"><span class="tiny">Clique no nome de um jogador para consultar atributos e evolução.</span><button data-route="tactics" class="secondary compact-button">Abrir escalação</button></div>
+          <section class="panel">
+          <div class="panel-head">
+            <h2>Elenco</h2>
+            <span id="squadSummary" class="tiny">22 jogadores</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Jogador</th>
+                  <th>Posições</th>
+                  <th>Perfil</th>
+                  <th>Estado</th>
+                  <th>Despertar</th>
+                </tr>
+              </thead>
+              <tbody id="squadTable"></tbody>
+            </table>
+          </div>
+        </section>
+        </section>
+
+        <section id="screen-skills" class="screen stack" data-screen="skills" aria-labelledby="screenTitle" hidden>
+          <div class="context-strip"><button data-route="squad" class="secondary compact-button">← Voltar ao elenco</button><span id="skillStage" class="phase-pill">Stage 0</span></div>
+          <section class="panel"><div class="panel-head"><h2>Ficha do jogador</h2></div><div class="panel-body"><div class="field">
+              <label for="skillPlayer">Jogador</label>
+              <select id="skillPlayer"></select>
+            </div></div></section>
+          <div class="two-columns skills-columns">
+            <section class="panel"><div class="panel-head"><h2>Atributos e perfil</h2><span class="tiny">Escala 1–100</span></div><div class="panel-body stack"><div id="skillProfile" class="skill-card"></div><div class="skill-actions"><button id="skillSetFocus">Definir como foco</button><button id="skillAssistant" class="secondary">Análise do assistente</button></div><div id="skillFeedback" class="tiny" role="status">Escolha um jogador para analisar.</div><button data-route="training" class="secondary">Abrir treino individual</button></div></section>
+            <section class="panel"><div class="panel-head"><h2>Skills e evolução</h2></div><div class="panel-body"><div id="skillTree" class="skill-tree"></div></div></section>
+          </div>
+        </section>
+
+        <section id="screen-training" class="screen stack" data-screen="training" aria-labelledby="screenTitle" hidden>
+          <div class="two-columns">
+            <section class="panel"><div class="panel-head"><h2>Planejamento da semana</h2><span class="tiny" id="trainingWeek">Semana 1</span></div><div class="panel-body stack">
+              <div class="field">
+            <label for="training">Treino da semana</label>
+            <select id="training">
+              <option value="balanced">Equilíbrio coletivo</option>
+              <option value="finishing">Finalização e frieza</option>
+              <option value="creation">Criação e passe</option>
+              <option value="defense">Bloco defensivo</option>
+              <option value="ego">Despertar do ego</option>
+              <option value="rest">Recuperação e moral</option>
+            </select>
+          </div>
+              <div class="field">
+            <label for="focusPlayer">Jogador foco</label>
+            <select id="focusPlayer"></select>
+          </div>
+              <div class="note coach tiny" id="trainingPreview"></div>
+              <button id="trainWeek">Aplicar treino da semana</button>
+              <div class="tiny" id="trainingHint">O treino avança a semana e modifica o elenco.</div>
+            </div></section>
+            <section class="panel"><div class="panel-head"><h2>Desenvolvimento do elenco</h2></div><div class="panel-body stack">
+              <div id="trainingSummary" class="detail-list"></div>
+              <div id="trainingFeedback" class="note coach" role="status">Nenhuma semana de treino aplicada.</div>
+              <div class="button-row"><button data-route="skills" class="secondary">Acompanhar skills</button><button data-route="match">Preparar a partida</button></div>
+            </div></section>
+          </div>
+        </section>
+
+        <section id="screen-match" class="screen stack" data-screen="match" aria-labelledby="screenTitle" hidden>
+          <div class="match-actions panel"><div class="panel-body"><div><strong id="matchActionTitle">Pronto para o apito?</strong><p class="tiny" id="matchActionHint">Cada bloco simula 15 minutos. Entre os blocos, você pode ajustar a tática.</p></div><div class="button-row"><button id="simulateSegment">Simular 15 minutos</button><button id="simulateMatch" class="secondary">Simular jogo completo</button></div></div></div>
+          <div class="two-columns match-columns">
+            <section class="panel">
+          <div class="panel-head">
+            <h2>Relato da partida</h2>
+            <span id="xgLine" class="tiny">xG 0.00 - 0.00</span>
+          </div>
+          <div class="panel-body stack">
+            <div class="match-strip">
+              <div>
+                <div id="leftLabel" class="tiny">Seu time</div>
+                <div class="momentum"><div id="leftMomentum" class="fill" style="width:50%"></div></div>
+              </div>
+              <strong id="momentumText">Equilibrado</strong>
+              <div>
+                <div id="rightLabel" class="tiny">Rival</div>
+                <div class="momentum right"><div id="rightMomentum" class="fill" style="width:50%"></div></div>
+              </div>
+            </div>
+            <div id="matchFeed" class="feed"></div>
+          </div>
+        </section>
+            <div class="stack">
+              <section class="panel"><div class="panel-head"><h2>Comando da equipe</h2></div><div class="panel-body stack">
+                <div class="field">
+            <label for="teamTalk">Preleção</label>
+            <select id="teamTalk">
+              <option value="calm">Calma: controlar pressão</option>
+              <option value="fire">Fogo: jogar com ego</option>
+              <option value="discipline">Disciplina: cumprir plano</option>
+              <option value="collective">Coletivo: um joga pelo outro</option>
+            </select>
+          </div>
+                <div id="matchPlan" class="detail-list"></div>
+                <div class="button-row"><button data-route="tactics">Ajustar tática</button><button data-route="overview" class="secondary">Ver assistente</button></div>
+              </div></section>
+              <section class="panel">
           <div class="panel-head">
             <h2>Banco e mudanças</h2>
             <span id="subsStatus" class="tiny">0/5 substituições</span>
@@ -701,83 +903,174 @@
             </div>
           </div>
         </section>
-
-        <section class="panel">
-          <div class="panel-head">
-            <h2>Elenco</h2>
-            <span id="squadSummary" class="tiny">22 jogadores</span>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>Jogador</th>
-                  <th>Posições</th>
-                  <th>Perfil</th>
-                  <th>Estado</th>
-                  <th>Despertar</th>
-                </tr>
-              </thead>
-              <tbody id="squadTable"></tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="panel">
-          <div class="panel-head">
-            <h2>Dia de jogo</h2>
-            <span id="xgLine" class="tiny">xG 0.00 - 0.00</span>
-          </div>
-          <div class="panel-body stack">
-            <div class="match-strip">
-              <div>
-                <div id="leftLabel" class="tiny">Seu time</div>
-                <div class="momentum"><div id="leftMomentum" class="fill" style="width:50%"></div></div>
-              </div>
-              <strong id="momentumText">Equilibrado</strong>
-              <div>
-                <div id="rightLabel" class="tiny">Rival</div>
-                <div class="momentum right"><div id="rightMomentum" class="fill" style="width:50%"></div></div>
-              </div>
-            </div>
-            <div id="matchFeed" class="feed"></div>
-          </div>
-        </section>
-      </section>
-
-      <aside class="stack">
-        <section class="panel">
-          <div class="panel-head">
-            <h2>Assistente técnico</h2>
-          </div>
-          <div class="panel-body">
-            <div id="assistantReport" class="report"></div>
-          </div>
-        </section>
-
-        <section class="panel">
-          <div class="panel-head">
-            <h2>Ficha e skills</h2>
-            <span id="skillStage" class="tiny">Stage 0</span>
-          </div>
-          <div class="panel-body stack">
-            <div class="field">
-              <label for="skillPlayer">Jogador</label>
-              <select id="skillPlayer"></select>
-            </div>
-            <div id="skillProfile" class="skill-card"></div>
-            <div id="skillTree" class="skill-tree"></div>
-            <div class="skill-actions">
-              <button id="skillSetFocus">Definir como foco</button>
-              <button id="skillAssistant" class="secondary">Analisar skills</button>
             </div>
           </div>
         </section>
-      </aside>
+        <p class="session-note tiny">A carreira fica ativa enquanto esta página estiver aberta. Recarregar a página inicia uma nova sessão.</p>
+      </div>
     </section>
   </main>
 
   <script>
+
+    const screenDefinitions = {
+      overview: { title: "Visão geral", section: "Clube", description: "O estado do clube e as próximas decisões." },
+      tactics: { title: "Tática", section: "Equipe principal", description: "Organize os titulares, as funções e a identidade do time." },
+      squad: { title: "Elenco", section: "Equipe principal", description: "Compare condição, moral, posições e desenvolvimento." },
+      skills: { title: "Ficha e skills", section: "Desenvolvimento", description: "Conheça os atributos e a evolução de cada jogador." },
+      training: { title: "Treinos", section: "Desenvolvimento", description: "Planeje a semana e escolha o foco individual." },
+      match: { title: "Dia de jogo", section: "Competição", description: "Acompanhe os lances e intervenha entre os blocos de 15 minutos." }
+    };
+    let activeScreen = null;
+
+    function navigateTo(requestedScreen, options) {
+      const settings = options || {};
+      const screen = Object.prototype.hasOwnProperty.call(screenDefinitions, requestedScreen) ? requestedScreen : "overview";
+      const definition = screenDefinitions[screen];
+      const changed = activeScreen !== screen;
+      document.querySelectorAll("[data-screen]").forEach(function(view) {
+        view.hidden = view.dataset.screen !== screen;
+      });
+      document.querySelectorAll("[data-nav-screen]").forEach(function(button) {
+        if (button.dataset.navScreen === screen) button.setAttribute("aria-current", "page");
+        else button.removeAttribute("aria-current");
+      });
+      document.getElementById("screenSection").textContent = definition.section;
+      document.getElementById("screenTitle").textContent = definition.title;
+      document.getElementById("screenDescription").textContent = definition.description;
+      document.title = definition.title + " | Supercampeoes Blue Lock";
+      activeScreen = screen;
+      if (settings.history !== "none" && window.location.hash !== "#" + screen) {
+        const method = settings.history === "replace" ? "replaceState" : "pushState";
+        window.history[method](null, "", "#" + screen);
+      }
+      if (changed && settings.focus !== false) {
+        document.getElementById("screenTitle").focus({ preventScroll: true });
+        window.scrollTo({ top: 0, behavior: "auto" });
+      }
+    }
+
+    function followLocation() {
+      navigateTo(window.location.hash.slice(1), { history: "replace" });
+    }
+
+    document.addEventListener("click", function(event) {
+      const profileButton = event.target.closest("[data-player-profile]");
+      if (profileButton) {
+        document.getElementById("skillPlayer").value = profileButton.dataset.playerProfile;
+        render();
+        navigateTo("skills");
+        return;
+      }
+      const routeButton = event.target.closest("[data-route]");
+      if (routeButton) navigateTo(routeButton.dataset.route);
+    });
+    window.addEventListener("popstate", followLocation);
+    window.addEventListener("hashchange", followLocation);
+
+    function detailRow(label, value) {
+      return "<div class='detail-row'><span>" + label + "</span><strong>" + value + "</strong></div>";
+    }
+
+    function formationLabel() {
+      const select = document.getElementById("formation");
+      return select.options[select.selectedIndex].textContent;
+    }
+
+    function renderManagementViews() {
+      const tactic = currentTactic();
+      const entries = lineupPlayers().filter(function(item) { return item.player; });
+      const phase = state.matchOver ? "Pós-jogo" : (state.matchStarted ? "Ao vivo · " + state.minute + "'" : "Pré-jogo");
+      const focus = state.managed.find(function(player) { return player.id === tactic.focusPlayerId; });
+      const lowCondition = state.managed.filter(function(player) { return player.condition < 68; }).length;
+      const badFits = entries.filter(function(item) { return positionFit(item.player, item.slot.position) < 70; }).length;
+      document.getElementById("sidebarTeam").textContent = state.managed[0].teamName;
+      document.getElementById("sidebarPhase").textContent = "Semana " + state.week + " · " + phase;
+      document.getElementById("screenPhase").textContent = phase;
+      document.getElementById("overviewXi").textContent = entries.length + " / 11";
+      document.getElementById("overviewCondition").textContent = Math.round(avg(state.managed.map(function(player) { return player.condition; })));
+      document.getElementById("overviewMorale").textContent = Math.round(avg(state.managed.map(function(player) { return player.morale; })));
+      document.getElementById("overviewSharpness").textContent = Math.round(avg(state.managed.map(function(player) { return player.sharpness; })));
+      document.getElementById("overviewHeadline").textContent = state.matchOver ? "Partida encerrada" : (state.matchStarted ? "A partida está nas suas mãos" : "Prepare o seu time");
+      document.getElementById("overviewNext").textContent = state.matchOver
+        ? "Consulte o relato da partida e a condição final do elenco."
+        : (state.matchStarted ? "Leia o assistente e ajuste o plano antes do próximo bloco." : "Revise a escalação, aplique o treino e escolha a preleção.");
+      const overviewAction = document.getElementById("overviewAction");
+      overviewAction.dataset.route = state.matchStarted ? "match" : "tactics";
+      overviewAction.textContent = state.matchStarted ? (state.matchOver ? "Ver resultado" : "Acompanhar jogo") : "Abrir tática";
+      document.getElementById("overviewPlan").innerHTML =
+        detailRow("Formação", formationLabel()) +
+        detailRow("Identidade", labelIdentity(tactic.identity)) +
+        detailRow("Treino escolhido", labelTraining(tactic.training)) +
+        detailRow("Foco individual", focus ? focus.name : "Nenhum");
+      document.getElementById("overviewChecklist").innerHTML =
+        detailRow("Escalação", entries.length === 11 ? "XI completo" : (11 - entries.length) + " posição(ões) sem titular") +
+        detailRow("Encaixes a revisar", badFits ? badFits + " jogador(es) fora de posição" : "Todos em posições compatíveis") +
+        detailRow("Condição do elenco", lowCondition ? lowCondition + " jogador(es) abaixo de 68" : "Elenco em boas condições") +
+        detailRow("Último treino", state.lastTraining ? state.lastTraining.label + " · Semana " + state.lastTraining.week : "Ainda não aplicado");
+      document.getElementById("tacticHelp").textContent = state.matchStarted
+        ? (state.matchOver ? "Confira o plano usado. Reinicie a carreira para preparar outra partida." : "Formação, funções e sliders podem mudar ao vivo. As mudanças ficam registradas no dia de jogo.")
+        : "Escolha um titular e uma função em cada posição. Os indicadores mostram o efeito do plano.";
+      document.getElementById("trainingWeek").textContent = "Semana " + state.week;
+      const previews = {
+        balanced: "Melhora o ritmo de jogo, a moral e a disciplina. O foco individual recebe mais ritmo.",
+        finishing: "Desenvolve a finalização, especialmente dos atacantes, e aumenta a fadiga.",
+        creation: "Desenvolve visão e criatividade. O foco individual recebe um estímulo maior.",
+        defense: "Desenvolve defesa e disciplina, com ganho maior para jogadores defensivos.",
+        ego: "Estimula ego e despertar, com mais fadiga e uma pequena perda de disciplina.",
+        rest: "Recupera condição e moral e reduz a fadiga."
+      };
+      document.getElementById("trainingPreview").textContent = previews[tactic.training];
+      document.getElementById("trainingHint").textContent = state.matchStarted
+        ? "Treino e foco ficam bloqueados após o início da partida."
+        : "Aplicar o treino avança uma semana e atualiza os jogadores.";
+      document.getElementById("trainingSummary").innerHTML =
+        detailRow("Foco individual", focus ? focus.name : "Nenhum") +
+        detailRow("Ritmo médio", Math.round(avg(state.managed.map(function(player) { return player.sharpness; })))) +
+        detailRow("Fadiga média", Math.round(avg(state.managed.map(function(player) { return player.fatigue; })))) +
+        detailRow("Despertar médio", Math.round(avg(state.managed.map(function(player) { return player.awakening; }))));
+      document.getElementById("trainingFeedback").textContent = state.lastTraining
+        ? "Semana " + state.lastTraining.week + " concluída: " + state.lastTraining.label + ". Foco em " + state.lastTraining.focusName + "."
+        : "Nenhuma semana de treino aplicada. Escolha um plano e um jogador foco.";
+      document.getElementById("matchPlan").innerHTML =
+        detailRow("Formação", formationLabel()) +
+        detailRow("Identidade", labelIdentity(tactic.identity)) +
+        detailRow("Pressão / ritmo", tactic.pressing + " / " + tactic.tempo) +
+        detailRow("Liberdade / risco", tactic.freedom + " / " + tactic.risk);
+      document.getElementById("matchActionTitle").textContent = state.matchOver ? "Fim de jogo" : (state.matchStarted ? "Próximo bloco: " + state.minute + "' → " + Math.min(90, state.minute + 15) + "'" : "Pronto para o apito?");
+      document.getElementById("matchActionHint").textContent = state.matchOver
+        ? "Consulte os lances e as mudanças. Reinicie a carreira para jogar novamente."
+        : "Cada bloco simula 15 minutos. Entre os blocos, você pode ajustar a tática.";
+      document.getElementById("simulateSegment").disabled = state.matchOver;
+      document.getElementById("simulateMatch").disabled = state.matchOver;
+      document.getElementById("skillSetFocus").disabled = state.matchStarted;
+      document.getElementById("skillFeedback").textContent = state.skillFeedback && state.skillFeedback.playerId === currentSkillPlayer().id
+        ? state.skillFeedback.text : "Use a análise do assistente para encontrar os pontos fortes deste jogador.";
+      document.querySelectorAll("[data-player-profile]").forEach(function(button) {
+        const selected = button.dataset.playerProfile === document.getElementById("skillPlayer").value;
+        button.setAttribute("aria-pressed", String(selected));
+        button.closest("tr").classList.toggle("selected-player", selected);
+      });
+      if (!state.feed.length) document.getElementById("matchFeed").innerHTML = "<div class='note coach'>A partida ainda não começou. Defina a preleção e simule o primeiro bloco.</div>";
+    }
+
+    function pitchPlacements(slots) {
+      const rows = [];
+      slots.slice().sort(function(a, b) { return a.y - b.y; }).forEach(function(slot) {
+        const row = rows[rows.length - 1];
+        if (!row || slot.y - row.y > 10) rows.push({ y: slot.y, slots: [slot] });
+        else row.slots.push(slot);
+      });
+      const placements = {};
+      const columns = { 1: [5], 2: [3, 8], 3: [1, 5, 10], 4: [1, 4, 7, 10] };
+      rows.forEach(function(row, index) {
+        row.slots.sort(function(a, b) { return a.x - b.x; }).forEach(function(slot, slotIndex) {
+          placements[slot.id] = { row: index + 1, column: columns[row.slots.length][slotIndex] + " / span " + (row.slots.length === 1 ? 4 : 3) };
+        });
+      });
+      return placements;
+    }
+
     const roster = [
       ["hist-barao-rio-branco", "Barao do Rio Branco", "historia", "Historia do Brasil FC", "GK", "Diplomatic Keeper", "defense", "Tratado da Area", [58,62,86,64,90,70,88,74,30,84]],
       ["hist-dandara", "Dandara dos Palmares", "historia", "Historia do Brasil FC", "DF", "Quilombo Captain", "defense", "Corte de Palmares", [68,84,72,84,80,66,78,88,58,35]],
@@ -1064,7 +1357,9 @@
         substitutions: [],
         tacticalChanges: [],
         maxSubs: 5,
-        lastFormation: document.getElementById("formation").value
+        lastFormation: document.getElementById("formation").value,
+        lastTraining: null,
+        skillFeedback: null
       };
       updateFocusOptions();
       buildLineup(true);
@@ -1355,6 +1650,7 @@
       }).slice(0, 3).map(function(key) {
         return attributeLabels[key] + " " + Math.round(attr(player, key));
       });
+      state.skillFeedback = { playerId: player.id, text: "Pontos fortes: " + topAttrs.join(", ") + "." + (best ? " Melhor uso: " + best.slot.position + " como " + roleName(best.slot.position, best.roleId) + " (rendimento " + Math.round(best.score) + ")." : "") };
       addReport("coach", "Skills de " + player.name + ": pontos fortes em " + topAttrs.join(", ") + ".");
       if (best) addReport("coach", "Melhor uso agora: " + best.slot.position + " como " + roleName(best.slot.position, best.roleId) + ", rendimento " + Math.round(best.score) + ".");
       if (player.awakening < 60) addReport("coach", "Ainda esta cru. Dê minutos ou treino foco para abrir a primeira skill.");
@@ -1402,6 +1698,8 @@
       const applyButton = document.getElementById("applySub");
       const activeEntries = lineupPlayers().filter(function(item) { return item.player; });
       const available = availableBenchPlayers();
+      const previousOut = outSelect.value;
+      const previousIn = inSelect.value;
 
       outSelect.innerHTML = activeEntries.map(function(item) {
         return "<option value='" + item.slot.id + "'>" + item.player.name + " | " + item.slot.position + " | Cond " + Math.round(item.player.condition) + "</option>";
@@ -1411,6 +1709,11 @@
         const label = player.name + " | " + player.naturalPositions.join("/") + " | melhor " + (best ? best.slot.position + " " + Math.round(best.score) : "-");
         return "<option value='" + player.id + "'>" + label + "</option>";
       }).join("");
+
+      if (activeEntries.some(function(item) { return item.slot.id === previousOut; })) outSelect.value = previousOut;
+      if (available.some(function(player) { return player.id === previousIn; })) inSelect.value = previousIn;
+      outSelect.disabled = !state.matchStarted || state.matchOver;
+      inSelect.disabled = !state.matchStarted || state.matchOver || !available.length;
 
       const locked = !state.matchStarted || state.matchOver || state.substitutions.length >= state.maxSubs || !activeEntries.length || !available.length;
       applyButton.disabled = locked;
@@ -1423,7 +1726,7 @@
           "<div class='tiny'>" + player.archetype + " | Cond " + Math.round(player.condition) + " | Mor " + Math.round(player.morale) + "</div>" +
           "<div class='tiny'>Melhor entrada: " + (best ? best.slot.position + " como " + roleName(best.slot.position, best.roleId) + " (" + Math.round(best.score) + ")" : "sem leitura") + "</div>" +
         "</article>";
-      }).join("") : "<div class='note warn'><span class='tag'>banco</span>Nenhum jogador disponivel para entrar.</div>";
+      }).join("") : "<div class='note coach'><span class='tag'>banco</span>Sem reservas disponíveis. Este elenco tem 11 jogadores; com o XI completo, todos estão em campo.</div>";
       document.getElementById("benchList").innerHTML = benchHtml;
 
       const subHistory = state.substitutions.map(function(change) {
@@ -1535,6 +1838,7 @@
         evolve(player, false);
       });
       state.week += 1;
+      state.lastTraining = { week: state.week - 1, label: labelTraining(tactic.training), focusName: focus ? focus.name : "nenhum jogador" };
       addReport("coach", "Semana aplicada: " + labelTraining(tactic.training) + ".");
       if (focus) addReport("coach", "Foco individual em " + focus.name + ". A comissão espera impacto no encaixe e no despertar.");
       render();
@@ -1828,6 +2132,7 @@
     function renderPitch() {
       const pitch = document.getElementById("pitch");
       const slots = formationSlots();
+      const placements = pitchPlacements(slots);
       const selectedIds = {};
       Object.keys(state.lineup).forEach(function(slotId) { if (state.lineup[slotId]) selectedIds[state.lineup[slotId]] = true; });
       pitch.innerHTML = slots.map(function(slot) {
@@ -1844,7 +2149,7 @@
         }).join("");
         const sub = player ? player.archetype : "Escolha um jogador";
         const posFit = player ? positionFit(player, slot.position) : 0;
-        return "<article class='slot' style='left:" + slot.x + "%; top:" + slot.y + "%'>" +
+        return "<article class='slot' style='grid-row:" + placements[slot.id].row + "; grid-column:" + placements[slot.id].column + "'>" +
           "<div class='slot-title'><strong>" + (player ? player.name : "Vago") + "</strong><span class='pos'>" + slot.position + "</span></div>" +
           "<div class='tiny'>" + sub + "</div>" +
           "<select data-player-slot='" + slot.id + "'" + (state.matchStarted ? " disabled" : "") + ">" + playerOptions + "</select>" +
@@ -1907,6 +2212,7 @@
       renderPitch();
       renderSubPanel();
       renderSkillScreen();
+      renderManagementViews();
     }
 
     function playerRow(player) {
@@ -1919,7 +2225,7 @@
       const next = thresholds[player.stage + 1] || thresholds[3];
       const progress = player.stage >= 3 ? 100 : clamp(player.awakening / next * 100, 0, 100);
       return "<tr>" +
-        "<td><strong>" + player.name + "</strong><div class='tiny'>" + status + "</div></td>" +
+        "<td><button type='button' class='player-link' data-player-profile='" + player.id + "' aria-label='Abrir ficha de " + player.name + "'>" + player.name + "</button><div class='tiny'>" + status + "</div></td>" +
         "<td><span class='role'>" + player.naturalPositions.join("/") + "</span><div class='tiny'>Estilo " + player.preferredStyle + "</div></td>" +
         "<td>TEC " + Math.round(attr(player, "technique")) + " | VIS " + Math.round(attr(player, "vision")) + " | EGO " + Math.round(attr(player, "ego")) + "<div class='tiny'>Skill: " + player.specialSkill + "</div></td>" +
         "<td>Mor " + Math.round(player.morale) + " | Cond " + Math.round(player.condition) + " | Rit " + Math.round(player.sharpness) + "<div class='bar'><div class='fill red' style='width:" + player.condition + "%'></div></div></td>" +
@@ -1977,10 +2283,11 @@
     document.getElementById("skillAssistant").addEventListener("click", analyzeSkillPlayer);
     document.getElementById("skillSetFocus").addEventListener("click", function() {
       const player = currentSkillPlayer();
-      if (!player) return;
+      if (!player || state.matchStarted) return;
       document.getElementById("focusPlayer").value = player.id;
       addReport("coach", player.name + " virou foco individual da semana.");
       render();
+      navigateTo("training");
     });
     document.getElementById("trainWeek").addEventListener("click", applyTraining);
     document.getElementById("simulateSegment").addEventListener("click", simulateSegment);
@@ -1989,6 +2296,7 @@
     document.getElementById("resetGame").addEventListener("click", resetGame);
 
     resetGame();
+    navigateTo(window.location.hash.slice(1), { history: "replace", focus: false });
   </script>
 </body>
 </html>
