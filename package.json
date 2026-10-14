@@ -1,0 +1,11 @@
+{
+  "name": "ego-football-engine",
+  "version": "0.1.0",
+  "description": "Prototype calculation engine for an anime manager football RPG.",
+  "type": "commonjs",
+  "scripts": {
+    "demo": "node examples/demo.js",
+    "test": "node test/engine.test.js"
+  },
+  "license": "UNLICENSED"
+}
